@@ -44,7 +44,7 @@
                 <td>kabel putus</td>
                 <td>Mark</td>
                 <td>Otto</td>
-                <td>Otto</td>
+                <td>misabch</td>
 
             </tr>
             <tr>
