@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('adminlte');
 });
 
+Route::get('/manajer inventaris', function () {
+    return view('manajer inventaris.form');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
