@@ -493,7 +493,7 @@
                             <input type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Pembelian</label>
+                            <label>Tanggal Pembeliann</label>
                             <input type="date" class="form-control" required>
                         </div>
                         <div class="form-group">
