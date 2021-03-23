@@ -290,6 +290,11 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Input Asset',
+            'url'  => '/login',
+            'icon' => 'fas fa-fw fa-pen',
+        ],
         ['header' => 'labels'],
         [
             'text'       => 'important',
