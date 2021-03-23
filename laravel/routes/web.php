@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('adminlte');
 });
 
-Route::get('/manajer_inventaris/input', function () {
-    return view('/manajer_inventaris/input');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
