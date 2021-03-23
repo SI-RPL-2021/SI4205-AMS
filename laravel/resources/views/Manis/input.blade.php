@@ -43,7 +43,7 @@
                 <td>X</td>
                 <td>kabel putus</td>
                 <td>Mark</td>
-                <td>Otto</td>
+                <td>asdjsandaj</td>
                 <td>misabch</td>
 
             </tr>
