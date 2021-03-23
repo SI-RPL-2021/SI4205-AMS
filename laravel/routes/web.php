@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('adminlte');
 });
+Route::get('/Manis', function () {
+    return view('Manis.input');
+});
 
 Auth::routes();
 
