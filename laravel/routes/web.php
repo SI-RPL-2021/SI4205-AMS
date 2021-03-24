@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Manajer Inventaris
 
+//Fitur CRUD Asset
 Route::get('/', function () {
     return view('adminlte');
 });
@@ -20,6 +22,9 @@ Route::get('/', function () {
 Route::get('/manajer_inventaris/input', function () {
     return view('/manajer_inventaris/input');
 });
+
+//Fitur CRUD anjinn
+
 
 Auth::routes();
 
