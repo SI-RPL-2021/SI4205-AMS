@@ -23,6 +23,9 @@ Route::get('/manajer_inventaris/input', function () {
 
 Route::get('/manajer_inventaris/input','App\Http\Controllers\AsetController@index');
 
+Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AsetController@hapus');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
