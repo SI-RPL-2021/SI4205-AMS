@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssetController extends Controller
 {
@@ -14,11 +15,11 @@ class AssetController extends Controller
      */
     public function index()
     {
-        // // mengambil data dari table pegawai
-        // $aset = DB::table('assets')->get();
+        // mengambil data dari table pegawai
+        $aset = DB::table('assets')->get();
 
-        // // mengirim data pegawai ke view index
-        // return view('/manajer_inventaris/input', ['assets' => $aset]);
+        // mengirim data pegawai ke view index
+        return view('/manajer_inventaris/input', ['assets' => $aset]);
     }
 
     /**
@@ -82,12 +83,12 @@ class AssetController extends Controller
      * @param  \App\Models\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(asset $asset)
+    public function destroy($id)
     {
-        // // menghapus data pegawai berdasarkan id yang dipilih
-        // DB::table('assets')->where('id', $id)->delete();
+        // menghapus data pegawai berdasarkan id yang dipilih
+        DB::table('assets')->where('id', $id)->delete();
 
-        // // alihkan halaman ke halaman pegawai
-        // return redirect('/manajer_inventaris/input');
+        // alihkan halaman ke halaman pegawai
+        return redirect('/manajer_inventaris/input');
     }
 }

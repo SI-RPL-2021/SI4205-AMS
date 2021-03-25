@@ -23,10 +23,13 @@ Route::get('/manajer_inventaris/input', function () {
     return view('/manajer_inventaris/input');
 });
 
-// Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
+Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
 
-// Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@hapus');
+Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@destroy');
 
+Route::get('/manajer_inventaris/update', function () {
+    return view('/manajer_inventaris/update');
+});
 
 Auth::routes();
 

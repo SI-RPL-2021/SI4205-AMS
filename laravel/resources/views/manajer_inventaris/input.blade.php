@@ -350,13 +350,12 @@
                             <th>Kategori</th>
                             <th>Harga Pembelian</th>
                             <th>Tanggal Pembelian</th>
-                            <th>Lokasi Pembelian</th>
                             <th>Foto Barang</th>
                             <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <!-- <tbody>
+                    <tbody>
                         <tr>
                         @foreach($assets as $a)
                             <td>
@@ -366,20 +365,19 @@
                                 </span>
                             </td>
                             
-                            <td>{{ $a->nama }}</td>
-                            <td>{{ $a->id_kategori_assets }}</td>
-                            <td>{{ $a->proc_harga_pembelian }}</td>
-                            <td>{{ $a->proc_tanggal_pembelian }}</td>
-                            <td>{{ $a->proc_id_vendor }}</td>
-                            <td>{{ $a->foto }}</td>
-                            <td>{{ $a->keterangan }}</td>
+                            <td>{{ $a->name }}</td>
+                            <td>{{ $a->asset_category }}</td>
+                            <td>{{ $a->asset_purchase_price }}</td>
+                            <td>{{ $a->asset_purchase_date }}</td>
+                            <td>{{ $a->picture }}</td>
+                            <td>{{ $a->description }}</td>
                             <td>
                                 <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="/manajer_inventaris/hapus/{{ $a->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                         @endforeach
-                    </tbody> -->
+                    </tbody>
                 </table>
                 <div class="clearfix">
                     <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
@@ -475,27 +473,16 @@
                                     <label>Harga Pembelian</label>
                                     <input type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group">
+
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
                                     <label>Waktu Pembelian</label>
                                     <input type="date" class="form-control" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Lokasi Pembelian</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Waktu Perawatan</label>
-                                <input type="date" class="form-control" required>
-                            </div>
                             <div class="form-group">
                                 <label>Foto Barang</label>
                                 <input class="form-control form-control-sm" id="formFileSm" type="file">
-                            </div>
-                            <div class="form-group">
-                                <label>Lokasi Barang</label>
-                                <input type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
