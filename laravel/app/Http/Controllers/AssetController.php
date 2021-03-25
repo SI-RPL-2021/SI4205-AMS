@@ -14,7 +14,11 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        // // mengambil data dari table pegawai
+        // $aset = DB::table('assets')->get();
+
+        // // mengirim data pegawai ke view index
+        // return view('/manajer_inventaris/input', ['assets' => $aset]);
     }
 
     /**
@@ -80,6 +84,10 @@ class AssetController extends Controller
      */
     public function destroy(asset $asset)
     {
-        //
+        // // menghapus data pegawai berdasarkan id yang dipilih
+        // DB::table('assets')->where('id', $id)->delete();
+
+        // // alihkan halaman ke halaman pegawai
+        // return redirect('/manajer_inventaris/input');
     }
 }
