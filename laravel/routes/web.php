@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/Manis', function () {
     return view('Manis.input');
 });
+Route::get('/detail', function () {
+    return view('Manis.detail');
+});
 
 Auth::routes();
 

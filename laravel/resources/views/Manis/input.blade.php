@@ -30,9 +30,9 @@
                 <th scope="col">Nama Barang</th>
                 <th scope="col">Kategori Barang</th>
                 <th scope="col">Kerusakan Barang</th>
-                <th scope="col">Status</th>
-                <th scope="col">Biaya</th>
                 <th scope="col">Nama Pengaju</th>
+                <th scope="col" style="text-align: 10px;">Aksi</th>
+                
 
             </tr>
         </thead>
@@ -43,9 +43,8 @@
                 <td>X</td>
                 <td>kabel putus</td>
                 <td>Mark</td>
-                <td>asdjsandaj</td>
-                <td>misabch</td>
-
+                <td><button type="button" class="btn btn-info" ><div style="color:white;">Detail</div></button></td>
+                
             </tr>
             <tr>
 
@@ -53,8 +52,8 @@
                 <td>Y</td>
                 <td>kabel putus</td>
                 <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
+                <td><button type="button" class="btn btn-info"><div style="color:white;">Detail</div></button></td>
+               
 
             </tr>
             <tr>
@@ -63,8 +62,8 @@
                 <td>Z</td>
                 <td>kabel putus</td>
                 <td>Otto</td>
-                <td>Otto</td>
-                <td>Otto</td>
+                <td><button type="button" class="btn btn-info"><div style="color:white;">Detail</div></button></td>
+                
 
             </tr>
         </tbody>
