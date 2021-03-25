@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <title>List Asset</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -41,8 +41,8 @@
 
         .table-title {
             padding-bottom: 15px;
-            background: #435d7d;
-            color: #fff;
+            background: #ffffff;
+            color: #000000;
             padding: 16px 30px;
             min-width: 100%;
             margin: -20px -25px 10px;
@@ -329,7 +329,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Employees</b></h2>
+                            <h2>List Asset</b></h2>
                         </div>
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
@@ -358,100 +358,27 @@
                     </thead>
                     <tbody>
                         <tr>
+                        @foreach($assets as $a)
                             <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox1" name="options[]" value="1">
                                     <label for="checkbox1"></label>
                                 </span>
                             </td>
-                            <td>Laptop Admin</td>
-                            <td>Elektronik</td>
-                            <td>8800000</td>
-                            <td>22 April 2021</td>
-                            <td>Acer Company ltd</td>
-                            <td>ini gambar</td>
-                            <td>Spesifikasi i7 gen 8 RAM 8GB SSD 9TB</td>
+                            
+                            <td>{{ $a->nama }}</td>
+                            <td>{{ $a->id_kategori_assets }}</td>
+                            <td>{{ $a->proc_harga_pembelian }}</td>
+                            <td>{{ $a->proc_tanggal_pembelian }}</td>
+                            <td>{{ $a->proc_id_vendor }}</td>
+                            <td>{{ $a->foto }}</td>
+                            <td>{{ $a->keterangan }}</td>
                             <td>
                                 <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/manajer_inventaris/hapus/{{ $a->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                    <label for="checkbox2"></label>
-                                </span>
-                            </td>
-                            <td>Laptop Admin</td>
-                            <td>Elektronik</td>
-                            <td>8800000</td>
-                            <td>22 April 2021</td>
-                            <td>Acer Company ltd</td>
-                            <td>ini gambar</td>
-                            <td>Spesifikasi i7 gen 8 RAM 8GB SSD 9TB</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                                    <label for="checkbox3"></label>
-                                </span>
-                            </td>
-                            <td>Laptop Admin</td>
-                            <td>Elektronik</td>
-                            <td>8800000</td>
-                            <td>22 April 2021</td>
-                            <td>Acer Company ltd</td>
-                            <td>ini gambar</td>
-                            <td>Spesifikasi i7 gen 8 RAM 8GB SSD 9TB</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                                    <label for="checkbox4"></label>
-                                </span>
-                            </td>
-                            <td>Laptop Admin</td>
-                            <td>Elektronik</td>
-                            <td>8800000</td>
-                            <td>22 April 2021</td>
-                            <td>Acer Company ltd</td>
-                            <td>ini gambar</td>
-                            <td>Spesifikasi i7 gen 8 RAM 8GB SSD 9TB</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                    <label for="checkbox5"></label>
-                                </span>
-                            </td>
-                            <td>Laptop Admin</td>
-                            <td>Elektronik</td>
-                            <td>8800000</td>
-                            <td>22 April 2021</td>
-                            <td>Acer Company ltd</td>
-                            <td>ini gambar</td>
-                            <td>Spesifikasi i7 gen 8 RAM 8GB SSD 9TB</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="clearfix">
