@@ -1,6 +1,0 @@
-{
-    "require": {
-        "jeroennoten/laravel-adminlte": "^3.5",
-        "laravel/ui": "^3.2"
-    }
-}
