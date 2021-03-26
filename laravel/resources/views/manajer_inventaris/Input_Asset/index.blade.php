@@ -316,7 +316,7 @@
 </head>
 
 
-    <!-- Delete Modal HTML -->
+<!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -340,6 +340,7 @@
 
 
 <body>
+    <!-- //table -->
     <div class="container-xl ">
         <div class="table-responsive">
             <div class="table-wrapper">
@@ -363,6 +364,7 @@
                                     <label for="selectAll"></label>
                                 </span>
                             </th>
+                            <th>No</th>
                             <th>Nama Barang</th>
                             <th>Kategori</th>
                             <th>Harga Pembelian</th>
@@ -376,24 +378,30 @@
                         @php
                         $i = 1
                         @endphp
+                        @foreach ($assets as $asset)
                         <tr>
-                            @foreach ($asset as $asset)
+
                             <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox1" name="options[]" value="1">
                                     <label for="checkbox1"></label>
                                 </span>
                             </td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
-                            <td>anjinglah dah dicoba berkali berkali tetep aja eerorororororroo</td>
+                            <td>{{ $i }}</td>
+                            <td>{{ $asset->name }}</td>
+                            <td>{{ $asset->asset_category }}</td>
+                            <td>Rp.{{ $asset->asset_purchase_price }}</td>
+                            <td>{{ $asset->asset_purchase_date }}</td>
+                            <td>{{ $asset->picture }}</td>
+                            <td>{{ $asset->description }}</td>
                             <td>
                                 <a href="/manajer_inventaris/edit/->id" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
+                            @php
+                            $i++
+                            @endphp
+                            @endforeach
 
                     </tbody>
                 </table>
@@ -414,109 +422,62 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Modal</h4>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form>
+
+                    <form action="/Input_Asset/store" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Barang</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" class="form-control" name="asset_category" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Pembelian</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" class="form-control" name="asset_purchase_price" required>
                                 </div>
 
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Waktu Pembelian</label>
-                                <input type="date" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Foto Barang</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Waktu Pembelian</label>
+                                    <input type="date" class="form-control" name="asset_purchase_date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Foto Barang</label>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
 
+                        </div>
+                        <div class="modal-footer text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
+
             </div>
+
         </div>
+
     </div>
-    <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea class="form-control" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete these Records?</p>
-                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
+
 </body>
-@stop
+@endsection
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">

@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Manajer Inventaris
-
-//Fitur CRUD Asset
 Route::get('/', function () {
     return view('home');
 });
-Route::get('manajer_inventaris/Input_Asset/index', 'app\Http\Controllers\AssetController@index');
-Route::post('/pendapataninti/store', 'IncomeController@store');
+//Fitur CRUD Asset
+
+Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index']);
+Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store']);
 Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
 Route::get('/editpendapatan/{income:id}', 'IncomeController@updateIndex');
 Route::patch('/editpendapatan/{income:id}', 'IncomeController@update');
@@ -37,4 +38,4 @@ Route::get('/Pinjam Asset/index', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
