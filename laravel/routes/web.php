@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 //Fitur CRUD Asset
 Route::get('/', function () {
-    return view('adminlte');
+    return view('home');
 });
+Route::get('manajer_inventaris/Input_Asset/index', 'app\Http\Controllers\AssetController@index');
+Route::post('/pendapataninti/store', 'IncomeController@store');
+Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
+Route::get('/editpendapatan/{income:id}', 'IncomeController@updateIndex');
+Route::patch('/editpendapatan/{income:id}', 'IncomeController@update');
 
-Route::get('/manajer_inventaris/input', function () {
-    return view('/manajer_inventaris/input');
+
+//Fitur Accept Asset
+Route::get('/Pinjam Asset/index', function () {
+    return view('/manajer_inventaris/Pinjam Asset/index');
 });
 
 // Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
