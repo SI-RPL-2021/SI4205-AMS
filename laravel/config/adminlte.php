@@ -252,6 +252,11 @@ return [
             'url'  => '/manajer_inventaris/approve_asset',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
         ],
+        [
+            'text' => 'Simpan Pinjam',
+            'url'  => '/manajer_inventaris/simpan_pinjam/',
+            'icon' => 'fas fa-fw fa-hand-holding-usd',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',

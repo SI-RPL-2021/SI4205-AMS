@@ -19,8 +19,9 @@ Route::get('/', function () {
     return view('adminlte');
 });
 
-Route::get('/manajer inventaris', function () {
-    return view('manajer inventaris.form');
+
+Route::get('/manajer_inventaris/simpan_pinjam/', function () {
+    return view('simpan_pinjam.form');
 });
 
 Auth::routes();
