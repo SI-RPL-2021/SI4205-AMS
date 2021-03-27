@@ -30,6 +30,10 @@ Route::get('/Pinjam Asset/index', function () {
     return view('/manajer_inventaris/Pinjam Asset/index');
 });
 
+Route::get('/manajer_inventaris/simpan_pinjam/', function () {
+    return view('simpan_pinjam.form');
+});
+
 // Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
 
 // Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@hapus');

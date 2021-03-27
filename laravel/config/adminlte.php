@@ -254,7 +254,7 @@ return [
         ],
         [
             'text' => 'Borrowing Asset',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/simpan_pinjam/',
             'icon' => 'fas fa-fw fa-shopping-bag',
         ], [
             'text' => 'Maintenance Asset',
