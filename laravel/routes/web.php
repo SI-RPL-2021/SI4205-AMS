@@ -18,13 +18,14 @@ Route::get('/', function () {
     return view('home');
 });
 //Fitur CRUD Asset
-
+Route::get('/update', function () {
+    return view('manajer_inventaris/Input_Asset/update');
+});
 Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index']);
 Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store']);
-Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
-Route::get('/editpendapatan/{income:id}', 'IncomeController@updateIndex');
-Route::patch('/editpendapatan/{income:id}', 'IncomeController@update');
-
+// Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
+Route::get('Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'updateindex']);
+Route::patch('Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'update']);
 
 //Fitur Accept Asset
 Route::get('/Pinjam Asset/index', function () {

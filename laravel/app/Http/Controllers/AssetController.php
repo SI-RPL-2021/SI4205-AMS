@@ -52,15 +52,15 @@ class AssetController extends Controller
         ]);
       
         // file upload
-        // $file = $request->file('photo');
-        // $fileName = rand() . '_' . $file->getClientOriginalName();
-        // $path = $file->storeAs('images/uploads', $fileName);
-        // $file->move('images/uploads', $fileName);
+        $file = $request->file('picture');
+        $fileName = rand() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('images/uploads', $fileName);
+        $file->move('images/uploads', $fileName);
 
         $insert = asset::create([
             'name' => $request->name,
             'unique_code' => $request->name,
-            'picture' => 'path',
+            'picture' => $path,
             'asset_category' => $request->asset_category,
             'asset_purchase_date' => $request->asset_purchase_date,
             'asset_purchase_price' => $request->asset_purchase_price,
