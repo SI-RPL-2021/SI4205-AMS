@@ -372,7 +372,7 @@
                             <td>{{ $a->picture }}</td>
                             <td>{{ $a->description }}</td>
                             <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/manajer_inventaris/update" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="/manajer_inventaris/hapus/{{ $a->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -394,62 +394,7 @@
             </div>
         </div>
     </div>
-    <!-- Edit Modal HTML -->
-    <!-- <div id="addEmployeeModal" class="modal fade">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Input Asset</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Elektronik</a></li>
-                                <li><a class="dropdown-item" href="#">Perkakas</a></li>
-                                <li><a class="dropdown-item" href="#">Yang lain</a></li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Harga Pembelian</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Pembeliann</label>
-                            <input type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Lokasi Pembelian</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="mb-3">
-                                <label for="formFileSm" class="form-label">Foto Barang</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
+   
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
