@@ -17,6 +17,11 @@ class AssetController extends Controller
     {
         // mengambil data dari table pegawai
         $aset = DB::table('assets')->get();
+        $assets = asset::all();
+
+        return view('manajer_inventaris.Input_Asset.index', compact('assets'));
+        // // mengambil data dari table pegawai
+        // $aset = DB::table('assets')->get();
 
         // mengirim data pegawai ke view index
         return view('/manajer_inventaris/input', ['assets' => $aset]);
@@ -40,7 +45,33 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'asset_category' => 'required',
+            'asset_purchase_price' => 'required',
+            'asset_purchase_date' => 'required',
+            'picture' => 'required',
+            'description' => 'required',
+        ]);
+      
+        // file upload
+        // $file = $request->file('photo');
+        // $fileName = rand() . '_' . $file->getClientOriginalName();
+        // $path = $file->storeAs('images/uploads', $fileName);
+        // $file->move('images/uploads', $fileName);
+
+        $insert = asset::create([
+            'name' => $request->name,
+            'unique_code' => $request->name,
+            'picture' => 'path',
+            'asset_category' => $request->asset_category,
+            'asset_purchase_date' => $request->asset_purchase_date,
+            'asset_purchase_price' => $request->asset_purchase_price,
+            'description' => $request->description,
+            'status' => 'Tersedia',
+
+        ]);
+        return redirect('/manajer_inventaris/Input_Asset/index');
     }
 
     /**
