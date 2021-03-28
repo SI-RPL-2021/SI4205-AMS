@@ -317,7 +317,7 @@
 
 <body>
 
-    <form action="/Input_Asset/store" method="post" enctype="multipart/form-data">
+    <form action="/Input_Asset/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssetController extends Controller
 {
@@ -14,16 +15,30 @@ class AssetController extends Controller
      */
     public function index()
     {
+        // mengambil data dari table asset
+        $aset = DB::table('assets')->get();
         $assets = asset::all();
 
         return view('manajer_inventaris.Input_Asset.index', compact('assets'));
-        // // mengambil data dari table pegawai
+        // // mengambil data dari table asset
         // $aset = DB::table('assets')->get();
 
-        // // mengirim data pegawai ke view index
-        // return view('/manajer_inventaris/input', ['assets' => $aset]);
+        // mengirim data asset ke view index
+        return view('/manajer_inventaris/input', ['assets' => $aset]);
     }
+    public function updateindex()
+    {
+        // mengambil data dari table asset
+        $aset = DB::table('assets')->get();
+        $assets = asset::all();
 
+        return view('manajer_inventaris.Input_Asset.index', compact('assets'));
+        // // mengambil data dari table asset
+        // $aset = DB::table('assets')->get();
+
+        // mengirim data asset ke view index
+        return view('/manajer_inventaris/input', ['assets' => $aset]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +65,7 @@ class AssetController extends Controller
             'picture' => 'required',
             'description' => 'required',
         ]);
-      
+
         // file upload
         $file = $request->file('picture');
         $fileName = rand() . '_' . $file->getClientOriginalName();
@@ -111,12 +126,12 @@ class AssetController extends Controller
      * @param  \App\Models\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(asset $asset)
+    public function destroy($id)
     {
-        // // menghapus data pegawai berdasarkan id yang dipilih
-        // DB::table('assets')->where('id', $id)->delete();
+        // menghapus data asset berdasarkan id yang dipilih
+        DB::table('assets')->where('id', $id)->delete();
 
-        // // alihkan halaman ke halaman pegawai
-        // return redirect('/manajer_inventaris/input');
+        // alihkan halaman ke halaman asset
+        return redirect('/manajer_inventaris/input');
     }
 }
