@@ -15,6 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+
+    .row {
+        
+    }
         body {
             color: #566787;
             background: #f5f5f5;
@@ -316,50 +320,70 @@
 </head>
 
 <body>
+    <div class="card" >
+        <div class="card-header">
+            Detail Asset
+        </div>
+        <div class="card-body">
+                <div class="row">
+                <img src="https://mmc.tirto.id/image/otf/700x0/2019/09/05/malinois-belgian_ratio-16x9.jpg" alt="aaa" style="display: block; margin: auto;">
+                </div>
+                <div class="row">
 
-    <form action="/Input_Asset/update" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PATCH')
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Nama Barang</label>
-                    <input type="text" class="form-control" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label>Kategori Barang</label>
-                    <input type="text" class="form-control" name="asset_category" required>
-                </div>
-                <div class="form-group">
-                    <label>Harga Pembelian</label>
-                    <input type="text" class="form-control" name="asset_purchase_price" required>
+
+                    <form action="/Input_Asset/update" method="post" enctype="multipart/form-data" style="width: 100%;">
+                        @csrf
+                        @method('PATCH')
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nama Barang</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategori Barang</label>
+                                    <input type="text" class="form-control" name="asset_category" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Harga Pembelian</label>
+                                    <input type="text" class="form-control" name="asset_purchase_price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status Asset</label>
+                                    <input type="text" class="form-control" name="status" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Waktu Pembelian</label>
+                                    <input type="date" class="form-control" name="asset_purchase_date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unique Code</label>
+                                    <input type="text" class="form-control" name="unique_code" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer text-center">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Waktu Pembelian</label>
-                    <input type="date" class="form-control" name="asset_purchase_date" required>
-                </div>
-                <div class="form-group">
-                    <label>Foto Barang</label>
-                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
-                </div>
-                <div class="form-group">
-                    <label>Keterangan</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                </div>
-            </div>
 
-        </div>
-        <div class="modal-footer text-center">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </form>
 
 
 </body>
+
 @endsection
 
 @section('css')
