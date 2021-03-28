@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Asset')
+@section('title', 'Asset Details')
 
 @section('content')
 
@@ -15,10 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+        .rowhead{
+            margin-bottom: 40px;
+        }
 
-    .row {
-        
-    }
         body {
             color: #566787;
             background: #f5f5f5;
@@ -274,8 +274,8 @@
         }
 
         .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
+            border-radius: 5px;
+            box-shadow: 2px;
             border-color: #dddddd;
         }
 
@@ -320,65 +320,68 @@
 </head>
 
 <body>
-    <div class="card" >
+    <div class="card bg-dark">
         <div class="card-header">
             Detail Asset
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index" >&times; </a></div>
+
         </div>
         <div class="card-body">
-                <div class="row">
-                <img src="https://mmc.tirto.id/image/otf/700x0/2019/09/05/malinois-belgian_ratio-16x9.jpg" alt="aaa" style="display: block; margin: auto;">
-                </div>
-                <div class="row">
+            <div class="row  justify-content-center">
+                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+            </div>
+            <div class="row">
 
 
-                    <form action="/Input_Asset/update" method="post" enctype="multipart/form-data" style="width: 100%;">
-                        @csrf
-                        @method('PATCH')
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Harga Pembelian</label>
-                                    <input type="text" class="form-control" name="asset_purchase_price" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Status Asset</label>
-                                    <input type="text" class="form-control" name="status" required>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Waktu Pembelian</label>
-                                    <input type="date" class="form-control" name="asset_purchase_date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Unique Code</label>
-                                    <input type="text" class="form-control" name="unique_code" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-
+                <div class="row justify-text-center">
+                    <div class="col">
+                    
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
                         </div>
-                        <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-danger">Delete</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                        <div class="form-group">
+                            <label>Kategori Barang</label>
+                            <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <label>Harga Pembelian</label>
+                            <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Status Asset</label>
+                            <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Waktu Pembelian</label>
+                            <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unique Code</label>
+                            <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea class="form-control" placeholder="{{$assets->description}}"  name="description" value="{{$assets->description}}" style="height: 120px"></textarea>
+                        </div>
+                    </div>
 
                 </div>
+
+
 
             </div>
+
+        </div>
+        <div class="card-footer">
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
 
 
 
