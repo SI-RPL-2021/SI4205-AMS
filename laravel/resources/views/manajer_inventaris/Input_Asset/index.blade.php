@@ -401,7 +401,7 @@
                             <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
                             <td>{{ $asset->description }}</td>
                             <td>
-                                <a href="/update" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/update" class="edit"><i class="material-icons" data-toggle="tooltip" title="Detail">&#xe88e;</i></a>
                                 <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                             @php
