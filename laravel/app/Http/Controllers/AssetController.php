@@ -19,6 +19,11 @@ class AssetController extends Controller
 
         // // mengirim data pegawai ke view index
         // return view('/manajer_inventaris/input', ['assets' => $aset]);
+
+        //search
+        $aset = DB::table('assets')->paginate(10);
+        return view('index',['assets' => $aset]);
+
     }
 
     /**
@@ -26,6 +31,22 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$aset = DB::table('assets')
+		->where('name','like',"%".$cari."%")
+		->paginate();
+ 
+    		// mengirim data pegawai ke view index
+		return view('index',['assets' => $aset]);
+ 
+	}
+
     public function create()
     {
         //

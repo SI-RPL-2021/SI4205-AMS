@@ -26,6 +26,7 @@ Route::get('/manajer_inventaris/input', function () {
     return view('/manajer_inventaris/input');
 });
 
+
 // Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
 
 // Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@hapus');
@@ -34,3 +35,7 @@ Route::get('/manajer_inventaris/input', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Search
+Route::get('/asset','AssetController@index');
+Route::get('/asset/cari','AssetController@cari');
