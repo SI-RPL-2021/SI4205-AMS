@@ -26,18 +26,11 @@ class AssetController extends Controller
         // mengirim data asset ke view index
         return view('/manajer_inventaris/input', ['assets' => $aset]);
     }
-    public function updateindex()
+    public function updateindex($id, Request $request)
     {
-        // mengambil data dari table asset
-        $aset = DB::table('assets')->get();
-        $assets = asset::all();
+        $assets = Asset::find($id);
 
-        return view('manajer_inventaris.Input_Asset.index', compact('assets'));
-        // // mengambil data dari table asset
-        // $aset = DB::table('assets')->get();
-
-        // mengirim data asset ke view index
-        return view('/manajer_inventaris/input', ['assets' => $aset]);
+        return view('manajer_inventaris/Input_Asset/update', compact('assets'));
     }
     /**
      * Show the form for creating a new resource.
@@ -65,7 +58,7 @@ class AssetController extends Controller
             'picture' => 'required',
             'description' => 'required',
         ]);
-
+      
         // file upload
         $file = $request->file('picture');
         $fileName = rand() . '_' . $file->getClientOriginalName();
