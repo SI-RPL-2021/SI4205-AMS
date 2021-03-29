@@ -25,9 +25,10 @@ Route::get('/update', function () {
 });
 Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
 Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
-Route::get('manajer_inventaris/Input_Asset/update/{asset:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.edit');
-Route::patch('Input_Asset/update/{{ $asset->id }}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
-// Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy')->name('asset.delete');
+Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');
+Route::patch('manajer_inventaris/Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
+Route::delete('delete/{assets:id}',  [App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.delete')->name('asset.delete');
+
 
 
 

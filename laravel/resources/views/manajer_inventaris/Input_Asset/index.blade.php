@@ -406,7 +406,7 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button type="submit" class="material-icons " data-toggle="tooltip" title="Delete">&#xE872;</button>
+                                 <button type="submit" class=""> <i class="material-icons btn-danger" data-toggle="tooltip" title="Details">&#xe872;</i></button>  
 
                                 </form>
 
