@@ -244,7 +244,7 @@ return [
         ['header' => 'Utility'],
         [
             'text' => 'Input Asset',
-            'url'  => '/manajer_inventaris/input',
+            'url'  => '/manajer_inventaris/Input_Asset/index',
             'icon' => 'fas fa-fw fa-book',
         ],
         [
@@ -252,11 +252,33 @@ return [
             'url'  => '/manajer_inventaris/approve_asset',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
         ],
+        [
+            'text' => 'Borrowing Asset',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-shopping-bag',
+        ], [
+            'text' => 'Maintenance Asset',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-medkit',
+        ],
+        [
+            'text' => 'Asset History',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-history',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
+        // [
+        //     'text'    => 'multilevel',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
@@ -295,7 +317,7 @@ return [
         //         ],
         //     ],
         // ],
-       
+
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',

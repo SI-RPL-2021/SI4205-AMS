@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssetController extends Controller
 {
@@ -14,9 +15,15 @@ class AssetController extends Controller
      */
     public function index()
     {
-        // // mengambil data dari table pegawai
+        // mengambil data dari table asset
+        $aset = DB::table('assets')->get();
+        $assets = asset::all();
+
+        return view('manajer_inventaris.Input_Asset.index', compact('assets'));
+        // // mengambil data dari table asset
         // $aset = DB::table('assets')->get();
 
+<<<<<<< HEAD
         // // mengirim data pegawai ke view index
         // return view('/manajer_inventaris/input', ['assets' => $aset]);
 
@@ -24,8 +31,17 @@ class AssetController extends Controller
         $aset = DB::table('assets')->paginate(10);
         return view('index',['assets' => $aset]);
 
+=======
+        // mengirim data asset ke view index
+        return view('/manajer_inventaris/input', ['assets' => $aset]);
+>>>>>>> 6636ba99fa6686a38f2f30ac38c16b5278ab7e8d
     }
+    public function updateindex($id, Request $request)
+    {
+        $assets = Asset::find($id);
 
+        return view('manajer_inventaris/Input_Asset/update', compact('assets'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -60,7 +76,33 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'asset_category' => 'required',
+            'asset_purchase_price' => 'required',
+            'asset_purchase_date' => 'required',
+            'picture' => 'required',
+            'description' => 'required',
+        ]);
+      
+        // file upload
+        $file = $request->file('picture');
+        $fileName = rand() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('images/uploads', $fileName);
+        $file->move('images/uploads', $fileName);
+
+        $insert = asset::create([
+            'name' => $request->name,
+            'unique_code' => $request->name,
+            'picture' => $path,
+            'asset_category' => $request->asset_category,
+            'asset_purchase_date' => $request->asset_purchase_date,
+            'asset_purchase_price' => $request->asset_purchase_price,
+            'description' => $request->description,
+            'status' => 'Tersedia',
+
+        ]);
+        return redirect('/manajer_inventaris/Input_Asset/index');
     }
 
     /**
@@ -103,12 +145,12 @@ class AssetController extends Controller
      * @param  \App\Models\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(asset $asset)
+    public function destroy($id)
     {
-        // // menghapus data pegawai berdasarkan id yang dipilih
-        // DB::table('assets')->where('id', $id)->delete();
+        // menghapus data asset berdasarkan id yang dipilih
+        DB::table('assets')->where('id', $id)->delete();
 
-        // // alihkan halaman ke halaman pegawai
-        // return redirect('/manajer_inventaris/input');
+        // alihkan halaman ke halaman asset
+        return redirect('/manajer_inventaris/input');
     }
 }
