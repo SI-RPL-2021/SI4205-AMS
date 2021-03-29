@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class asset extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'asset_category',
+        'asset_purchase_price',
+        'asset_purchase_date' ,
+        'picture',
+        'description',
+        'unique_code',
+        'status',
+       
+        // 'deskripsi', 'jumlah_penjualan', 'pendapatan_bersih', 'user_id', 'status'
+
+    ];
+    protected $table = 'assets';
 }

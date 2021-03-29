@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Asset')
 
 @section('content')
 
@@ -15,6 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+
+    .row {
+        
+    }
         body {
             color: #566787;
             background: #f5f5f5;
@@ -29,12 +33,7 @@
             padding: 20px 25px;
 
 
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .table-responsive {
-
-            box-shadow: 2px 6px 10px #747f91;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         }
 
         .table-title {
@@ -320,122 +319,21 @@
     </script>
 </head>
 
-
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
 <body>
-    <!-- //table -->
-
-    <div class="container-xl ">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title bg-dark">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>List Asset</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Harga Pembelian</th>
-                            <th>Tanggal Pembelian</th>
-                            <th>Foto Barang</th>
-                            <th>Keterangan</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($assets as $asset)
-                        <tr>
-
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $i }}</td>
-                            <td>{{ $asset->name }}</td>
-                            <td>{{ $asset->asset_category }}</td>
-                            <td>Rp.{{ $asset->asset_purchase_price }}</td>
-                            <td>{{ $asset->asset_purchase_date }}</td>
-                            <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
-                            <td>{{ $asset->description }}</td>
-                            <td>
-                                <a href="/manajer_inventaris/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                            @endforeach
-
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
+    <div class="card" >
+        <div class="card-header">
+            Detail Asset
         </div>
-    </div>
-
-
-    <!-- add asset -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+        <div class="card-body">
+                <div class="row">
+                <img src="https://mmc.tirto.id/image/otf/700x0/2019/09/05/malinois-belgian_ratio-16x9.jpg" alt="aaa" style="display: block; margin: auto;">
                 </div>
-                <div class="modal-body">
+                <div class="row">
 
-                    <form action="/Input_Asset/store" method="post" enctype="multipart/form-data">
+
+                    <form action="/Input_Asset/update" method="post" enctype="multipart/form-data" style="width: 100%;">
                         @csrf
+                        @method('PATCH')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -444,11 +342,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
+                                    <input type="text" class="form-control" name="asset_category" value="{{}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Pembelian</label>
                                     <input type="text" class="form-control" name="asset_purchase_price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status Asset</label>
+                                    <input type="text" class="form-control" name="status" required>
                                 </div>
 
                             </div>
@@ -458,8 +360,8 @@
                                     <input type="date" class="form-control" name="asset_purchase_date" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
+                                    <label>Unique Code</label>
+                                    <input type="text" class="form-control" name="unique_code" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan</label>
@@ -469,22 +371,19 @@
 
                         </div>
                         <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
-                </div>
 
+                </div>
 
             </div>
 
-        </div>
 
-    </div>
-    </div>
-    </div>
 
 </body>
+
 @endsection
 
 @section('css')
