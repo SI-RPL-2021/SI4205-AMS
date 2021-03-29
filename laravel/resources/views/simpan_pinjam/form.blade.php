@@ -177,11 +177,10 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form method ="post" action="/borrowing">
-                                @csrf
+                                <form method ="post" action="">
                                     <div class="form-group">
                                         <label>Nama Barang</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Kategori Barang</label>
@@ -223,8 +222,8 @@
     
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
