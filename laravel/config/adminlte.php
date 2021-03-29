@@ -253,11 +253,9 @@ return [
             'icon' => 'fas fa-fw fa-hand-holding-usd',
         ],
         [
-<<<<<<< HEAD
             'text' => 'Simpan Pinjam',
             'url'  => '/manajer_inventaris/simpan_pinjam/',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
-=======
             'text' => 'Borrowing Asset',
             'url'  => '/manajer_inventaris/simpan_pinjam/',
             'icon' => 'fas fa-fw fa-shopping-bag',
@@ -270,7 +268,6 @@ return [
             'text' => 'Asset History',
             'url'  => '/',
             'icon' => 'fas fa-fw fa-history',
->>>>>>> 3597ef30af53a5362d45ce9afaf2a4fed2b06c67
         ],
         // [
         //     'text' => 'change_password',
