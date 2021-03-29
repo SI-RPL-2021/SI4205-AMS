@@ -23,7 +23,6 @@ class AssetController extends Controller
         // // mengambil data dari table asset
         // $aset = DB::table('assets')->get();
 
-<<<<<<< HEAD
         // // mengirim data pegawai ke view index
         // return view('/manajer_inventaris/input', ['assets' => $aset]);
 
@@ -31,10 +30,8 @@ class AssetController extends Controller
         $aset = DB::table('assets')->paginate(10);
         return view('index',['assets' => $aset]);
 
-=======
         // mengirim data asset ke view index
         return view('/manajer_inventaris/input', ['assets' => $aset]);
->>>>>>> 6636ba99fa6686a38f2f30ac38c16b5278ab7e8d
     }
     public function updateindex($id, Request $request)
     {
