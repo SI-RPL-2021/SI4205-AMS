@@ -58,7 +58,7 @@ class AssetController extends Controller
             'picture' => 'required',
             'description' => 'required',
         ]);
-
+      
         // file upload
         $file = $request->file('picture');
         $fileName = rand() . '_' . $file->getClientOriginalName();

@@ -29,7 +29,7 @@
             padding: 20px 25px;
 
 
-            box-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
         }
 
         .table-responsive {
@@ -346,7 +346,7 @@
 
 <body>
     <!-- //table -->
-    
+
     <div class="container-xl ">
         <div class="table-responsive">
             <div class="table-wrapper">
