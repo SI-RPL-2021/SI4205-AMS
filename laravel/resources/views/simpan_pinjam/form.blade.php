@@ -177,7 +177,8 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form>
+                                <form method ="post" action="/borrowing">
+                                @csrf
                                     <div class="form-group">
                                         <label>Nama Barang</label>
                                         <input type="text" class="form-control" required>
@@ -222,16 +223,15 @@
     
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="w-100"></div>
-
-        <div class="table-responsive mt-5">
+          <div class="table-responsive mt-5">
             <table class="table">
                 <thead>
                     <tr>
@@ -251,15 +251,15 @@
                 <tbody>
                     <tr>
                         <td scope="row">1</td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
-                        <td>Data </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><div class="d-flex">
                             <button type="button" class="btn btn-danger mr-2">Hapus</button>
                             <button type="button" class="btn btn-primary">Edit</button>    
