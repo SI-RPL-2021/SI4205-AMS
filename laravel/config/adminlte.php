@@ -244,7 +244,7 @@ return [
         ['header' => 'Utility'],
         [
             'text' => 'Input Asset',
-            'url'  => '/manajer_inventaris/input',
+            'url'  => '/manajer_inventaris/Input_Asset/index',
             'icon' => 'fas fa-fw fa-book',
         ],
         [
@@ -253,15 +253,38 @@ return [
             'icon' => 'fas fa-fw fa-hand-holding-usd',
         ],
         [
+<<<<<<< HEAD
             'text' => 'Simpan Pinjam',
             'url'  => '/manajer_inventaris/simpan_pinjam/',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
+=======
+            'text' => 'Borrowing Asset',
+            'url'  => '/manajer_inventaris/simpan_pinjam/',
+            'icon' => 'fas fa-fw fa-shopping-bag',
+        ], [
+            'text' => 'Maintenance Asset',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-medkit',
+        ],
+        [
+            'text' => 'Asset History',
+            'url'  => '/',
+            'icon' => 'fas fa-fw fa-history',
+>>>>>>> 3597ef30af53a5362d45ce9afaf2a4fed2b06c67
         ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
+        // [
+        //     'text'    => 'multilevel',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
@@ -300,7 +323,7 @@ return [
         //         ],
         //     ],
         // ],
-       
+
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',

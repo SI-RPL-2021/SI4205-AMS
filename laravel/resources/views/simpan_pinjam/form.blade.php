@@ -27,8 +27,6 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
-
         .container {
             max-width: 2000px;
             width: 100%;
@@ -38,25 +36,21 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
             height: 700px;
         }
-
         .content form .user-details {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             margin: 20px 0 12px 0;
         }
-
         form .user-details .input-box {
             margin-bottom: 15px;
             width: calc(100% / 2 - 20px);
         }
-
         form .input-box span.details {
             display: block;
             font-weight: 500;
             margin-bottom: 5px;
         }
-
         .user-details .input-box input {
             height: 45px;
             width: 100%;
@@ -68,30 +62,25 @@
             border-bottom-width: 2px;
             transition: all 0.3s ease;
         }
-
         .user-details .input-box input:focus,
         .user-details .input-box input:valid {
             border-color: #9b59b6;
         }
-
         form .gender-details .gender-title {
             font-size: 20px;
             font-weight: 500;
         }
-
         form .category {
             display: flex;
             width: 80%;
             margin: 14px 0;
             justify-content: space-between;
         }
-
         form .category label {
             display: flex;
             align-items: center;
             cursor: pointer;
         }
-
         form .category label .dot {
             height: 18px;
             width: 18px;
@@ -101,12 +90,10 @@
             border: 5px solid transparent;
             transition: all 0.3s ease;
         }
-
         form .button {
             height: 45px;
             margin: 35px 0
         }
-
         form .button input {
             height: 100%;
             width: 100%;
@@ -120,36 +107,29 @@
             transition: all 0.3s ease;
             background: linear-gradient(135deg, #71b7e6, #9b59b6);
         }
-
         form .button input:hover {
             /* transform: scale(0.99); */
             background: linear-gradient(-135deg, #71b7e6, #9b59b6);
         }
-
         @media(max-width: 584px) {
             .container {
                 max-width: 100%;
             }
-
             form .user-details .input-box {
                 margin-bottom: 15px;
                 width: 100%;
             }
-
             form .category {
                 width: 100%;
             }
-
             .content form .user-details {
                 max-height: 300px;
                 overflow-y: scroll;
             }
-
             .user-details::-webkit-scrollbar {
                 width: 5px;
             }
         }
-
         @media(max-width: 459px) {
             .container .content .category {
                 flex-direction: column;
@@ -165,7 +145,6 @@
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addSimpanPinjam">
           Tambah
         </button>
-        
 
         <div class="modal fade" id="addSimpanPinjam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -177,10 +156,10 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form method ="post" action="">
+                                <form>
                                     <div class="form-group">
                                         <label>Nama Barang</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Kategori Barang</label>
@@ -219,7 +198,6 @@
                                 </form>
                             </div>
                         </div>
-    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -230,7 +208,8 @@
         </div>
 
         <div class="w-100"></div>
-          <div class="table-responsive mt-5">
+
+        <div class="table-responsive mt-5">
             <table class="table">
                 <thead>
                     <tr>
@@ -250,15 +229,15 @@
                 <tbody>
                     <tr>
                         <td scope="row">1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
+                        <td>Data </td>
                         <td><div class="d-flex">
                             <button type="button" class="btn btn-danger mr-2">Hapus</button>
                             <button type="button" class="btn btn-primary">Edit</button>    
@@ -299,11 +278,11 @@
                 </tbody>
             </table>
         </div>
-    
+
     </div>
 
 
-    
+
 @stop
 
 @section('css')
@@ -312,4 +291,4 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
-@stop
+@stop 
