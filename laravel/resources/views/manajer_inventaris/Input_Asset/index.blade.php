@@ -406,7 +406,7 @@
                                     @csrf
                                     @method('delete')
 
-                                    <button type="submit" class="material-icons " data-toggle="tooltip" title="Delete">&#xE872;</button>
+                                 <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
 
                                 </form>
 
@@ -419,7 +419,7 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <div class="hint-text">Showing <b>1/b> out of <b>Many</b> entries</div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
                         <li class="page-item active"><a href="#" class="page-link">1</a></li>
