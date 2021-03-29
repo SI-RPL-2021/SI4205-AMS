@@ -108,9 +108,31 @@ class AssetController extends Controller
      * @param  \App\Models\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, asset $asset)
+    public function update($id,Request $request)
     {
-        //
+        $asset = Asset::find($id);
+
+        $asset->name = $request->name;
+        $asset->asset_category = $request->asset_category;
+        $asset->asset_purchase_date = $request->asset_purchase_date;
+        $asset->asset_purchase_price = $request->asset_purchase_price;
+        $asset->unique_code = $request->name;
+        $asset->description = $request->description;
+    
+
+        if ($request->hasFile('picture')) {
+            $file = $request->file('picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = rand() . '.' . $extension;
+            $file->move('imgages/uploads', $filename);
+            $asset->picture = $filename;
+        } else {
+
+            $asset->picture = $asset->picture;
+        }
+        $asset->save();
+
+        return redirect('manajer_inventaris/Input_Asset/index');
     }
 
     /**
@@ -125,6 +147,6 @@ class AssetController extends Controller
         DB::table('assets')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
-        return redirect('/manajer_inventaris/input');
+        return redirect('manajer_inventaris/Input_Asset/index');
     }
 }

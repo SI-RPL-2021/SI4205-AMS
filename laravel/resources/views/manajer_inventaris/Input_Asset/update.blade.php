@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
-        .rowhead{
+        .rowhead {
             margin-bottom: 40px;
         }
 
@@ -323,57 +323,61 @@
     <div class="card bg-dark">
         <div class="card-header">
             Detail Asset
-            <div class="close"><a href="/manajer_inventaris/Input_Asset/index" >&times; </a></div>
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
         </div>
         <div class="card-body">
             <div class="row  justify-content-center">
                 <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
             </div>
-            <div class="row">
+            <form action="{{ route('asset.update', compact('assets')) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
+                @csrf
+                <div class="row">
 
 
-                <div class="row justify-text-center" style="width: 100%;">
-                    <div class="col">
-                    
-                        <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                    <div class="row justify-text-center" style="width: 100%;">
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori Barang</label>
+                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Harga Pembelian</label>
+                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Asset</label>
+                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Kategori Barang</label>
-                            <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Harga Pembelian</label>
-                            <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Status Asset</label>
-                            <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Waktu Pembelian</label>
+                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Unique Code</label>
+                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea  class="form-control"  name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Waktu Pembelian</label>
-                            <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Unique Code</label>
-                            <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" placeholder="{{$assets->description}}"  name="description" value="{{$assets->description}}" style="height: 120px"></textarea>
-                        </div>
-                    </div>
+
+
 
                 </div>
-
-
-
-            </div>
 
         </div>
         <div class="card-footer">
@@ -383,6 +387,7 @@
             </div>
         </div>
 
+        </form>
 
 
 </body>
