@@ -1,2 +1,0 @@
-# LatihanWeb
-Repo Exercise
