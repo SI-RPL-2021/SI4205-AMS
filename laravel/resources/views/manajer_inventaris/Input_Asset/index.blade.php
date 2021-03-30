@@ -401,8 +401,15 @@
                             <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
                             <td>{{ $asset->description }}</td>
                             <td>
-                                <a href="/manajer_inventaris/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="/delete/{{$asset->id}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                 <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                </form>
+
                             </td>
                             @php
                             $i++
@@ -412,7 +419,7 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <div class="hint-text">Showing <b>1/b> out of <b>Many</b> entries</div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
                         <li class="page-item active"><a href="#" class="page-link">1</a></li>
