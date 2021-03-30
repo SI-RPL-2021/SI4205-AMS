@@ -44,6 +44,11 @@ Route::get('/manajer_inventaris/update', function () {
     return view('/manajer_inventaris/update');
 });
 
+//Fitur Maintenance
+Route::get('maintenance/input', [App\Http\Controllers\MaintenanceController::class, 'index']);
+Route::post('Input_Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store']);
+
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
