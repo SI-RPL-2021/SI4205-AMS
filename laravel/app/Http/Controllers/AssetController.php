@@ -78,7 +78,7 @@ class AssetController extends Controller
 		->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('index',['assets' => $aset]);
+		return view('search',['assets' => $aset]);
  
 	}
 

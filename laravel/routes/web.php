@@ -53,6 +53,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Search
 Route::get('/searc', [App\Http\Controllers\AssetController::class, 'indexx'])->name('search');
+Route::get('/searchh/cari', [App\Http\Controllers\AssetController::class, 'cari'])->name('search');
 
 // History
 Route::get('/histo', [App\Http\Controllers\AssetController::class, 'indexxx'])->name('history');
