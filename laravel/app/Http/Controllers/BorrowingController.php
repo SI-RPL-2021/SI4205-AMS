@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\borrowing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BorrowingController extends Controller
 {
@@ -14,8 +15,17 @@ class BorrowingController extends Controller
      */
     public function index()
     {
-        
-    }
+        // mengambil data dari table asset
+      $borrowing = DB::table('borrowings')->get();
+      $borrowings = borrowing::all();
+
+      return view('manajer_inventaris/simpan_pinjam/index',compact('borrowings'));
+      // // mengambil data dari table asset
+      // $aset = DB::table('assets')->get();
+
+      // mengirim data asset ke view index
+  }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -35,9 +45,27 @@ class BorrowingController extends Controller
      */
     public function store(Request $request)
     {
-      return $request;
-    }
+        $request->validate([
+            'borrowing_picture' => 'required',
+            'borrowing_date' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        // file upload
+        $file = $request->file('borrowing_picture');
+        $fileName = rand() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('images/uploads', $fileName);
+        $file->move('images/uploads', $fileName);
+                
+        $insert = borrowing::create([
+            'borrowing_picture' => $path,
+            'borrowing_date' => $request->borrowing_date,
+            'description' => $request->description,
+            'status' => $request->status,
 
+        ]);
+        return redirect('/manajer_inventaris/simpan_pinjam/index');
+    }
     /**
      * Display the specified resource.
      *
@@ -80,6 +108,9 @@ class BorrowingController extends Controller
      */
     public function destroy(borrowing $borrowing)
     {
-        //
+        DB::table('borrowings')->where('id', $id)->delete();
+
+        // alihkan halaman ke halaman asset
+        return redirect('/manajer_inventaris/simpan_pinjam_form');
     }
 }

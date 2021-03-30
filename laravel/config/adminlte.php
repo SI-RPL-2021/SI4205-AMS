@@ -254,11 +254,8 @@ return [
         ],
         [
             'text' => 'Simpan Pinjam',
-            'url'  => '/manajer_inventaris/simpan_pinjam/',
+            'url'  => '/manajer_inventaris/simpan_pinjam/index',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
-            'text' => 'Borrowing Asset',
-            'url'  => '/manajer_inventaris/simpan_pinjam/',
-            'icon' => 'fas fa-fw fa-shopping-bag',
         ], [
             'text' => 'Maintenance Asset',
             'url'  => '/',

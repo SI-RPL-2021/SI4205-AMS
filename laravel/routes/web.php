@@ -35,31 +35,21 @@ Route::patch('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Con
 Route::get('/Pinjam Asset/index', function () {
     return view('/manajer_inventaris/Pinjam Asset/index');
 });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-Route::get('/manajer_inventaris/simpan_pinjam/', function () {
-    return view('simpan_pinjam.form');
-});
-
-// Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
-
-// Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@hapus');
->>>>>>> 3597ef30af53a5362d45ce9afaf2a4fed2b06c67
-
-Route::get('/manajer_inventaris/simpan_pinjam/', function () {
-    return view('simpan_pinjam.form');
-=======
 Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
 
 Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@destroy');
 
 Route::get('/manajer_inventaris/update', function () {
     return view('/manajer_inventaris/update');
->>>>>>> 6636ba99fa6686a38f2f30ac38c16b5278ab7e8d
 });
 
 Auth::routes();
-
+//form
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('manajer_inventaris/simpan_pinjam/index', [App\Http\Controllers\BorrowingController::class, 'index']);
+Route::post('simpan_pinjam/store', [App\Http\Controllers\BorrowingController::class, 'store']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
