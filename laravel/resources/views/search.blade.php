@@ -1,11 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
-
 @section('content')
 <style type="text/css">
 		.pagination li{
@@ -17,7 +11,7 @@
 
 	<h3>Search Aset</h3>
 
-	<form action="/aset/cari" method="GET">
+	<form action="/searchh/cari" method="GET">
 		<input type="text" name="cari" placeholder="Cari aset .." value="{{ old('cari') }}">
 		<input type="submit" value="CARI">
 	</form>
@@ -31,6 +25,7 @@
 			<th>Kategori</th>
 			<th>Status</th>
 		</tr>
+    
 		@foreach($assets as $p)
 		<tr>
 			<td>{{ $p->name }}</td>
@@ -42,18 +37,10 @@
 	</table>
  
 	<br/>
-	Halaman : {{ $aset->currentPage() }} <br/>
-	Jumlah Data : {{ $aset->total() }} <br/>
-	Data Per Halaman : {{ $aset->perPage() }} <br/>
+	Halaman : {{ $assets->currentPage() }} <br/>
+	Jumlah Data : {{ $assets->total() }} <br/>
+	Data Per Halaman : {{ $assets->perPage() }} <br/>
  
  
-	{{ $aset->links() }}
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+	{{ $assets->links() }}
+@endsection

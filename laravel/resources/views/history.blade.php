@@ -1,19 +1,23 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>History Aset</h1>
-@stop
-
 @section('content')
-<table border="1">
+<style type="text/css">
+		.pagination li{
+			float: left;
+			list-style-type: none;
+			margin:5px;
+		}
+	</style>
+	<br/>
+  <h3>HISTORY</h3>
+	<table border="1">
 		<tr>
 			<th>Nama</th>
 			<th>id</th>
 			<th>Kategori</th>
 			<th>Status</th>
 		</tr>
+    
 		@foreach($assets as $p)
 		<tr>
 			<td>{{ $p->name }}</td>
@@ -23,12 +27,12 @@
 		</tr>
 		@endforeach
 	</table>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+ 
+	<br/>
+	Halaman : {{ $assets->currentPage() }} <br/>
+	Jumlah Data : {{ $assets->total() }} <br/>
+	Data Per Halaman : {{ $assets->perPage() }} <br/>
+ 
+ 
+	{{ $assets->links() }}
+@endsection

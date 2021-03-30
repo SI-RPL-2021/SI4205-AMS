@@ -45,6 +45,28 @@ class AssetController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function indexx()
+    {
+        // mengambil data dari table asset
+        $aset = DB::table('assets')->get();
+        $assets = asset::all();
+
+        //search
+        $aset = DB::table('assets')->paginate(10);
+        return view('search',['assets' => $aset]);
+    }
+
+    public function indexxx()
+    {
+        // mengambil data dari table asset
+        $aset = DB::table('assets')->get();
+        $assets = asset::all();
+
+        //search
+        $aset = DB::table('assets')->paginate(10);
+        return view('history',['assets' => $aset]);
+    }
+
     public function cari(Request $request)
 	{
 		// menangkap data pencarian

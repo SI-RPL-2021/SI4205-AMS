@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AssetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +23,7 @@ Route::get('/', function () {
 Route::get('/update', function () {
     return view('manajer_inventaris/Input_Asset/update');
 });
-Route::get('/history', function () {
-    return view('history');
-});
-Route::get('/search', function () {
-    return view('search');
-});
+
 Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index']);
 Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store']);
 // Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
@@ -57,6 +52,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Search
-Route::get('/asset','AssetController@index');
-Route::get('/asset/cari','AssetController@cari');
+Route::get('/searc', [App\Http\Controllers\AssetController::class, 'indexx'])->name('search');
+
+// History
+Route::get('/histo', [App\Http\Controllers\AssetController::class, 'indexxx'])->name('history');
+
+
+
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
