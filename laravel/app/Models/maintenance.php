@@ -11,10 +11,10 @@ class maintenance extends Model
 
     protected $fillable = [
         'name',
-        'asset_demage',
+        'asset_damage',
         'asset_age',
         'maintenance_bill' ,
-        'demage_status',
+        'damage_status',
 
 
     ];

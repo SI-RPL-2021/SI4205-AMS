@@ -376,7 +376,7 @@
                             <th>Umur barang</th>
                             <th>Biaya kerusakan</th>
                             <th>Status kerusakan</th>
-                            <th>Keterangan</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -395,12 +395,12 @@
                             </td>
                             <td>{{ $i }}</td>
                             <td>{{ $maintenance->name }}</td>
-                            <td>{{ $maintenance->asset_demage }}</td>
-                            <td>Rp.{{ $maintenance->asset_age}}</td>
+                            <td>{{ $maintenance->asset_damage }}</td>
+                            <td>{{ $maintenance->asset_age}}</td>
                             <td>{{ $maintenance->maintenance_bill }}</td>
-                            <td>{{ $maintenance->demage_status }}</td>
+                            <td>{{ $maintenance->damage_status }}</td>
                             <td>
-                                <a href="/manajer_inventaris/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <a href="/manajer_inventaris/Input_Asset/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                 <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                             @php
@@ -433,7 +433,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Input_Asset/store" method="post" enctype="multipart/form-data">
+                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -443,22 +443,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kerusakan Barang</label>
-                                    <input type="text" class="form-control" name="asset_demage" required>
+                                    <input type="text" class="form-control" name="asset_damage" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Umur barang</label>
-                                    <input type="text" class="form-control" name="asset_age" required>
+                                    <input type="number" class="form-control" name="asset_age" required>
                                 </div>
 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>biaya kerusakaan</label>
-                                    <input type="date" class="form-control" name="maintenance_bill" required>
+                                    <label>Biaya kerusakaan</label>
+                                    <input type="number" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>status kerusakan</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="demage_status" required>
+                                    <label>Status kerusakan</label>
+                                    <input type="text" class="form-control" name="damage_status" required>
                                 </div>
                             </div>
 

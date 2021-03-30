@@ -45,24 +45,25 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request-> validate([
 
             'name' => 'required',
-            'asset_demage' => 'required',
+            'asset_damage' => 'required',
             'asset_age' => 'required',
             'maintenance_bill' => 'required',
-            'demage_status' => 'required',
-            'description' => 'required',
+            'damage_status' => 'required',
+            
 
         ]);
-    
+      
         $insert = maintenance::create([
             'name' => $request->name,
-            'asset_demage' => $request->asset_demage,
+            'asset_damage' => $request->asset_damage,
             'asset_age' => $request->asset_age,
             'maintenance_bill' => $request->maintenance_bill,
-            'demage_status' => $request->demage_status,
-            'description' => $request->description,
+            'damage_status' => $request->damage_status,
+           
             
 
         ]);

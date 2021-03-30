@@ -46,7 +46,7 @@ Route::get('/manajer_inventaris/update', function () {
 
 //Fitur Maintenance
 Route::get('maintenance/input', [App\Http\Controllers\MaintenanceController::class, 'index']);
-Route::post('Input_Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store']);
+Route::post('Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store']);
 
 
 Auth::routes();
