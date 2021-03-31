@@ -19,12 +19,12 @@ class AssetController extends Controller
         $aset = DB::table('assets')->get();
         $assets = asset::all();
 
-        return view('manajer_inventaris.Input_Asset.index', compact('assets'));
+        return view('manajer_inventaris/Input_Asset/index', compact('assets'));
         // // mengambil data dari table asset
         // $aset = DB::table('assets')->get();
 
         // mengirim data asset ke view index
-        return view('/manajer_inventaris/input', ['assets' => $aset]);
+  
     }
     public function updateindex($id, Request $request)
     {
