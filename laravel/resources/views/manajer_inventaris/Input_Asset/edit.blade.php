@@ -322,7 +322,7 @@
 <body>
     <div class="card bg-dark">
         <div class="card-header">
-            Detail Asset
+            Detail as
             <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
         </div>
