@@ -396,11 +396,11 @@
                             <td>{{ $i }}</td>
                             <td>{{ $asset->name }}</td>
                             <td>{{ $asset->asset_category }}</td>
-                            <td>Rp.{{ $asset->asset_purchase_price }}</td>
+                            <td>Rp. {{  number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
                             <td>{{ $asset->asset_purchase_date }}</td>
                             <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
                             <td>{{ $asset->description }}</td>
-                            <td>
+                            <td style="text-align: center;">
                                 <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                 <form action="/delete/{{$asset->id}}" method="post">
                                     @csrf

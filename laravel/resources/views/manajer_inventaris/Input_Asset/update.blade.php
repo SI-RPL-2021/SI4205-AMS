@@ -330,6 +330,7 @@
             <div class="row  justify-content-center">
                 <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
             </div>
+            <br>
             <form action="{{ route('asset.update', compact('assets')) }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
@@ -338,7 +339,7 @@
 
                     <div class="row justify-text-center" style="width: 100%;">
 
-                        <div class="col">
+                        <div class="col" style="margin-left: 30px;" >
 
                             <div class="form-group">
                                 <label>Nama Barang</label>
