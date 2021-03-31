@@ -349,7 +349,7 @@
 
     <div class="container-xl ">
         <div class="table-responsive">
-            <div class="table-wrapper">
+            <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
@@ -419,7 +419,7 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>1/b> out of <b>Many</b> entries</div>
+                    <div class="hint-text">Showing <b>1</b> out of <b>Many</b> entries</div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
                         <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -441,9 +441,9 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Input_Asset/store" method="post" enctype="multipart/form-data">
+                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nama Barang</label>
@@ -461,7 +461,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Waktu Pembelian</label>
+                                    <label >Waktu Pembelian</label>
                                     <input type="date" class="form-control" name="asset_purchase_date" required>
                                 </div>
                                 <div class="form-group">
