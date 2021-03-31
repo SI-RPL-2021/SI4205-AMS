@@ -15,6 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+        .rowhead {
+            margin-bottom: 40px;
+        }
+
         body {
             color: #566787;
             background: #f5f5f5;
@@ -29,12 +33,7 @@
             padding: 20px 25px;
 
 
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .table-responsive {
-
-            box-shadow: 2px 6px 10px #747f91;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         }
 
         .table-title {
@@ -275,8 +274,8 @@
         }
 
         .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
+            border-radius: 5px;
+            box-shadow: 2px;
             border-color: #dddddd;
         }
 
@@ -320,172 +319,77 @@
     </script>
 </head>
 
-
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
 <body>
-    <!-- //table -->
+    <div class="card bg-dark">
+        <div class="card-header">
+            Detail Maintenance
+            <div class="close"><a href="/manintenance/input">&times; </a></div>
 
-    <div class="container-xl ">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title bg-dark">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>List Maintenance</b></h2>
+        </div>
+        <div class="card-body">
+           
+            <form action="{{ route('maintenance.update', compact('maintenances')) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
+                @csrf
+                <div class="row">
+
+
+                    <div class="row justify-text-center" style="width: 100%;">
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="name" value="{{$maintenances->name }}" placeholder="{{$maintenances->Name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kerusakan Barang</label>
+                                <input type="text" class="form-control" name="asset_damage" value="{{ $maintennaces->asset_damage }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>umur Barang</label>
+                                <input type="text" class="form-control" name="asset_age" value="{{$maintenances->asset_age }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Biaya Kerusakan</label>
+                                <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Status kerusakan</label>
+                                <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
+                            </div>
+
                         </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Maintenance</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
-                        </div>
+                       
+
                     </div>
+
+
+
                 </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Kerusakan barang</th>
-                            <th>Umur barang</th>
-                            <th>Biaya kerusakan</th>
-                            <th>Status kerusakan</th>
-
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($maintenances as $maintenance)
-                        <tr>
-
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $i }}</td>
-                            <td>{{ $maintenance->name }}</td>
-                            <td>{{ $maintenance->asset_damage }}</td>
-                            <td>{{ $maintenance->asset_age}}</td>
-                            <td>{{ $maintenance->maintenance_bill }}</td>
-                            <td>{{ $maintenance->damage_status }}</td>
-                            <td>
-                                <a href="" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                            @endforeach
-
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- add maintenance -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-
-                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kerusakan Barang</label>
-                                    <input type="text" class="form-control" name="asset_damage" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Umur barang</label>
-                                    <input type="number" class="form-control" name="asset_age" required>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Biaya kerusakaan</label>
-                                    <input type="number" class="form-control" name="maintenance_bill" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Status kerusakan</label>
-                                    <input type="text" class="form-control" name="damage_status" required>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
-
-
-            </div>
 
         </div>
+        <div class="card-footer">
 
-    </div>
-    </div>
-    </div>
+            <div class="modal-footer justify-content-center">
+
+                <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form action="/delete/{{$maintenances->id}}" method="post">
+                    @csrf
+                    @method('delete')
+
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
+
+                </form>
+            </div>
+        </div>
+
+
+
 
 </body>
+
 @endsection
 
 @section('css')

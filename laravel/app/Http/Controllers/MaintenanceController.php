@@ -99,9 +99,18 @@ class MaintenanceController extends Controller
      * @param  \App\Models\maintenance  $maintenance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, maintenance $maintenance)
+    public function update($id, Request $request)
     {
-        //
+        $maintenance = Maintenance::find($id);
+
+        $maintenance->name = $request->name;
+        $maintenance->asset_damage = $request->asset_damage;
+        $maintenance->asset_age = $request->asset_age;
+        $maintenance->maintenance_bill = $request->maintenance_bill;
+        $maintenance->damage_status = $request->name;
+        
+    
+        return redirect('/maintenance/input');
     }
 
     /**
