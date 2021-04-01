@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
-        body {
+       body {
             color: #566787;
             background: #f5f5f5;
             font-family: 'Varela Round', sans-serif;
@@ -293,147 +293,26 @@
             font-weight: normal;
         }
     </style>
-    <script>
-        $(document).ready(function() {
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
-
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function() {
-                if (this.checked) {
-                    checkbox.each(function() {
-                        this.checked = true;
-                    });
-                } else {
-                    checkbox.each(function() {
-                        this.checked = false;
-                    });
-                }
-            });
-            checkbox.click(function() {
-                if (!this.checked) {
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        });
     </script>
 </head>
 
-
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <body>
-    <!-- //table -->
+    <form action="" method="post">
 
-    <div class="container-xl ">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title bg-dark">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Pinjam Asset</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Borrowing</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                        <th>Nox</th>
-                        <th>Foto Barang</th>
-                        <th>Tanggal Peminjaman</th>
-                        <th>Keterangan</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                        $i = 1
-                        @endphp
-                        @foreach ($borrowings as $borrowing)
-                        <tr>
+   
+    <div class="card bg-dark">
+        <div class="card-header">
+            Detail Asset
+            <div class="close"><a href="/manajer_inventaris/simpan_pinjam/index" >&times; </a></div>
 
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $i }}</td>
-                            <td>{{ $borrowing->borrowing_picture}}</td>
-                            <td>{{ $borrowing->borrowing_date }}</td>
-                            <td>{{ $borrowing->description }}</td>
-                            <td>{{ $borrowing->status }}</td>
-                            <td>
-                                <a href="/manajer_inventaris/simpan_pinjam/update/{{ $borrowing->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <a href='{{url("simpan_pinjam/hapus/$borrowing->id")}}' class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                            @endforeach
-
-
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
-    </div>
-
-
-    <!-- add asset -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-
-                    <form action="/simpan_pinjam/store" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                            <div class="form-group">
+            <div class="row  justify-content-center">
+                <img class="rounded" src="{{ asset(($borrowings->borrowing_picture)) }}" alt="{{$borrowings->borrowing_picture}}" height="250px">
+            </div>
+            <div class="row">
+                <div class="row justify-text-center">
+                    <div class="col">
+                    <div class="form-group">
                                     <label>Foto Barang</label>
                                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
                                 </div>
@@ -450,25 +329,27 @@
                                     <label>Status</label>
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="status" style="height: 100px"></textarea>
                                 </div>
-
-                        </div>
-                        <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
+                        
 
 
             </div>
 
         </div>
+        <div class="card-footer">
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
 
     </div>
-    </div>
-    </div>
+
+</form>
+
+
 
 </body>
+
 @endsection
 
 @section('css')

@@ -48,6 +48,9 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('manajer_inventaris/simpan_pinjam/index', [App\Http\Controllers\BorrowingController::class, 'index']);
 Route::post('simpan_pinjam/store', [App\Http\Controllers\BorrowingController::class, 'store']);
+Route::get('simpan_pinjam/hapus/{borrowings:id}',[App\Http\Controllers\BorrowingController::class, 'destroy']);
+Route::get('manajer_inventaris/simpan_pinjam/update/{income:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex']);
+Route::patch('manajer_inventaris/simpan_pinjam/update/{income:id}',  [App\Http\Controllers\BorrowingController::class, 'update']);
 
 
 Auth::routes();

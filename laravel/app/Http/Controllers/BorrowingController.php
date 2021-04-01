@@ -24,7 +24,14 @@ class BorrowingController extends Controller
       // $aset = DB::table('assets')->get();
 
       // mengirim data asset ke view index
-  }
+      return view('/manajer_inventaris/simpan_pinjam', ['borrowings' => $borrowing]);
+    }
+    public function updateindex($id, Request $request)
+    {
+        $borrowings = borrowing::find($id);
+
+        return view('manajer_inventaris/simpan_pinjam/update', compact('borrowings'));
+    }
     
 
     /**
@@ -106,11 +113,11 @@ class BorrowingController extends Controller
      * @param  \App\Models\borrowing  $borrowing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(borrowing $borrowing)
+    public function destroy($id)
     {
         DB::table('borrowings')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
-        return redirect('/manajer_inventaris/simpan_pinjam_form');
+        return redirect('/manajer_inventaris/simpan_pinjam/index');
     }
 }
