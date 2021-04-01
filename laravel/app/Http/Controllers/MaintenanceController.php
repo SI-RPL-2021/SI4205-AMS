@@ -26,6 +26,12 @@ class MaintenanceController extends Controller
         // mengirim data asset ke view input
        
     }
+    public function updateinput($id, Request $request)
+    {
+        $maintenances = Maintenance::find($id);
+
+        return view('manajer_inventaris/Maintenance/update', compact('maintenances'));
+    }
    
     /**
      * Show the form for creating a new resource.
@@ -107,11 +113,14 @@ class MaintenanceController extends Controller
         $maintenance->asset_damage = $request->asset_damage;
         $maintenance->asset_age = $request->asset_age;
         $maintenance->maintenance_bill = $request->maintenance_bill;
-        $maintenance->damage_status = $request->name;
+        $maintenance->damage_status = $request->damage_status;
         
     
+        $maintenance-> save();
         return redirect('/maintenance/input');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

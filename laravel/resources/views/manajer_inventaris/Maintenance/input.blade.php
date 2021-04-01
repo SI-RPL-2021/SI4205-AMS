@@ -400,7 +400,7 @@
                             <td>{{ $maintenance->maintenance_bill }}</td>
                             <td>{{ $maintenance->damage_status }}</td>
                             <td>
-                                <a href="" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                 <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
                                     @csrf
                                     @method('delete')
@@ -444,28 +444,36 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <label style="color: black;">Nama Barang</label>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
+                                        <option selected="selected" data-select2-id="3">Mobil</option>
+                                        <option data-select2-id="34">Laptop</option>
+                                        <option data-select2-id="35">Printer</option>
+                                        <option data-select2-id="36">Layar proyektor</option>
+                                        
+                                    </select>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label>Kerusakan Barang</label>
+                                    <label style="color: black;">Kerusakan Barang</label>
                                     <input type="text" class="form-control" name="asset_damage" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Umur barang</label>
+                                    <label style="color: black;">Umur barang</label>
                                     <input type="number" class="form-control" name="asset_age" required>
                                 </div>
 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Biaya kerusakaan</label>
-                                    <input type="number" class="form-control" name="maintenance_bill" required>
+                                    <label style="color: black;">Biaya Kerusakan</label>
+                                    <input type="text" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Status kerusakan</label>
+                                    <label style="color: black;">Status kerusakan</label>
                                     <input type="text" class="form-control" name="damage_status" required>
                                 </div>
+
                             </div>
 
                         </div>
