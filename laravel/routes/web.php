@@ -15,52 +15,45 @@ use Illuminate\Support\Facades\Route;
 */
 //Manajer Inventaris
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 
 //Fitur CRUD Asset
-Route::get('/update', function () {
-    return view('manajer_inventaris/Input_Asset/update');
-});
-Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index']);
-Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store']);
-// Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
-Route::get('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'updateindex']);
-Route::patch('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'update']);
+
 Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
 Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
-Route::get('manajer_inventaris/Input_Asset/update/{asset:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.edit');
-Route::patch('Input_Asset/update/{{ $asset->id }}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
-// Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy')->name('asset.delete');
+Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');
+Route::patch('manajer_inventaris/Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
+Route::delete('delete/{assets:id}',  [App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.delete')->name('asset.delete');
+
+//Fitur CRUD Category Asset
+
+Route::get('manajer_inventaris/category/index', [App\Http\Controllers\CategoryController::class, 'index'])->name('cat.show');
+Route::post('category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('cat.save');
+Route::get('category/update/{category:id}',  [App\Http\Controllers\CategoryController::class, 'updateindex'])->name('cat.details');
+Route::patch('manajer_inventaris/category/update/{category:id}',  [App\Http\Controllers\CategoryController::class, 'update'])->name('cat.update');
+Route::delete('delete/{category:id}',  [App\Http\Controllers\CategoryController::class, 'destroy'])->name('asset.delete')->name('cat.delete');
+
+//Fitur CRUD Maintenance
+
+Route::get('manajer_inventaris/Maintenance/index', [App\Http\Controllers\MaintenanceController::class, 'index'])->name('maintenance.show');
+Route::post('Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store'])->name('maintenance.save');
+Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'updateindex'])->name('maintenance.details');
+Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'update'])->name('maintenance.update');
+Route::delete('delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
+
+//Fitur CRUD Peminjaman
+
+Route::get('manajer_inventaris/Borrowing/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('maintenance.show');
+Route::post('Maintenance/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('maintenance.save');
+Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('maintenance.details');
+Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('maintenance.update');
+Route::delete('delete/{Maintenances:id}',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
 
 
 
-//Fitur Accept Asset
-Route::get('/Pinjam Asset/index', function () {
-    return view('/manajer_inventaris/Pinjam Asset/index');
-});
-
-Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
-
-Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@destroy');
-
-Route::get('/manajer_inventaris/update', function () {
-    return view('/manajer_inventaris/update');
-});
 
 Auth::routes();
-//form
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('manajer_inventaris/simpan_pinjam/index', [App\Http\Controllers\BorrowingController::class, 'index']);
-Route::post('simpan_pinjam/store', [App\Http\Controllers\BorrowingController::class, 'store']);
-Route::get('simpan_pinjam/hapus/{borrowings:id}',[App\Http\Controllers\BorrowingController::class, 'destroy']);
-Route::get('manajer_inventaris/simpan_pinjam/update/{income:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex']);
-Route::patch('manajer_inventaris/simpan_pinjam/update/{income:id}',  [App\Http\Controllers\BorrowingController::class, 'update']);
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

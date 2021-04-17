@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Peminjaman Asset')
 
 @section('content')
 
@@ -327,7 +327,7 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
+                    <h4 class="modal-title">Delete Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -342,20 +342,22 @@
         </div>
     </div>
 </div>
+
+
 <body>
     <!-- //table -->
 
     <div class="container-xl ">
         <div class="table-responsive">
-            <div class="table-wrapper">
+            <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Pinjam Asset</b></h2>
+                            <h2>Borrowed Item List </b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Borrowing</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Borrow An Asset</span></a>
+                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete Records</span></a>
                         </div>
                     </div>
                 </div>
@@ -368,19 +370,21 @@
                                     <label for="selectAll"></label>
                                 </span>
                             </th>
-                        <th>Nox</th>
-                        <th>Foto Barang</th>
-                        <th>Tanggal Peminjaman</th>
-                        <th>Keterangan</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                            <th>No</th>
+                            <th>Nama Barang</th>
+                            <th>Foto Barang</th>
+                            <th>Keterangan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Status Peminjaman</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @php
+                        @php
                         $i = 1
                         @endphp
-                        @foreach ($borrowings as $borrowing)
+                        @foreach ($borrow as $key=> $borrow)
                         <tr>
 
                             <td>
@@ -389,30 +393,34 @@
                                     <label for="checkbox1"></label>
                                 </span>
                             </td>
-                            <td>{{ $i }}</td>
-                            <td>{{ $borrowing->borrowing_picture}}</td>
-                            <td>{{ $borrowing->borrowing_date }}</td>
-                            <td>{{ $borrowing->description }}</td>
-                            <td>{{ $borrowing->status }}</td>
+                            <td>{{ $borrow ->firstItem() + $key }}</td>
+                            <td>{{ $borrow->asset_id }}</td>
+                            <td class="product-img"><img class="rounded" src="{{ asset($borrow->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
+                            <td>{{ $borrow->description }}</td>
+                            <td>{{ $borrow->borrowing_date}}</td>
+                            <td>{{ $borrow->borrowing_end}}</td>
+                            <td>{{ $borrow->status}}</td>
                             <td>
-                                <a href="/manajer_inventaris/simpan_pinjam/update/{{ $borrowing->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <a href='{{url("simpan_pinjam/hapus/$borrowing->id")}}' class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="/delete/{{$asset->id}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                </form>
+
                             </td>
                             @php
                             $i++
                             @endphp
                             @endforeach
 
-
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
+
+
                 </div>
             </div>
         </div>
@@ -429,27 +437,37 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/simpan_pinjam/store" method="post" enctype="multipart/form-data">
+                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-6">
-                            <div class="form-group">
-                                    <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
+                                <div class="form-group">
+                                    <label>Kode Barang</label>
+                                    <select name="unique_code" id="">
+                                        @foreach ($assets as $assets)
+                                        <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                    <div class="form-group">
-                                        <label>Tanggal Peminjaman</label>
-                                        <input type="date" class="form-control" name="borrowing_date" required>
-                                    </div>
-
+                                <div class="form-group">
+                                    <label>Foto Barang</label>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_end" required>
+                                </div>
                                 <div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Tambahkan Keterangan Disini" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                    <label>Tanggal Peminjaman</label>
+                                    <input type="date" class="form-control" name="borrowing_date" required>
+                                </div> 
                                 <div class="form-group">
-                                    <label>Status</label>
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="status" style="height: 100px"></textarea>
+                                    <label>Tanggal Pengembalian</label>
+                                    <input type="date" class="form-control" name="borrowing_end" required>
                                 </div>
+                            </div>
 
                         </div>
                         <div class="modal-footer text-center">

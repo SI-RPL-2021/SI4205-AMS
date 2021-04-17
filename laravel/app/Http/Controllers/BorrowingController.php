@@ -16,21 +16,11 @@ class BorrowingController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-      $borrowing = DB::table('borrowings')->get();
-      $borrowings = borrowing::all();
+        $borrow = DB::table('borrowings')->paginate(5);
+        $assets = DB::table('assets')->get();
 
-      return view('manajer_inventaris/simpan_pinjam/index',compact('borrowings'));
-      // // mengambil data dari table asset
-      // $aset = DB::table('assets')->get();
-
-      // mengirim data asset ke view index
-      return view('/manajer_inventaris/simpan_pinjam', ['borrowings' => $borrowing]);
-    }
-    public function updateindex($id, Request $request)
-    {
-        $borrowings = borrowing::find($id);
-
-        return view('manajer_inventaris/simpan_pinjam/update', compact('borrowings'));
+        return view('manajer_inventaris/Borrowing/index', compact(['borrow','assets']));
+      
     }
 
     /**
@@ -40,7 +30,6 @@ class BorrowingController extends Controller
      */
     public function create()
     {
-     
         //
     }
 
@@ -52,26 +41,7 @@ class BorrowingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'borrowing_picture' => 'required',
-            'borrowing_date' => 'required',
-            'description' => 'required',
-            'status' => 'required',
-        ]);
-        // file upload
-        $file = $request->file('borrowing_picture');
-        $fileName = rand() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('images/uploads', $fileName);
-        $file->move('images/uploads', $fileName);
-                
-        $insert = borrowing::create([
-            'borrowing_picture' => $path,
-            'borrowing_date' => $request->borrowing_date,
-            'description' => $request->description,
-            'status' => $request->status,
-
-        ]);
-        return redirect('/manajer_inventaris/simpan_pinjam/index');
+        //
     }
 
     /**
@@ -114,12 +84,8 @@ class BorrowingController extends Controller
      * @param  \App\Models\borrowing  $borrowing
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(borrowing $borrowing)
     {
-        DB::table('borrowings')->where('id', $id)->delete();
-
-        // alihkan halaman ke halaman asset
-        return redirect('/manajer_inventaris/simpan_pinjam');
-        return redirect('/manajer_inventaris/simpan_pinjam/index');
+        //
     }
 }

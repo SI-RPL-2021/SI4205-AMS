@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'AMS',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -50,7 +50,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-4',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xl img-circle elevation-4',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'AMS',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
 
@@ -123,12 +123,12 @@ return [
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
+    'classes_content_wrapper' => 'bg-lightblue',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-info elevation-4',
-    'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-dark navbar-dark',
+    'classes_sidebar' => 'sidebar-dark-lightblue elevation-4',
+    'classes_sidebar_nav' => 'navbar-dark',
+    'classes_topnav' => 'navbar-light navbar-light ',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -226,7 +226,7 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
+            'search' => false,
             'topnav' => true,
         ],
         [
@@ -239,13 +239,24 @@ return [
             'url'         => '/',
             'icon'        => 'far fa-fw fa-laugh',
             'label'       => 69,
-            'label_color' => 'info',
+            'label_color' => 'danger',
         ],
         ['header' => 'Utility'],
         [
-            'text' => 'Input Asset',
-            'url'  => '/manajer_inventaris/Input_Asset/index',
+            'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
+            'submenu' => [[
+                'text' => 'Add Asset',
+                'url'  => '/manajer_inventaris/Input_Asset/index',
+                'icon' => 'fas fa-fw fa-pen',
+            ],
+            [
+                'text' => 'Add Asset Category',
+                'url'  => '/manajer_inventaris/category/index',
+                'icon' => 'fas fa-fw fa-archive',
+            ]]
+
+
         ],
         [
             'text' => 'Approve Asset',
@@ -253,18 +264,17 @@ return [
             'icon' => 'fas fa-fw fa-hand-holding-usd',
         ],
         [
-            'text' => 'Simpan Pinjam',
-            'url'  => '/manajer_inventaris/simpan_pinjam/index',
-            'icon' => 'fas fa-fw fa-hand-holding-usd',
-        ], 
-        [
+            'text' => 'Borrowing Asset',
+            'url'  => '/manajer_inventaris/Borrowing/index',
+            'icon' => 'fas fa-fw fa-shopping-bag',
+        ], [
             'text' => 'Maintenance Asset',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
         ],
         [
             'text' => 'Asset History',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
         ],
         // [

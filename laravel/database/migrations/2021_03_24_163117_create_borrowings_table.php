@@ -15,15 +15,16 @@ class CreateBorrowingsTable extends Migration
     {
         Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('asset_id');
+            $table->unsignedBigInteger('asset_id');
             // $table->unsignedBigInteger('user_id');
             // $table->unsignedBigInteger('emp_id');
             $table->string('borrowing_picture');
+            $table->integer('borrowing_end')->nullable();
             $table->date('borrowing_date');
             $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
-            // $table->foreign('asset_id')->references('id')->on('assets');
+            $table->foreign('asset_id')->references('id')->on('assets');
             // $table->foreign('user_id')->references('id')->on('users');
             // $table->foreign('emp_id')->references('id')->on('employees');
         });
