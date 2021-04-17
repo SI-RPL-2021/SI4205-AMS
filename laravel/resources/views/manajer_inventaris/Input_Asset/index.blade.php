@@ -403,6 +403,15 @@
                             <td>
                                 <a href="/manajer_inventaris/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                 <a href="/manajer_inventaris/hapus/->id }}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="/delete/{{$asset->id}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button type="submit" class="material-icons " data-toggle="tooltip" title="Delete">&#xE872;</button>
+
+                                </form>
+
                             </td>
                             @php
                             $i++

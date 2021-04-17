@@ -28,6 +28,11 @@ Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, '
 // Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy');
 Route::get('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'updateindex']);
 Route::patch('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Controllers\AssetController::class, 'update']);
+Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
+Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
+Route::get('manajer_inventaris/Input_Asset/update/{asset:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.edit');
+Route::patch('Input_Asset/update/{{ $asset->id }}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
+// Route::delete('/pendapataninti/{income:id}', 'IncomeController@destroy')->name('asset.delete');
 
 
 
@@ -35,6 +40,7 @@ Route::patch('manajer_inventaris/Input_Asset/update/{income:id}',  [App\Http\Con
 Route::get('/Pinjam Asset/index', function () {
     return view('/manajer_inventaris/Pinjam Asset/index');
 });
+
 Route::get('/manajer_inventaris/input','App\Http\Controllers\AssetController@index');
 
 Route::get('manajer_inventaris/hapus/{id}','App\Http\Controllers\AssetController@destroy');
@@ -56,3 +62,5 @@ Route::patch('manajer_inventaris/simpan_pinjam/update/{income:id}',  [App\Http\C
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -256,7 +256,8 @@ return [
             'text' => 'Simpan Pinjam',
             'url'  => '/manajer_inventaris/simpan_pinjam/index',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
-        ], [
+        ], 
+        [
             'text' => 'Maintenance Asset',
             'url'  => '/',
             'icon' => 'fas fa-fw fa-medkit',

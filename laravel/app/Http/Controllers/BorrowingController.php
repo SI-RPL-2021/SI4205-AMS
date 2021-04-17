@@ -32,7 +32,6 @@ class BorrowingController extends Controller
 
         return view('manajer_inventaris/simpan_pinjam/update', compact('borrowings'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +41,7 @@ class BorrowingController extends Controller
     public function create()
     {
      
+        //
     }
 
     /**
@@ -73,6 +73,7 @@ class BorrowingController extends Controller
         ]);
         return redirect('/manajer_inventaris/simpan_pinjam/index');
     }
+
     /**
      * Display the specified resource.
      *
@@ -118,6 +119,7 @@ class BorrowingController extends Controller
         DB::table('borrowings')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
+        return redirect('/manajer_inventaris/simpan_pinjam');
         return redirect('/manajer_inventaris/simpan_pinjam/index');
     }
 }

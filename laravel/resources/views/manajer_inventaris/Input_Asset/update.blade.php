@@ -16,6 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
         .rowhead{
+        .rowhead {
             margin-bottom: 40px;
         }
 
@@ -324,6 +325,7 @@
         <div class="card-header">
             Detail Asset
             <div class="close"><a href="/manajer_inventaris/Input_Asset/index" >&times; </a></div>
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
         </div>
         <div class="card-body">
@@ -375,6 +377,77 @@
 
             </div>
 
+            <form action="{{ route('asset.update', compact('assets')) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
+                @csrf
+                <div class="row">
+
+
+                    <div class="row justify-text-center" style="width: 100%;">
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori Barang</label>
+                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Harga Pembelian</label>
+                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Asset</label>
+                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                            </div>
+
+            <form action="/Input_Asset/update/{{ $assets->id }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Barang</label>
+                                        <input type="text" class="form-control" name="name" value="{{$assets->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kategori Barang</label>
+                                        <input type="text" class="form-control" name="asset_category" value="{{$assets->asset_category}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Harga Pembelian</label>
+                                        <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price}}" required>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Waktu Pembelian</label>
+                                        <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Foto Barang</label>
+                                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" value="{{$assets->picture}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Keterangan</label>
+                                        <textarea class="form-control"  id="floatingTextarea2" name="description" style="height: 100px" value="{{$assets->description}}"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer text-center">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+
+
+                </div>
+
         </div>
         <div class="card-footer">
             <div class="modal-footer justify-content-center">
@@ -384,6 +457,29 @@
         </div>
 
 
+                <a href="#addEmployeeModal" class="btn btn-primary rounded" data-toggle="modal"><i class="material-icons "></i> <span>Edit Asset</span></a>
+            </div>
+        </div>
+
+        <!-- edit asset -->
+        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+
+                     
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
 
 </body>
 
