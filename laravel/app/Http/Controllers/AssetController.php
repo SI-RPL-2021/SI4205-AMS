@@ -16,15 +16,11 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        $aset = DB::table('assets')->get();
-        $assets = asset::all();
+        $assets = DB::table('assets')->paginate(5);
+     
 
         return view('manajer_inventaris/Input_Asset/index', compact('assets'));
-        // // mengambil data dari table asset
-        // $aset = DB::table('assets')->get();
-
-        // mengirim data asset ke view index
-  
+     
     }
     public function updateindex($id, Request $request)
     {
@@ -76,7 +72,7 @@ class AssetController extends Controller
             'status' => 'Tersedia',
 
         ]);
-        return redirect('/manajer_inventaris/Input_Asset/index');
+        return redirect('/manajer_inventaris/Input_Asset/index')->with('success','Asset Berhasil Ditambahkan');
     }
 
     /**

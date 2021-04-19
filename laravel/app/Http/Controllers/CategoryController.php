@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\maintenance;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MaintenanceController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,12 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-     // mengambil data dari table asset
-     $maintenance = DB::table('maintenances')->get();
-     $maintenances = maintenance::all();
+         // mengambil data dari table category
+         $categories = DB::table('categories')->paginate(5);
+     
 
-     return view('manajer_inventaris/Maintenance/index', compact('maintenances'));
-     // // mengambil data dari table asset
-     // $aset = DB::table('assets')->get();
-
-     // mengirim data asset ke view index
+         return view('manajer_inventaris/category/index', compact('categories'));
+       
     }
 
     /**
@@ -50,10 +47,10 @@ class MaintenanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\maintenance  $maintenance
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(maintenance $maintenance)
+    public function show(Category $category)
     {
         //
     }
@@ -61,10 +58,10 @@ class MaintenanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\maintenance  $maintenance
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(maintenance $maintenance)
+    public function edit(Category $category)
     {
         //
     }
@@ -73,10 +70,10 @@ class MaintenanceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\maintenance  $maintenance
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, maintenance $maintenance)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -84,10 +81,10 @@ class MaintenanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\maintenance  $maintenance
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(maintenance $maintenance)
+    public function destroy(Category $category)
     {
         //
     }
