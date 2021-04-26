@@ -318,6 +318,14 @@
             });
         });
     </script>
+    @if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 </head>
 
 
@@ -371,7 +379,7 @@
                                 </span>
                             </th>
                             <th>No</th>
-                            <th>Nama Barang</th>
+                            <th>Kode Barang</th>
                             <th>Foto Barang</th>
                             <th>Keterangan</th>
                             <th>Tanggal Peminjaman</th>
@@ -384,7 +392,7 @@
                         @php
                         $i = 1
                         @endphp
-                        @foreach ($borrow as $key=> $borrow)
+                        @foreach ($borrow as $key=> $borrows)
                         <tr>
 
                             <td>
@@ -394,15 +402,15 @@
                                 </span>
                             </td>
                             <td>{{ $borrow ->firstItem() + $key }}</td>
-                            <td>{{ $borrow->asset_id }}</td>
-                            <td class="product-img"><img class="rounded" src="{{ asset($borrow->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
-                            <td>{{ $borrow->description }}</td>
-                            <td>{{ $borrow->borrowing_date}}</td>
-                            <td>{{ $borrow->borrowing_end}}</td>
-                            <td>{{ $borrow->status}}</td>
+                            <td>{{ $borrows->asset_code }}</td>
+                            <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
+                            <td>{{ $borrows->description }}</td>
+                            <td>{{ $borrows->borrowing_date}}</td>
+                            <td>{{ $borrows->borrowing_end}}</td>
+                            <td>{{ $borrows->status}}</td>
                             <td>
-                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/delete/{{$asset->id}}" method="post">
+                                <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="{{ route('borrowing.destroy', ['borrow' => $borrows->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
 
@@ -427,7 +435,7 @@
     </div>
 
 
-    <!-- add asset -->
+    <!-- add borrow -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -437,13 +445,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/Borrowing/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
-                                    <select name="unique_code" id="">
+                                    <select name="asset_code" >
                                         @foreach ($assets as $assets)
                                         <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
                                         @endforeach
@@ -451,7 +459,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_end" required>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan</label>
@@ -465,7 +473,7 @@
                                 </div> 
                                 <div class="form-group">
                                     <label>Tanggal Pengembalian</label>
-                                    <input type="date" class="form-control" name="borrowing_end" required>
+                                    <input type="date" class="form-control" name="borrowing_end" >
                                 </div>
                             </div>
 

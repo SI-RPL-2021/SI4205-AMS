@@ -35,6 +35,14 @@ Route::get('category/update/{category:id}',  [App\Http\Controllers\CategoryContr
 Route::patch('manajer_inventaris/category/update/{category:id}',  [App\Http\Controllers\CategoryController::class, 'update'])->name('cat.update');
 Route::delete('delete/{category:id}',  [App\Http\Controllers\CategoryController::class, 'destroy'])->name('asset.delete')->name('cat.delete');
 
+//Fitur CRUD Peminjaman
+
+Route::get('manajer_inventaris/Borrowing/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('borrowing.show');
+Route::post('Borrowing/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('borrowing.save');
+Route::get('borrowing/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('borrowing.details');
+Route::patch('manajer_inventaris/borrowing/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('borrowing.update');
+Route::delete('/borrowing/{borrow}/destroy',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('borrowing.destroy');
+
 //Fitur CRUD Maintenance
 
 Route::get('manajer_inventaris/Maintenance/index', [App\Http\Controllers\MaintenanceController::class, 'index'])->name('maintenance.show');
@@ -43,13 +51,6 @@ Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\Mainten
 Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'update'])->name('maintenance.update');
 Route::delete('delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
 
-//Fitur CRUD Peminjaman
-
-Route::get('manajer_inventaris/Borrowing/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('maintenance.show');
-Route::post('Maintenance/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('maintenance.save');
-Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('maintenance.details');
-Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('maintenance.update');
-Route::delete('delete/{Maintenances:id}',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
 
 
 
