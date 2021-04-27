@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Update Asset')
+@section('title', 'Update Peminjaman')
 
 @section('content')
 
@@ -322,15 +322,15 @@
 <body>
     <div class="card bg-dark">
         <div class="card-header">
-            Detail Asset
-            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
+            Detail Peminjaman
+            <div class="close"><a href="/manajer_inventaris/borrowing/index">&times; </a></div>
 
         </div>
         <div class="card-body">
             <div class="row  justify-content-center">
-                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+                <img class="rounded" src="{{ asset($borrow->borrowing_picture) }}" alt="{{$borrow->borrowing_picture}}" height="250px">
             </div>
-            <form action="{{ route('asset.update', compact('assets')) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('borrowing.update', compact('borrow')) }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
                 <div class="row">
@@ -341,37 +341,28 @@
                         <div class="col">
 
                             <div class="form-group">
-                                <label>Nama Barang</label>
-                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                                <label>Kode Barang</label>
+                                <input type="text" class="form-control" name="asset_code" value="{{$borrow->asset_code }}" placeholder="{{$borrow->asset_code }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Kategori Barang</label>
-                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                                <label>Tanggal Peminjaman </label>
+                                <input type="date" class="form-control" name="borrowing_date" value="{{ $borrow->borrowing_date }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Harga Pembelian</label>
-                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                                <label>Tanggal Pengembalian</label>
+                                <input type="date" class="form-control" name="borrowing_end" value="{{$borrow->borrowing_end }}" >
+                            </div>
+                            <div class="form-group">
+                                <label for="ta">Status Asset</label>
+                                <textarea name="description" id="ta" cols="15" rows="5" placeholder="{{$borrow->description}}" value="{{$borrow->description}}"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Status Asset</label>
-                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                                <input type="text" class="form-control" name="status" value="{{$borrow->status}}" required>
                             </div>
 
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Waktu Pembelian</label>
-                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Unique Code</label>
-                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
-                            </div>
-                        </div>
+
 
                     </div>
 
@@ -386,7 +377,7 @@
 
                 <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
-                <form action="/delete/{{$assets->id}}" method="post">
+                <form action="{{route('borrowing.destroy',['borrow' => $borrow->id])}}" method="post">
                     @csrf
                     @method('delete')
 
