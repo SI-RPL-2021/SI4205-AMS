@@ -16,8 +16,8 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        $aset = DB::table('assets')->get();
-        $assets = asset::all();
+        $assets = DB::table('assets')->paginate(5);
+     
 
         return view('manajer_inventaris/Input_Asset/index', compact('assets'));
         // // mengambil data dari table asset
