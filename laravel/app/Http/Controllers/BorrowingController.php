@@ -72,7 +72,7 @@ class BorrowingController extends Controller
 
 
 
-        return redirect('/manajer_inventaris/Borrowing/index');
+        return redirect('/manajer_inventaris/Borrowing/index')->with('success','Peminjaman Berhasil Ditambahkan');
     }
 
     /**
