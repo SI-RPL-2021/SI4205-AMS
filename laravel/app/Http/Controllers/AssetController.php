@@ -17,10 +17,10 @@ class AssetController extends Controller
     {
         // mengambil data dari table asset
         $assets = DB::table('assets')->paginate(5);
-     
+        $categories = DB::table('categories')->get();
 
-        return view('manajer_inventaris/Input_Asset/index', compact('assets'));
-     
+
+        return view('manajer_inventaris/Input_Asset/index', compact('assets','categories'));
     }
     public function updateindex($id, Request $request)
     {
@@ -54,14 +54,14 @@ class AssetController extends Controller
             'picture' => 'required',
             'description' => 'required',
         ]);
-      
+
         // file upload
         $file = $request->file('picture');
         $fileName = rand() . '_' . $file->getClientOriginalName();
         $path = $file->storeAs('images/uploads', $fileName);
         $file->move('images/uploads', $fileName);
 
-        $insert = asset::create([
+        asset::create([
             'name' => $request->name,
             'unique_code' => $request->name,
             'picture' => $path,
@@ -72,7 +72,7 @@ class AssetController extends Controller
             'status' => 'Tersedia',
 
         ]);
-        return redirect('/manajer_inventaris/Input_Asset/index')->with('success','Asset Berhasil Ditambahkan');
+        return redirect('/manajer_inventaris/Input_Asset/index')->with('success', 'Asset Berhasil Ditambahkan');
     }
 
     /**
@@ -104,7 +104,7 @@ class AssetController extends Controller
      * @param  \App\Models\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
         $asset = Asset::find($id);
 
@@ -114,7 +114,7 @@ class AssetController extends Controller
         $asset->asset_purchase_price = $request->asset_purchase_price;
         $asset->unique_code = $request->name;
         $asset->description = $request->description;
-    
+
 
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
@@ -144,5 +144,17 @@ class AssetController extends Controller
 
         // alihkan halaman ke halaman asset
         return redirect('manajer_inventaris/Input_Asset/index');
+    }
+    public function search()
+    {
+        $search_text = $_GET['search'];
+        $assets = asset::where('name','LIKE', '%' .$search_text. '%')->paginate(5);
+        $categories = DB::table('categories')->get();
+        return view('manajer_inventaris/Input_Asset/index', compact('assets','categories'));
+    }
+    public function tambah($a, $b)
+    {
+        $total = $a + $b;
+        return $total;
     }
 }

@@ -258,6 +258,7 @@ return [
 
 
         ],
+        
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
@@ -265,7 +266,7 @@ return [
         ],
         [
             'text' => 'Borrowing Asset',
-            'url'  => '/manajer_inventaris/Borrowing/index',
+            'url'  => '/manajer_inventaris/borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
         ], [
             'text' => 'Maintenance Asset',

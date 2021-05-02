@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -361,12 +362,21 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h2>List Asset</b></h2>
+
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+                    <form class="form-inline ml-auto p-2 " type="get" action="{{url('/searchAsset')}}">
+                        <input type="search" class="form-control " name="search" placeholder="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
                 </div>
                 <div class="row">
                     <table class="table table-dark table-hover">
@@ -450,12 +460,16 @@
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
+                                    <label>Nama Asset</label>
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
+                                    <label>Kategori Asset</label>
+                                    <select name="asset_category">
+                                        @foreach ($categories as $categories)
+                                        <option value="{{$categories->category}}">{{$categories->category}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Pembelian</label>

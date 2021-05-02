@@ -23,4 +23,9 @@ class asset extends Model
 
     ];
     protected $table = 'assets';
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
