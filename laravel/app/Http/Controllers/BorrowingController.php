@@ -20,7 +20,7 @@ class BorrowingController extends Controller
         $borrow = DB::table('borrowings')->paginate(5);
         $assets = DB::table('assets')->get();
 
-        return view('manajer_inventaris/Borrowing/index', compact(['borrow', 'assets']));
+        return view('manajer_inventaris/Borrowing/return/index', compact(['borrow', 'assets']));
     }
     public function updateindex($id, Request $request)
     {
@@ -72,7 +72,7 @@ class BorrowingController extends Controller
 
 
 
-        return redirect('/manajer_inventaris/Borrowing/index')->with('success','Peminjaman Berhasil Ditambahkan');
+        return redirect('/manajer_inventaris/Borrowing/index');
     }
 
     /**

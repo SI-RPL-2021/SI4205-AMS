@@ -243,11 +243,22 @@ return [
         ],
         ['header' => 'Utility'],
         [
-            'text' => 'Input Asset',
-            'url'  => '/manajer_inventaris/Input_Asset/index',
+            'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
-            
+            'submenu' => [[
+                'text' => 'Add Asset',
+                'url'  => '/manajer_inventaris/Input_Asset/index',
+                'icon' => 'fas fa-fw fa-pen',
+            ],
+            [
+                'text' => 'Add Asset Category',
+                'url'  => '/manajer_inventaris/category/index',
+                'icon' => 'fas fa-fw fa-archive',
+            ]]
+
+
         ],
+        
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
@@ -255,16 +266,16 @@ return [
         ],
         [
             'text' => 'Borrowing Asset',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
         ], [
             'text' => 'Maintenance Asset',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
         ],
         [
             'text' => 'Asset History',
-            'url'  => '/',
+            'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
         ],
         // [
