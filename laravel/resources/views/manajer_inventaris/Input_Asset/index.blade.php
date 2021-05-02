@@ -423,7 +423,8 @@
 
                         </tbody>
                     </table>
-                    <div class="pagination" style="position: relative; left: 900px; ">
+                    <p style="margin-top: 10px;" > Showing 5 results from 100 data </p>
+                    <div class="pagination" style="position: relative; left: 700px; top:8px">
                         {{$assets->links('pagination::bootstrap-4') }}
                     </div>
                 </div>

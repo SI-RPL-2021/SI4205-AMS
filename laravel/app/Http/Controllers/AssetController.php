@@ -149,4 +149,11 @@ class AssetController extends Controller
         // alihkan halaman ke halaman asset
         return redirect('manajer_inventaris/Input_Asset/index');
     }
+    public function hebat($a,$b)
+    {
+
+        $total = $a + $b;
+        return $total;
+       
+    }
 }
