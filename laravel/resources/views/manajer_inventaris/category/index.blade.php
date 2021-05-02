@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Input Category')
 
 @section('content')
 
@@ -147,10 +147,6 @@
         .pagination {
             float: right;
             margin: 0 0 5px;
-        }
-
-        .center {
-            text-align: center;
         }
 
         .pagination li a {
@@ -323,14 +319,7 @@
         });
     </script>
 </head>
-@if (session('success'))
-<div class="alert alert-success" role="alert">
-    {{ session('success') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
+
 
 <!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
@@ -364,10 +353,10 @@
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>List Asset</b></h2>
+                            <h2>List Category</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Category</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
@@ -383,12 +372,7 @@
                                     </span>
                                 </th>
                                 <th>No</th>
-                                <th>Nama Barang</th>
                                 <th>Kategori</th>
-                                <th>Harga Pembelian</th>
-                                <th>Tanggal Pembelian</th>
-                                <th>Foto Barang</th>
-                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -396,7 +380,7 @@
                             @php
                             $i = 1
                             @endphp
-                            @foreach ($assets as $key=> $asset)
+                            @foreach ($categories as $key=> $cat)
                             <tr>
 
                                 <td>
@@ -405,20 +389,15 @@
                                         <label for="checkbox1"></label>
                                     </span>
                                 </td>
-                                <td>{{ $assets ->firstItem() + $key }}</td>
-                                <td>{{ $asset->name }}</td>
-                                <td>{{ $asset->asset_category }}</td>
-                                <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
-                                <td>{{ $asset->asset_purchase_date }}</td>
-                                <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
-                                <td>{{ $asset->description }}</td>
-                                <td style="text-align: center;">
+                                <td>{{ $categories ->firstItem() + $key }}</td>
+                                <td>{{ $cat->category }}</td>
+                                <td>
                                     <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                    <form action="/delete/{{$asset->id}}" method="post">
+                                    <form action="/delete/{{$cat->id}}" method="post">
                                         @csrf
                                         @method('delete')
 
-                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;" data-toggle="tooltip" title="Details"></i> </button>
+                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
 
                                     </form>
 
@@ -431,7 +410,7 @@
                         </tbody>
                     </table>
                     <div class="pagination">
-                        {{$assets->links('pagination::bootstrap-4') }}
+                        {{$categories->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

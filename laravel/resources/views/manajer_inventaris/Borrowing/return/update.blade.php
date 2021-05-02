@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Update Peminjaman')
 
 @section('content')
 
@@ -322,125 +322,73 @@
 <body>
     <div class="card bg-dark">
         <div class="card-header">
-            Detail as
-            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
+            Detail Peminjaman
+            <div class="close"><a href="/manajer_inventaris/borrowing/index">&times; </a></div>
 
         </div>
         <div class="card-body">
             <div class="row  justify-content-center">
-                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+                <img class="rounded" src="{{ asset($borrow->borrowing_picture) }}" alt="{{$borrow->borrowing_picture}}" height="250px">
             </div>
-            <div class="row">
+            <form action="{{ route('borrowing.update', compact('borrow')) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
+                @csrf
+                <div class="row">
 
 
-                <div class="row justify-text-center">
-                    <div class="col">
+                    <div class="row justify-text-center" style="width: 100%;">
 
-                        <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label>Kode Barang</label>
+                                <input type="text" class="form-control" name="asset_code" value="{{$borrow->asset_code }}" placeholder="{{$borrow->asset_code }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Peminjaman </label>
+                                <input type="date" class="form-control" name="borrowing_date" value="{{ $borrow->borrowing_date }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Pengembalian</label>
+                                <input type="date" class="form-control" name="borrowing_end" value="{{$borrow->borrowing_end }}" >
+                            </div>
+                            <div class="form-group">
+                                <label for="ta">Status Asset</label>
+                                <textarea name="description" id="ta" cols="15" rows="5" placeholder="{{$borrow->description}}" value="{{$borrow->description}}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Asset</label>
+                                <input type="text" class="form-control" name="status" value="{{$borrow->status}}" required>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Kategori Barang</label>
-                            <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Harga Pembelian</label>
-                            <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Status Asset</label>
-                            <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
-                        </div>
+
 
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Waktu Pembelian</label>
-                            <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Unique Code</label>
-                            <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" placeholder="{{$assets->description}}" name="description" value="{{$assets->description}}" style="height: 120px"></textarea>
-                        </div>
-                    </div>
+
+
 
                 </div>
-
-
-
-            </div>
 
         </div>
         <div class="card-footer">
+
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-danger">Delete</button>
-                <a href="#addEmployeeModal" class="btn btn-primary rounded" data-toggle="modal"><i class="material-icons "></i> <span>Edit Asset</span></a>
+
+                <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form action="{{route('borrowing.destroy',['borrow' => $borrow->id])}}" method="post">
+                    @csrf
+                    @method('delete')
+
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
+
+                </form>
             </div>
         </div>
 
-        <!-- edit asset -->
-        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form action="/Input_Asset/update/{{ $assets->id }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PATCH')
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nama Barang</label>
-                                        <input type="text" class="form-control" name="name" value="{{$assets->name}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kategori Barang</label>
-                                        <input type="text" class="form-control" name="asset_category" value="{{$assets->asset_category}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Harga Pembelian</label>
-                                        <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price}}" required>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Waktu Pembelian</label>
-                                        <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Foto Barang</label>
-                                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" value="{{$assets->picture}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan</label>
-                                        <textarea class="form-control"  id="floatingTextarea2" name="description" style="height: 100px" value="{{$assets->description}}"></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer text-center">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
 
 
-                </div>
-
-            </div>
-
-        </div>
 
 </body>
 
