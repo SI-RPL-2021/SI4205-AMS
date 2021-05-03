@@ -322,12 +322,14 @@
 <body>
     <div class="card bg-dark">
         <div class="card-header">
-            Detail Maintenance
-            <div class="close"><a href="/manajer_inventaris/Maintenance/input">&times; </a></div>
+            Detail as
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
         </div>
         <div class="card-body">
-           
+            <div class="row  justify-content-center">
+                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+            </div>
             <div class="row">
 
 
@@ -336,25 +338,35 @@
 
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input type="text" class="form-control" name="name" value="{{$maintenances->name }}" placeholder="{{$maintenances->Name }}" required>
+                            <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Kerusakan Barang</label>
-                            <input type="text" class="form-control" name="asset_damage" value="{{ $maintenances->asset_damage }}" required>
+                            <label>Kategori Barang</label>
+                            <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
                         </div>
                         <div class="form-group">
-                            <label>umur Barang</label>
-                            <input type="text" class="form-control" name="asset_age" value="{{$maintenances->asset_age }}" required>
+                            <label>Harga Pembelian</label>
+                            <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Biaya Kerusakan</label>
-                            <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Status kerusakan</label>
-                            <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
+                            <label>Status Asset</label>
+                            <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
                         </div>
 
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Waktu Pembelian</label>
+                            <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unique Code</label>
+                            <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea class="form-control" placeholder="{{$assets->description}}" name="description" value="{{$assets->description}}" style="height: 120px"></textarea>
+                        </div>
                     </div>
 
                 </div>
@@ -371,7 +383,7 @@
             </div>
         </div>
 
-        <!-- edit maintenance -->
+        <!-- edit asset -->
         <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -381,37 +393,45 @@
                     </div>
                     <div class="modal-body">
 
-                        <form action="/Maintenance/update/{{ $maintenances->id }}" method="post" enctype="multipart/form-data">
+                        <form action="/Input_Asset/update/{{ $assets->id }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nama Barang</label>
-                                        <input type="text" class="form-control" name="name" value="{{$maintenances->name }}" placeholder="{{$maintenances->Name }}" required>
+                                        <input type="text" class="form-control" name="name" value="{{$assets->name}}" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Kerusakan Barang</label>
-                                        <input type="text" class="form-control" name="asset_damage" value="{{ $maintenances->asset_damage }}" required>
+                                        <label>Kategori Barang</label>
+                                        <input type="text" class="form-control" name="asset_category" value="{{$assets->asset_category}}" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>umur Barang</label>
-                                        <input type="text" class="form-control" name="asset_age" value="{{$maintenances->asset_age }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Biaya Kerusakan</label>
-                                        <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Status kerusakan</label>
-                                        <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
+                                        <label>Harga Pembelian</label>
+                                        <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price}}" required>
                                     </div>
 
                                 </div>
-                                <div class="modal-footer text-center">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Waktu Pembelian</label>
+                                        <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Foto Barang</label>
+                                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" value="{{$assets->picture}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Keterangan</label>
+                                        <textarea class="form-control"  id="floatingTextarea2" name="description" style="height: 100px" value="{{$assets->description}}"></textarea>
+                                    </div>
                                 </div>
+
+                            </div>
+                            <div class="modal-footer text-center">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                     </div>
 

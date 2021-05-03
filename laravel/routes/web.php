@@ -51,8 +51,7 @@ Route::get('manajer_inventaris/Maintenance/index', [App\Http\Controllers\Mainten
 Route::post('Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store'])->name('maintenance.save');
 Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'updateindex'])->name('maintenance.details');
 Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'update'])->name('maintenance.update');
-Route::delete('delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
-
+Route::delete('maintenance/delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\asset;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,7 @@ class AssetController extends Controller
         $categories = DB::table('categories')->get();
 
 
-        return view('manajer_inventaris/Input_Asset/index', compact('assets','categories'));
+        return view('manajer_inventaris/Input_Asset/index', compact('assets', 'categories'));
     }
     public function updateindex($id, Request $request)
     {
@@ -52,7 +53,7 @@ class AssetController extends Controller
             'asset_purchase_price' => 'required',
             'asset_purchase_date' => 'required',
             'picture' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         // file upload
@@ -61,17 +62,32 @@ class AssetController extends Controller
         $path = $file->storeAs('images/uploads', $fileName);
         $file->move('images/uploads', $fileName);
 
-        asset::create([
-            'name' => $request->name,
-            'unique_code' => $request->name,
-            'picture' => $path,
-            'asset_category' => $request->asset_category,
-            'asset_purchase_date' => $request->asset_purchase_date,
-            'asset_purchase_price' => $request->asset_purchase_price,
-            'description' => $request->description,
-            'status' => 'Tersedia',
+        // asset::create([
+        //     'name' => $request->name,
+        //     'unique_code' => $request->name,
+        //     'picture' => $path,
+        //     'asset_category' => $request->asset_category,
+        //     'asset_purchase_date' => $request->asset_purchase_date,
+        //     'asset_purchase_price' => $request->asset_purchase_price,
+        //     'description' => $request->description,
+        //     'status' => 'Tersedia',
 
-        ]);
+        // ]);
+
+        $asset = new Asset;
+        $asset->name = $request['name'];
+        $asset->unique_code = $request['name'];
+        $asset->picture = $path;
+        $asset->asset_purchase_date = $request['asset_purchase_date'];
+        $asset->asset_purchase_price = $request['asset_purchase_price'];
+        $asset->description = $request['description'];
+        $asset->status = 'Tersedia';
+      
+        $asset->save();
+
+        $category = Category::find($request['asset_category']);
+        $asset->categories()->attach($category);
+     
         return redirect('/manajer_inventaris/Input_Asset/index')->with('success', 'Asset Berhasil Ditambahkan');
     }
 
@@ -148,9 +164,9 @@ class AssetController extends Controller
     public function search()
     {
         $search_text = $_GET['search'];
-        $assets = asset::where('name','LIKE', '%' .$search_text. '%')->paginate(5);
+        $assets = asset::where('name', 'LIKE', '%' . $search_text . '%')->paginate(5);
         $categories = DB::table('categories')->get();
-        return view('manajer_inventaris/Input_Asset/index', compact('assets','categories'));
+        return view('manajer_inventaris/Input_Asset/index', compact('assets', 'categories'));
     }
     public function tambah($a, $b)
     {

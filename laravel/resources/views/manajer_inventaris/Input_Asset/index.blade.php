@@ -413,7 +413,9 @@
                                 </td>
                                 <td>{{ $assets ->firstItem() + $key }}</td>
                                 <td>{{ $asset->name }}</td>
-                                <td>{{ $asset->asset_category }}</td>
+                                <td class="asset-category">
+                           
+                                </td>
                                 <td>Rp.{{ $asset->asset_purchase_price }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
@@ -464,12 +466,19 @@
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Asset</label>
-                                    <select name="asset_category">
-                                        @foreach ($categories as $categories)
-                                        <option value="{{$categories->category}}">{{$categories->category}}</option>
+                                    <label for="asset_category mb-1">Category</label>
+                                    <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
+
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
                                         @endforeach
                                     </select>
+
+                                    @error('asset_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Pembelian</label>

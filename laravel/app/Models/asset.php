@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class asset extends Model
 {
-    use HasFactory;
+   
 
     protected $fillable = [
         'name',
@@ -28,4 +28,5 @@ class asset extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+    
 }

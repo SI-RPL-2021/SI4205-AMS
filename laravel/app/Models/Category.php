@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+ 
     protected $fillable = [
         'category'
     ];
-    public function products()
+    public function assets()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Asset::class);
     }
+    
 }
