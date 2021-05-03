@@ -322,13 +322,15 @@
 <body>
     <div class="card bg-dark">
         <div class="card-header">
-            Detail Maintenance
-            <div class="close"><a href="/manintenance/input">&times; </a></div>
+            Detail Asset
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
         </div>
         <div class="card-body">
-           
-            <form action="{{ route('maintenance.update', compact('maintenances')) }}" method="post" enctype="multipart/form-data">
+            <div class="row  justify-content-center">
+                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+            </div>
+            <form action="{{ route('asset.update', compact('assets')) }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
                 <div class="row">
@@ -340,34 +342,36 @@
 
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <label style="color: black;">Nama Barang</label>
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" value="{{ $maintenances->name }}" required>
-                                        <option selected="selected" data-select2-id="3">Mobil</option>
-                                        <option data-select2-id="34">Laptop</option>
-                                        <option data-select2-id="35">Printer</option>
-                                        <option data-select2-id="36">Layar proyektor</option>
-                                        
-                                    </select>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Kerusakan Barang</label>
-                                <input type="text" class="form-control" name="asset_damage" value="{{ $maintenances->asset_damage }}" required>
+                                <label>Kategori Barang</label>
+                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
                             </div>
                             <div class="form-group">
-                                <label>umur Barang</label>
-                                <input type="text" class="form-control" name="asset_age" value="{{$maintenances->asset_age }}" required>
+                                <label>Harga Pembelian</label>
+                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Biaya Kerusakan</label>
-                                <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Status kerusakan</label>
-                                <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
+                                <label>Status Asset</label>
+                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
                             </div>
 
                         </div>
-                       
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Waktu Pembelian</label>
+                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Unique Code</label>
+                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -382,7 +386,7 @@
 
                 <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
-                <form action="/delete/{{$maintenances->id}}" method="post">
+                <form action="/delete/{{$assets->id}}" method="post">
                     @csrf
                     @method('delete')
 

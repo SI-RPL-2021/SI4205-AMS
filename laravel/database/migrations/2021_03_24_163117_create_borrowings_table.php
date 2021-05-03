@@ -18,7 +18,9 @@ class CreateBorrowingsTable extends Migration
             // $table->unsignedBigInteger('asset_id');
             // $table->unsignedBigInteger('user_id');
             // $table->unsignedBigInteger('emp_id');
+            $table->string('asset_code');
             $table->string('borrowing_picture');
+            $table->date('borrowing_end')->nullable();
             $table->date('borrowing_date');
             $table->text('description')->nullable();
             $table->string('status');

@@ -319,7 +319,14 @@
         });
     </script>
 </head>
-
+@if (session('success'))
+<div class="alert alert-success" role="alert">
+    {{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 
 <!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
@@ -473,7 +480,7 @@
                         </tbody>
                     </table>
                     <div class="pagination">
-                        {{$assets->links() }}
+                        {{$assets->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
