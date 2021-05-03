@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class asset extends Model
 {
-    use HasFactory;
+   
 
     protected $fillable = [
         'name',
@@ -23,4 +23,10 @@ class asset extends Model
 
     ];
     protected $table = 'assets';
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+    
 }

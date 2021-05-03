@@ -15,7 +15,16 @@ class CreateMaintenancesTable extends Migration
     {
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('asset_id');
+            $table->string('name');
+            $table->string('asset_damage');
+            $table->integer('asset_age');
+            $table->string('maintenance_bill');
+            $table->string('damage_status');
             $table->timestamps();
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('asset_id')->references('id')->on('assets');
         });
     }
 
