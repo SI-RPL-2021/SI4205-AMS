@@ -378,58 +378,6 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Harga Pembelian</th>
-                            <th>Tanggal Pembelian</th>
-                            <th>Foto Barang</th>
-                            <th>Keterangan</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($assets as $asset)
-                        <tr>
-
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $i }}</td>
-                            <td>{{ $asset->name }}</td>
-                            <td>{{ $asset->asset_category }}</td>
-                            <td>Rp.{{ $asset->asset_purchase_price }}</td>
-                            <td>{{ $asset->asset_purchase_date }}</td>
-                            <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
-                            <td>{{ $asset->description }}</td>
-                            <td>
-                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/delete/{{$asset->id}}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                 <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-
-                            </td>
-=======
                 <div class="row">
                     <table class="table table-dark table-hover">
                         <thead>
@@ -451,7 +399,6 @@
                             </tr>
                         </thead>
                         <tbody>
->>>>>>> b753671109201bf20bfde443a55de1c909b37770
                             @php
                             $i = 1
                             @endphp
