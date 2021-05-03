@@ -19,14 +19,14 @@ class MaintenanceController extends Controller
         $maintenance = DB::table('maintenances')->get();
         $maintenances = maintenance::all();
 
-        return view('manajer_inventaris/maintenance/input', compact('maintenances'));
+        return view('manajer_inventaris/maintenance/index', compact('maintenances'));
         // // mengambil data dari table asset
         // $aset = DB::table('assets')->get();
 
         // mengirim data asset ke view input
        
     }
-    public function updateinput($id, Request $request)
+    public function updateindex($id, Request $request)
     {
         $maintenances = Maintenance::find($id);
 
@@ -73,7 +73,7 @@ class MaintenanceController extends Controller
             
 
         ]);
-        return redirect('/maintenance/input');
+        return redirect(route('maintenance.show'));
     }
 
     /**
@@ -134,6 +134,10 @@ class MaintenanceController extends Controller
         DB::table('maintenances')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
+<<<<<<< HEAD
         return redirect('/maintenance/input');
+=======
+        return redirect(route('maintenance.show'));
+>>>>>>> 3b881ef0736e359c2b3732e55e6ca3a4ec6f112e
     }
 }

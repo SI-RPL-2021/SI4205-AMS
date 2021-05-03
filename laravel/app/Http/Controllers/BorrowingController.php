@@ -68,11 +68,11 @@ class BorrowingController extends Controller
             'status' => 'Dipinjamkan',
 
         ]);
+     
 
 
 
-
-        return redirect('/manajer_inventaris/Borrowing/index');
+        return redirect('/manajer_inventaris/borrowing/return/index');
     }
 
     /**
