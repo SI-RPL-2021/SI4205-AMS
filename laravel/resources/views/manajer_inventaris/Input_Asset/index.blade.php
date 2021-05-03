@@ -364,19 +364,19 @@
                             <h2>List Asset</b></h2>
 
                         </div>
-                        <div class="col-sm-14">
-                            <form class="form-inline " type="get" action="{{url('/search')}}">
-                                <input type="search" class="form-control " name="query" placeholder="Search">
-                                <button class="btn btn-primary" type="submit">Search</button>
-                            </form>
 
-
-                        </div>
                         <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+                    <form class="form-inline ml-auto p-2 " type="get" action="{{url('/searchAsset')}}">
+                        <input type="search" class="form-control " name="search" placeholder="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
                 </div>
 <<<<<<< HEAD
                 <table class="table table-dark table-hover">
@@ -466,7 +466,9 @@
                                 </td>
                                 <td>{{ $assets ->firstItem() + $key }}</td>
                                 <td>{{ $asset->name }}</td>
-                                <td>{{ $asset->asset_category }}</td>
+                                <td class="asset-category">
+                           
+                                </td>
                                 <td>Rp.{{ $asset->asset_purchase_price }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
@@ -513,12 +515,23 @@
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
+                                    <label>Nama Asset</label>
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
+                                    <label for="asset_category mb-1">Category</label>
+                                    <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
+
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('asset_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Pembelian</label>

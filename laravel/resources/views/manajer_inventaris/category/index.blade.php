@@ -355,11 +355,19 @@
                         <div class="col-sm-6">
                             <h2>List Category</b></h2>
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Category</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
+
                     </div>
+                </div>
+                <div class="row">
+                <form class="form-inline ml-auto p-2 " type="get" action="{{url('/searchCat')}}">
+                        <input type="search" class="form-control " name="search" placeholder="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
                 </div>
                 <div class="row">
                     <table class="table table-dark table-hover">
@@ -392,8 +400,8 @@
                                 <td>{{ $categories ->firstItem() + $key }}</td>
                                 <td>{{ $cat->category }}</td>
                                 <td>
-                                    <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                    <form action="/delete/{{$cat->id}}" method="post">
+                                    <a href="/category/update/{{ $cat->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                    <form action="/category/delete/{{$cat->id}}" method="post">
                                         @csrf
                                         @method('delete')
 
@@ -418,48 +426,31 @@
     </div>
 
 
-    <!-- add asset -->
+    <!-- add cat -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <h5 class="modal-title text-body" id="exampleModalLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/category/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
+
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Harga Pembelian</label>
-                                    <input type="text" class="form-control" name="asset_purchase_price" required>
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" name="category" required>
                                 </div>
 
+
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Waktu Pembelian</label>
-                                    <input type="date" class="form-control" name="asset_purchase_date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                                </div>
-                            </div>
+
 
                         </div>
                         <div class="modal-footer text-center">

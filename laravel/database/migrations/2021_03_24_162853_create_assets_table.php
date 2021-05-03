@@ -18,7 +18,6 @@ class CreateAssetsTable extends Migration
             // $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('unique_code');
-            $table->string('asset_category');
             $table->string('picture');
             $table->date('asset_purchase_date');
             $table->integer('asset_purchase_price');
