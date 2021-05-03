@@ -134,10 +134,6 @@ class MaintenanceController extends Controller
         DB::table('maintenances')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
-<<<<<<< HEAD
-        return redirect('/maintenance/input');
-=======
         return redirect(route('maintenance.show'));
->>>>>>> 3b881ef0736e359c2b3732e55e6ca3a4ec6f112e
     }
 }
