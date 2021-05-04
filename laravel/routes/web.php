@@ -58,7 +58,15 @@ Route::get('/searchh/cari', [App\Http\Controllers\AssetController::class, 'cari'
 // History
 Route::get('/histo', [App\Http\Controllers\AssetController::class, 'indexxx'])->name('history');
 
+//Login
+Route::get('/uploadfile', 'UploadfileController@index');
+Route::post('/uploadfile', 'UploadfileController@upload');
+Route::get('/main', [App\Http\Controllers\MainController::class, 'index']);
+Route::post('/main/checklogin', [App\Http\Controllers\MainController::class, 'checklogin']);
+Route::get('main/successlogin', [App\Http\Controllers\MainController::class, 'successlogin']);
+Route::get('main/logout', [App\Http\Controllers\MainController::class, 'logout']);
 
+//register
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\User;
+use Illuminate\Database;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +20,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Model::unguard();
+        $this->call(UsersTablesSeeder::class);
+        
         for ($i = 0; $i < 10; $i++) {
-
             DB::table('assets')->insert([
                 'name' => Str::random(10),
                 'unique_code' => Str::random(10),
@@ -27,10 +33,6 @@ class DatabaseSeeder extends Seeder
                 'asset_purchase_price' => '12',
                 'description' => Str::random(10),
                 'status' =>  Str::random(10),
-
-
-
-
             ]);
         }
     }
