@@ -22,7 +22,7 @@ class CreateAssetsTable extends Migration
             $table->date('asset_purchase_date');
             $table->integer('asset_purchase_price');
             $table->text('description')->nullable();
-            $table->string('status');
+            $table->integer('qty');
             $table->timestamps();
             // $table->foreign('user_id')->references('id')->on('users');
         });

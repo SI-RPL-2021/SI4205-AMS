@@ -17,8 +17,9 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        $assets = DB::table('assets')->paginate(5);
-        $categories = DB::table('categories')->get();
+        $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
+        $categories = Category::all();
+
 
 
         return view('manajer_inventaris/Input_Asset/index', compact('assets', 'categories'));
@@ -26,8 +27,8 @@ class AssetController extends Controller
     public function updateindex($id, Request $request)
     {
         $assets = Asset::find($id);
-
-        return view('manajer_inventaris/Input_Asset/update', compact('assets'));
+        $categories = Category::all();
+        return view('manajer_inventaris/Input_Asset/update', compact('assets', 'categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -81,13 +82,14 @@ class AssetController extends Controller
         $asset->asset_purchase_date = $request['asset_purchase_date'];
         $asset->asset_purchase_price = $request['asset_purchase_price'];
         $asset->description = $request['description'];
-        $asset->status = 'Tersedia';
-      
+        $asset->qty = 100;
+
+
         $asset->save();
 
-        $category = Category::find($request['asset_category']);
-        $asset->categories()->attach($category);
-     
+        // $category = Category::find($request['asset_category']);
+        $asset->categories()->attach($request['asset_category']);
+
         return redirect('/manajer_inventaris/Input_Asset/index')->with('success', 'Asset Berhasil Ditambahkan');
     }
 
@@ -123,28 +125,45 @@ class AssetController extends Controller
     public function update($id, Request $request)
     {
         $asset = Asset::find($id);
+        $request->validate([
+            'name' => 'required',
+            'asset_category' => 'required',
+            'asset_purchase_price' => 'required',
+            'asset_purchase_date' => 'required',
+            'picture' => 'required',
+            'description' => 'nullable',
+        ]);
 
-        $asset->name = $request->name;
-        $asset->asset_category = $request->asset_category;
-        $asset->asset_purchase_date = $request->asset_purchase_date;
-        $asset->asset_purchase_price = $request->asset_purchase_price;
-        $asset->unique_code = $request->name;
-        $asset->description = $request->description;
 
 
         if ($request->hasFile('picture')) {
+            // file upload
             $file = $request->file('picture');
-            $extension = $file->getClientOriginalExtension();
-            $filename = rand() . '.' . $extension;
-            $file->move('imgages/uploads', $filename);
-            $asset->picture = $filename;
+            $fileName = rand() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('images/uploads', $fileName);
+            $file->move('images/uploads', $fileName);
         } else {
 
             $asset->picture = $asset->picture;
         }
+
+        $asset = new Asset;
+        $asset->name = $request['name'];
+        $asset->unique_code = $request['name'];
+        $asset->picture = $path;
+        $asset->asset_purchase_date = $request['asset_purchase_date'];
+        $asset->asset_purchase_price = $request['asset_purchase_price'];
+        $asset->description = $request['description'];
+        $asset->qty = 100;
+
+
         $asset->save();
 
-        return redirect('manajer_inventaris/Input_Asset/index');
+        // $category = Category::find($request['asset_category']);
+        $asset->categories()->attach($request['asset_category']);
+
+
+        return redirect('/manajer_inventaris/Input_Asset/index')->with('success', 'Asset Berhasil DiUpdate');
     }
 
     /**
