@@ -131,6 +131,7 @@ return [
     'classes_topnav' => 'navbar-light navbar-light ',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -225,9 +226,12 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => false,
+            
+            'text' => 'profile', 
+            'url' => 'admin/blog',
             'topnav' => true,
+            'position' => 'right: 1090px',
+            
         ],
         [
             'text' => 'blog',
@@ -258,6 +262,7 @@ return [
 
 
         ],
+        
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
@@ -265,7 +270,7 @@ return [
         ],
         [
             'text' => 'Borrowing Asset',
-
+            'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
             'submenu' => [[
                 'text' => 'Rent Asset',

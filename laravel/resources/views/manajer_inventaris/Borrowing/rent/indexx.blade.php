@@ -365,14 +365,6 @@ select:active {
         });
     </script>
 </head>
-@if (session('success'))
-<div class="alert alert-success" role="alert">
-    {{ session('success') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
 
 
 <!-- Delete Modal HTML -->
@@ -456,7 +448,7 @@ select:active {
                             <td>{{ $borrows->status}}</td>
                             <td>
                                 <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="{{ route('borrowing.destroy', ['borrow' => $borrows->id]) }}" method="post">
+                                <form action="{{ route('return.destroy', ['borrow' => $borrows->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
 
@@ -491,7 +483,7 @@ select:active {
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Borrowing/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/Borrowing/return/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
