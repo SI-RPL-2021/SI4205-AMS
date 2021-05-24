@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class restore extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'asset_code',
+        'return_picture',
+        'return_date',
+        'description',
+   
+
+    ];
+    protected $table = 'restores';
 }
