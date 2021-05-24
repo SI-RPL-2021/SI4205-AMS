@@ -13,18 +13,18 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->integer('NIP');
-            $table->string('emp_name');
-            $table->string('emp_picture');
-            $table->string('emp_gender');
-            $table->string('emp_address');
-            $table->string('emp_phonenumber');
-            $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-        });
+        // Schema::create('employees', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->integer('NIP');
+        //     $table->string('emp_name');
+        //     $table->string('emp_picture');
+        //     $table->string('emp_gender');
+        //     $table->string('emp_address');
+        //     $table->string('emp_phonenumber');
+        //     $table->timestamps();
+        //     $table->foreign('user_id')->references('id')->on('users');
+        // });
     }
 
     /**

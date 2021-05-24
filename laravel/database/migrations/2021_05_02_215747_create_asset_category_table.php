@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetCategory extends Migration
+class CreateAssetCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class CreateAssetCategory extends Migration
     public function up()
     {
         Schema::create('asset_category', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('asset_id')->constrained('assets');
+            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('asset_id')->constrained('assets')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['category_id', 'asset_id']);
         });
     }

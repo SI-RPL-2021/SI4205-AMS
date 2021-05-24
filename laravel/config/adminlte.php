@@ -65,11 +65,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -144,15 +144,15 @@ return [
     |
     */
 
-    'sidebar_mini' => false,
-    'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
+    'sidebar_mini' => true,
+    'sidebar_collapse' => true,
+    'sidebar_collapse_auto_size' => true,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_animation_speed' => 200,
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -225,8 +225,9 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => false,
+            'text' => 'Profile',
+            'url'  => '/blog',
+            'icon'  => 'far fa-fw fa-laugh',
             'topnav' => true,
         ],
         [
@@ -245,20 +246,22 @@ return [
         [
             'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
-            'submenu' => [[
-                'text' => 'Add Asset',
-                'url'  => '/manajer_inventaris/Input_Asset/index',
-                'icon' => 'fas fa-fw fa-pen',
-            ],
-            [
-                'text' => 'Add Asset Category',
-                'url'  => '/manajer_inventaris/category/index',
-                'icon' => 'fas fa-fw fa-archive',
-            ]]
+            'submenu' => [
+                [
+                    'text' => 'Add Asset',
+                    'url'  => '/manajer_inventaris/Input_Asset/index',
+                    'icon' => 'fas fa-fw fa-pen',
+                ],
+                [
+                    'text' => 'Add Asset Category',
+                    'url'  => '/manajer_inventaris/category/index',
+                    'icon' => 'fas fa-fw fa-archive',
+                ]
+            ]
 
 
         ],
-        
+
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
@@ -266,12 +269,28 @@ return [
         ],
         [
             'text' => 'Borrowing Asset',
-            'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
+            'submenu' => [
+                [
+                    'text' => 'Rent Asset',
+                    'url'  => '/manajer_inventaris/borrowing/rent/index',
+                    'icon' => 'fas fa-fw fa-handshake-o',
+                ],
+                [
+                    'text' => 'Return Asset',
+                    'url'  => '/manajer_inventaris/borrowing/return/index',
+                    'icon' => 'fas fa-fw fa-undo',
+                ]
+            ]
         ], [
             'text' => 'Maintenance Asset',
             'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
+        ],
+        [
+            'text' => 'Asset Report',
+            'url'  => '/manajer_inventaris/report/index',
+            'icon' => 'fas fa-fw fa-chart-line',
         ],
         [
             'text' => 'Asset History',

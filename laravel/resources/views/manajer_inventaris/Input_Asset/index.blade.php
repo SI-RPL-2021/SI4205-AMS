@@ -1,12 +1,13 @@
 @extends('adminlte::page')
 
 @section('title', 'Input Asset')
-
+<link rel=”icon” href=ams.png”>
 @section('content')
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -402,7 +403,7 @@
                             @php
                             $i = 1
                             @endphp
-                            @foreach ($assets as $key=> $asset)
+                            @foreach ($assets as $asset)
                             <tr>
 
                                 <td>
@@ -411,14 +412,24 @@
                                         <label for="checkbox1"></label>
                                     </span>
                                 </td>
-                                <td>{{ $assets ->firstItem() + $key }}</td>
+
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{ $asset->name }}</td>
                                 <td class="asset-category">
-                           
+                                    <ul>
+                                        @foreach ($asset->categories as $category)
+
+                                        <li>
+                                            {{$category->category}}
+                                        </li>
+
+
+                                        @endforeach
+                                    </ul>
                                 </td>
                                 <td>Rp.{{ $asset->asset_purchase_price }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
-                                <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="100px"></td>
+                                <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="50px"></td>
                                 <td>{{ $asset->description }}</td>
                                 <td>
                                     <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
@@ -467,7 +478,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="asset_category mb-1">Category</label>
-                                    <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
+                                    <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
 
                                         @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category }}</option>
