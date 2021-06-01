@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class asset extends Model
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Asset extends Model
 {
-    use HasFactory;
+   use HasFactory;
 
     protected $fillable = [
         'name',
@@ -23,4 +25,10 @@ class asset extends Model
 
     ];
     protected $table = 'assets';
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+    
 }

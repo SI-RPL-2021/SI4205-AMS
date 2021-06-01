@@ -345,16 +345,32 @@
                                 <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Kategori Barang</label>
-                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                                <label for="asset-category mb-1">Category</label>
+                                <select class="select2-bg form-control select2 @error('asset-category') is-invalid @enderror" id="asset-category" name="asset-category[]" placeholder="Category" required autocomplete="asset-category" autofocus multiple="multiple">
+
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" @foreach ($category as $name) @if ($category->category == $name)
+                                        selected
+                                        @endif
+                                        @endforeach>
+                                        {{ $category->category }}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                                @error('asset-category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Harga Pembelian</label>
-                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                                <input type="number" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Status Asset</label>
-                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                                <label>Jumlah Asset</label>
+                                <input type="number" class="form-control" name="status" value="{{$assets->status}}" required>
                             </div>
 
                         </div>
@@ -370,6 +386,10 @@
                             <div class="form-group">
                                 <label>Keterangan</label>
                                 <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Foto Barang</label>
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
                             </div>
                         </div>
 

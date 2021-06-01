@@ -11,14 +11,12 @@ class borrowing extends Model
 
     protected $fillable = [
 
-        'asset_id',
+        'asset_code',
         'borrowing_picture',
         'borrowing_end',
         'borrowing_date' ,
         'description',
-        'status',
-        'created_at',
-        'updated_at',					
+        'status',				
 
     ];
     protected $table = 'borrowings';

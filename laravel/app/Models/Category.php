@@ -2,10 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Asset;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
+ use  HasFactory;
+    protected $fillable = [
+        'category'
+    ];
+    public function assets()
+    {
+        return $this->belongsToMany(Asset::class);
+    }
+    
 }

@@ -23,6 +23,13 @@ class CategoryController extends Controller
        
     }
 
+    public function updateindex($id, Request $request)
+    {
+        $categories = Category::find($id);
+
+        return view('manajer_inventaris/category/update', compact('categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +48,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          
+            'category' => 'required',
+        ]);
+
+
+        category::create([
+            'category' => $request->category,
+    
+
+        ]);
+
+        return redirect('/manajer_inventaris/category/index');
     }
 
     /**
@@ -73,9 +92,18 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,  $id)
     {
-        //
+        $cat = Category::find($id);
+
+     
+        $cat->category = $request->category;
+
+
+       
+        $cat->save();
+
+        return redirect(route('cat.show'));
     }
 
     /**
@@ -84,8 +112,19 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+              // menghapus data category berdasarkan id yang dipilih
+              DB::table('categories')->where('id', $id)->delete();
+
+              // alihkan halaman ke halaman category
+              return redirect('/manajer_inventaris/category/index');
+    }
+
+    public function search()
+    {
+        $search_text = $_GET['search'];
+        $categories = Category::where('category','LIKE', '%' .$search_text. '%')->paginate(5);
+        return view('manajer_inventaris/category/index',compact('categories'));
     }
 }
