@@ -359,7 +359,7 @@
 <body>
     <!-- //table -->
 
-    <div class="container-xl ">
+    <div class="container-xxl ">
         <div class="table-responsive">
             <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
