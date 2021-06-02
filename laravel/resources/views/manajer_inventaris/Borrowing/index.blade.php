@@ -343,7 +343,7 @@
                     <p class="text-warning"><small>This action cannot be undone.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Delete">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </div>
             </form>
