@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -257,18 +258,20 @@ return [
                     'icon' => 'fas fa-fw fa-archive',
                 ]
             ],
-            'roles' => 'manajer'
+            'icon_color' => 'primary',
         ],
 
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Borrowing Asset',
             'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
+            'icon_color' => 'primary',
             'submenu' => [
                 [
                     'text' => 'Rent Asset',
@@ -285,17 +288,20 @@ return [
             'text' => 'Maintenance Asset',
             'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Asset History',
             'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
+            'icon_color' => 'primary',
         ],
 
         [
             'text' => 'User Management',
             'url'  => '/manajer_inventaris/user/index',
             'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'primary',
         ],
         // [
         //     'text' => 'change_password',

@@ -509,6 +509,10 @@
                                     <label>Keterangan</label>
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label>Jumlah Asset</label>
+                                <input  type="text"  class="form-control" placeholder="jumlah" name="qty" required>
+                                </div>
                             </div>
 
                         </div>

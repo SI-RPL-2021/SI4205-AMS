@@ -130,7 +130,7 @@ class AssetController extends Controller
             'asset_category' => 'required',
             'asset_purchase_price' => 'required',
             'asset_purchase_date' => 'required',
-            'picture' => 'required',
+            'picture' => 'nullable',
             'description' => 'nullable',
         ]);
 
@@ -159,11 +159,10 @@ class AssetController extends Controller
 
         $asset->save();
 
-        // $category = Category::find($request['asset_category']);
         $asset->categories()->attach($request['asset_category']);
 
 
-        return redirect('/manajer_inventaris/Input_Asset/index')->with('success', 'Asset Berhasil DiUpdate');
+        return redirect(route('asset.show'))->with('success', 'Asset Berhasil DiUpdate');
     }
 
     /**

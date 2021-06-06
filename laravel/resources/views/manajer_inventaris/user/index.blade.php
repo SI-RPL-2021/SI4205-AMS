@@ -378,8 +378,8 @@
 
                     </div>
                     <div class="row">
-                        <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchAsset') }}">
-                            <input type="search" class="form-control " name="search" placeholder="Search">
+                        <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchUser') }}">
+                            <input type="search" class="form-control " name="user" placeholder="Search">
                             <button class="btn btn-primary" type="submit">Search</button>
                         </form>
                     </div>
@@ -397,60 +397,37 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $i = 1;
+                                $i = 1
                                 @endphp
-
+                                @foreach ($users as $key=> $user)
                                 <tr>
-
-                                    <td>1</td>
-                                    <td>ayam</td>
-                                    <td>ayam@mail.com</td>
-                                    <td>manager</td>
+    
+                                 
+                                    <td>{{ $users ->firstItem() + $key }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>
-                                        <a href="" class="edit"><i class="material-icons" data-toggle="tooltip"
-                                                title="Details">&#xE241;</i></a>
-                                        <form action="" method="post">
+                                        <a href="/user/update/{{ $user->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                        <form action="/user/delete/{{$user->id}}" method="post">
                                             @csrf
                                             @method('delete')
-
-                                            <button type="submit" class=""
-                                                style="background-color: transparent; border:none" data-toggle="tooltip"
-                                                title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
+    
+                                            <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
+    
                                         </form>
+    
                                     </td>
                                     @php
-                                        $i++;
+                                    $i++
                                     @endphp
-
-                                </tr>
-                                <tr>
-
-                                    <td>2</td>
-                                    <td>kucing</td>
-                                    <td>kucing@mail.com</td>
-                                    <td>karyawan</td>
-                                    <td>
-                                        <a href="" class="edit"><i class="material-icons" data-toggle="tooltip"
-                                                title="Details">&#xE241;</i></a>
-                                        <form action="" method="post">
-                                            @csrf
-                                            @method('delete')
-
-                                            <button type="submit" class=""
-                                                style="background-color: transparent; border:none" data-toggle="tooltip"
-                                                title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                        </form>
-                                    </td>
-                                    @php
-                                        $i++;
-                                    @endphp
-
-                                </tr>
+                                    @endforeach
+                               
                             </tbody>
                         </table>
-
+                        <div class="pagination">
+                            {{$users->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,7 +445,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
+                        <form action="{{route('user.save')}}" method="post" style="color: black;" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row ">
@@ -479,14 +456,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="name" required>
+                                        <input type="email" class="form-control" name="email" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Role</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="role" aria-label="Default select example">
                                             <option selected>Select Role</option>
-                                            <option value="1">Manager</option>
-                                            <option value="2">Karyawan</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="karyawan">Karyawan</option>
                                         </select>
                                     </div>
 
@@ -494,12 +471,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" class="form-control" name="asset_purchase_date" required>
+                                        <input type="text" class="form-control" name="password" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Confirm Password</label>
-                                        <input type="text" class="form-control" name="asset_purchase_date" required>
-                                    </div>
+                                   
 
                                 </div>
 

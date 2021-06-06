@@ -342,11 +342,11 @@
 
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" >
                             </div>
                             <div class="form-group">
                                 <label for="asset-category mb-1">Category</label>
-                                <select class="select2-bg form-control select2 @error('asset-category') is-invalid @enderror" id="asset-category" name="asset-category[]" placeholder="Category" required autocomplete="asset-category" autofocus multiple="multiple">
+                                <select class="select2-bg form-control select2 @error('asset-category') is-invalid @enderror" id="asset-category" name="asset-category[]" placeholder="Category"  autocomplete="asset-category" autofocus multiple="multiple">
 
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" @foreach ($category as $name) @if ($category->category == $name)
@@ -366,30 +366,34 @@
                             </div>
                             <div class="form-group">
                                 <label>Harga Pembelian</label>
-                                <input type="number" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                                <input type="number" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" >
                             </div>
                             <div class="form-group">
                                 <label>Jumlah Asset</label>
-                                <input type="number" class="form-control" name="status" value="{{$assets->status}}" required>
+                                <input type="number" class="form-control" name="status" value="{{$assets->qty}}" >
+                            </div>
+                            <div class="form-group">
+                                <h6>Author: {{Auth::user()->name}}</h6>
+                            
                             </div>
 
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Waktu Pembelian</label>
-                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" >
                             </div>
                             <div class="form-group">
                                 <label>Unique Code</label>
-                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" >
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" >{{$assets->description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Foto Barang</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" >
                             </div>
                         </div>
 
@@ -405,7 +409,7 @@
             <div class="modal-footer justify-content-center">
 
                 <button type="submit" class="btn btn-primary">Edit</button>
-                </form>
+            </form>
                 <form action="/delete/{{$assets->id}}" method="post">
                     @csrf
                     @method('delete')
