@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Maintenance Asset')
+@section('title', 'Peminjaman Asset')
 
 @section('content')
 
@@ -292,6 +292,51 @@
         .modal form label {
             font-weight: normal;
         }
+        select {
+  font: 400 12px/1.3 sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+  color: var(--baseFg);
+  border: 1px solid var(--baseFg);
+  line-height: 1;
+  outline: 0;
+  padding: 0.65em 2.5em 0.55em 0.75em;
+  border-radius: var(--radius);
+  background-color: var(--baseBg);
+  background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+  background-position: right 20px center, right bottom, right bottom, right bottom; 
+  position: absolute; right: 3%; width: 250px;
+}
+
+select:hover {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+}
+
+select:active {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+  color: var(--accentBg);
+  border-color: var(--accentFg);
+  background-color: var(--accentFg);
+}
+
+:root {
+  --radius: 2px;
+  --baseFg: dimgray;
+  --baseBg: white;
+  --accentFg: #006fc2;
+  --accentBg: #bae1ff;
+}
     </style>
     <script>
         $(document).ready(function() {
@@ -349,29 +394,34 @@
 
     <div class="container-xl ">
         <div class="table-responsive">
-            <div class="table-wrapper">
+            <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>List Maintenance</b></h2>
+                            <h2>Borrowed Item List </b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Maintenance</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Borrow An Asset</span></a>
+                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete Records</span></a>
                         </div>
                     </div>
                 </div>
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                       
+                            <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                            </th>
                             <th>No</th>
-                            <th>Nama Asset</th>
-                            <th>Jenis Laporan Asset</th>
-                            <th>Umur Asset</th>
-                            <th>Biaya </th>
-                            <th>Status Asset</th>
-
+                            <th>Kode Barang</th>
+                            <th>Foto Barang</th>
+                            <th>Keterangan</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Status Peminjaman</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -379,25 +429,32 @@
                         @php
                         $i = 1
                         @endphp
-                        @foreach ($maintenances as $maintenance)
+                        @foreach ($borrow as $key=> $borrows)
                         <tr>
 
-                           
-                            <td>{{ $i }}</td>
-                            <td>{{ $maintenance->name }}</td>
-                            <td>{{ $maintenance->asset_damage }}</td>
-                            <td>{{ $maintenance->asset_age}}</td>
-                            <td>{{ $maintenance->maintenance_bill }}</td>
-                            <td>{{ $maintenance->damage_status }}</td>
                             <td>
-                                <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td>{{ $borrow ->firstItem() + $key }}</td>
+                            <td>{{ $borrows->asset_code }}</td>
+                            <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
+                            <td>{{ $borrows->description }}</td>
+                            <td>{{ $borrows->borrowing_date}}</td>
+                            <td>{{ $borrows->borrowing_end}}</td>
+                            <td>{{ $borrows->status}}</td>
+                            <td>
+                                <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="{{ route('return.destroy', ['borrow' => $borrows->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
 
-                                    <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
+                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
 
                                 </form>
+
                             </td>
                             @php
                             $i++
@@ -407,19 +464,15 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
+
+
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- add maintenance -->
+    <!-- add borrow -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -429,41 +482,36 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
+                    <form action="/return/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label style="color: black;">Nama Asset</label>
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
-                                        <option selected="selected" data-select2-id="3">Pilih Asset</option>
-                                        <option data-select2-id="34">Laptop</option>
-                                        <option data-select2-id="35">Printer</option>
-                                        <option data-select2-id="36">Layar proyektor</option>
-                                        
+                                    <label>Kode Barang</label>
+                                    <select name="asset_code" >
+                                        @foreach ($assets as $assets)
+                                        <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
+                                        @endforeach
                                     </select>
-                                    
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Jenis Laporan Asset</label>
-                                    <input type="text" class="form-control" name="asset_damage" required>
+                                    <label>Foto Barang</label>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Umur barang</label>
-                                    <input type="number" class="form-control" name="asset_age" required>
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control" placeholder="Tambahkan Keterangan Disini" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
                                 </div>
-
                             </div>
                             <div class="col-md-6">
+                            <div class="form-group">
+                                    <label>Tanggal Peminjaman</label>
+                                    <input type="date" class="form-control" name="borrowing_date" required>
+                                </div> 
                                 <div class="form-group">
-                                    <label style="color: black;">Biaya </label>
-                                    <input type="text" class="form-control" name="maintenance_bill" required>
+                                    <label>Tanggal Pengembalian</label>
+                                    <input type="date" class="form-control" name="borrowing_end" >
                                 </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Status Asset</label>
-                                    <input type="text" class="form-control" name="damage_status" required>
-                                </div>
-
                             </div>
 
                         </div>

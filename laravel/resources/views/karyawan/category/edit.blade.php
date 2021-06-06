@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Maintenance Asset')
+@section('title', 'Input Asset')
 
 @section('content')
 
@@ -15,6 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+        .rowhead {
+            margin-bottom: 40px;
+        }
+
         body {
             color: #566787;
             background: #f5f5f5;
@@ -29,12 +33,7 @@
             padding: 20px 25px;
 
 
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .table-responsive {
-
-            box-shadow: 2px 6px 10px #747f91;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         }
 
         .table-title {
@@ -275,8 +274,8 @@
         }
 
         .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
+            border-radius: 5px;
+            box-shadow: 2px;
             border-color: #dddddd;
         }
 
@@ -320,170 +319,131 @@
     </script>
 </head>
 
-
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
 <body>
-    <!-- //table -->
+    <div class="card bg-dark">
+        <div class="card-header">
+            Detail as
+            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
 
-    <div class="container-xl ">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title bg-dark">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>List Maintenance</b></h2>
+        </div>
+        <div class="card-body">
+            <div class="row  justify-content-center">
+                <img class="rounded" src="{{ asset($assets->picture) }}" alt="{{$assets->picture}}" height="250px">
+            </div>
+            <div class="row">
+
+
+                <div class="row justify-text-center">
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
                         </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Maintenance</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
+                        <div class="form-group">
+                            <label>Kategori Barang</label>
+                            <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Harga Pembelian</label>
+                            <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Status Asset</label>
+                            <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Waktu Pembelian</label>
+                            <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unique Code</label>
+                            <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea class="form-control" placeholder="{{$assets->description}}" name="description" value="{{$assets->description}}" style="height: 120px"></textarea>
                         </div>
                     </div>
+
                 </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                       
-                            <th>No</th>
-                            <th>Nama Asset</th>
-                            <th>Jenis Laporan Asset</th>
-                            <th>Umur Asset</th>
-                            <th>Biaya </th>
-                            <th>Status Asset</th>
 
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($maintenances as $maintenance)
-                        <tr>
-
-                           
-                            <td>{{ $i }}</td>
-                            <td>{{ $maintenance->name }}</td>
-                            <td>{{ $maintenance->asset_damage }}</td>
-                            <td>{{ $maintenance->asset_age}}</td>
-                            <td>{{ $maintenance->maintenance_bill }}</td>
-                            <td>{{ $maintenance->damage_status }}</td>
-                            <td>
-                                <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                            @endforeach
-
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- add maintenance -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-
-                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="color: black;">Nama Asset</label>
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
-                                        <option selected="selected" data-select2-id="3">Pilih Asset</option>
-                                        <option data-select2-id="34">Laptop</option>
-                                        <option data-select2-id="35">Printer</option>
-                                        <option data-select2-id="36">Layar proyektor</option>
-                                        
-                                    </select>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Jenis Laporan Asset</label>
-                                    <input type="text" class="form-control" name="asset_damage" required>
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Umur barang</label>
-                                    <input type="number" class="form-control" name="asset_age" required>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="color: black;">Biaya </label>
-                                    <input type="text" class="form-control" name="maintenance_bill" required>
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Status Asset</label>
-                                    <input type="text" class="form-control" name="damage_status" required>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
 
 
             </div>
 
         </div>
+        <div class="card-footer">
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger">Delete</button>
+                <a href="#addEmployeeModal" class="btn btn-primary rounded" data-toggle="modal"><i class="material-icons "></i> <span>Edit Asset</span></a>
+            </div>
+        </div>
 
-    </div>
-    </div>
-    </div>
+        <!-- edit asset -->
+        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="/Input_Asset/update/{{ $assets->id }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Barang</label>
+                                        <input type="text" class="form-control" name="name" value="{{$assets->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kategori Barang</label>
+                                        <input type="text" class="form-control" name="asset_category" value="{{$assets->asset_category}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Harga Pembelian</label>
+                                        <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price}}" required>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Waktu Pembelian</label>
+                                        <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Foto Barang</label>
+                                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" value="{{$assets->picture}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Keterangan</label>
+                                        <textarea class="form-control"  id="floatingTextarea2" name="description" style="height: 100px" value="{{$assets->description}}"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer text-center">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
 
 </body>
+
 @endsection
 
 @section('css')

@@ -356,7 +356,7 @@
 <body>
     <!-- //table -->
 
-    <div class="container-xl ">
+    <div class="container-xxl">
         <div class="table-responsive">
             <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
@@ -395,7 +395,6 @@
                                 <th>Harga Pembelian</th>
                                 <th>Tanggal Pembelian</th>
                                 <th>Foto Barang</th>
-                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -427,10 +426,10 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>Rp.{{ $asset->asset_purchase_price }}</td>
+                                <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="50px"></td>
-                                <td>{{ $asset->description }}</td>
+                                
                                 <td>
                                     <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                     <form action="/delete/{{$asset->id}}" method="post">

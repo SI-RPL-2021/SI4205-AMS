@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Maintenance Asset')
+@section('title', 'Input Category')
 
 @section('content')
 
@@ -349,122 +349,108 @@
 
     <div class="container-xl ">
         <div class="table-responsive">
-            <div class="table-wrapper">
+            <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>List Maintenance</b></h2>
+                            <h2>List Category</b></h2>
                         </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Maintenance</span></a>
+
+                        <div class="col-sm-12">
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Category</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
+
                     </div>
                 </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                       
-                            <th>No</th>
-                            <th>Nama Asset</th>
-                            <th>Jenis Laporan Asset</th>
-                            <th>Umur Asset</th>
-                            <th>Biaya </th>
-                            <th>Status Asset</th>
-
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($maintenances as $maintenance)
-                        <tr>
-
-                           
-                            <td>{{ $i }}</td>
-                            <td>{{ $maintenance->name }}</td>
-                            <td>{{ $maintenance->asset_damage }}</td>
-                            <td>{{ $maintenance->asset_age}}</td>
-                            <td>{{ $maintenance->maintenance_bill }}</td>
-                            <td>{{ $maintenance->damage_status }}</td>
-                            <td>
-                                <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-                            </td>
+                <div class="row">
+                <form class="form-inline ml-auto p-2 " type="get" action="{{url('/searchCat')}}">
+                        <input type="search" class="form-control " name="search" placeholder="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                    </span>
+                                </th>
+                                <th>No</th>
+                                <th>Kategori</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @php
-                            $i++
+                            $i = 1
                             @endphp
-                            @endforeach
+                            @foreach ($categories as $key=> $cat)
+                            <tr>
 
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
-                    </ul>
+                                <td>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                        <label for="checkbox1"></label>
+                                    </span>
+                                </td>
+                                <td>{{ $categories ->firstItem() + $key }}</td>
+                                <td>{{ $cat->category }}</td>
+                                <td>
+                                    <a href="/category/update/{{ $cat->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                    <form action="/category/delete/{{$cat->id}}" method="post">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                    </form>
+
+                                </td>
+                                @php
+                                $i++
+                                @endphp
+                                @endforeach
+
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        {{$categories->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- add maintenance -->
+    <!-- add cat -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <h5 class="modal-title text-body" id="exampleModalLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
+                    <form action="/category/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-6">
+
                                 <div class="form-group">
-                                    <label style="color: black;">Nama Asset</label>
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
-                                        <option selected="selected" data-select2-id="3">Pilih Asset</option>
-                                        <option data-select2-id="34">Laptop</option>
-                                        <option data-select2-id="35">Printer</option>
-                                        <option data-select2-id="36">Layar proyektor</option>
-                                        
-                                    </select>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Jenis Laporan Asset</label>
-                                    <input type="text" class="form-control" name="asset_damage" required>
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Umur barang</label>
-                                    <input type="number" class="form-control" name="asset_age" required>
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" name="category" required>
                                 </div>
 
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="color: black;">Biaya </label>
-                                    <input type="text" class="form-control" name="maintenance_bill" required>
-                                </div>
-                                <div class="form-group">
-                                    <label style="color: black;">Status Asset</label>
-                                    <input type="text" class="form-control" name="damage_status" required>
-                                </div>
 
                             </div>
+
 
                         </div>
                         <div class="modal-footer text-center">
