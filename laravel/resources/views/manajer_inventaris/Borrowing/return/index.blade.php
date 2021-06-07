@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Peminjaman Asset')
+@section('title', 'Pengembalian Asset')
 
 @section('content')
 
@@ -292,54 +292,51 @@
         .modal form label {
             font-weight: normal;
         }
-
         select {
-            font: 400 12px/1.3 sans-serif;
-            -webkit-appearance: none;
-            appearance: none;
-            color: var(--baseFg);
-            border: 1px solid var(--baseFg);
-            line-height: 1;
-            outline: 0;
-            padding: 0.65em 2.5em 0.55em 0.75em;
-            border-radius: var(--radius);
-            background-color: var(--baseBg);
-            background-image: linear-gradient(var(--baseFg), var(--baseFg)),
-                linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
-                linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
-                linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
-            background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-            background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
-            background-position: right 20px center, right bottom, right bottom, right bottom;
-            position: absolute;
-            right: 3%;
-            width: 250px;
-        }
+  font: 400 12px/1.3 sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+  color: var(--baseFg);
+  border: 1px solid var(--baseFg);
+  line-height: 1;
+  outline: 0;
+  padding: 0.65em 2.5em 0.55em 0.75em;
+  border-radius: var(--radius);
+  background-color: var(--baseBg);
+  background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+  background-position: right 20px center, right bottom, right bottom, right bottom; 
+  position: absolute; right: 3%; width: 250px;
+}
 
-        select:hover {
-            background-image: linear-gradient(var(--accentFg), var(--accentFg)),
-                linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
-                linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
-                linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
-        }
+select:hover {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+}
 
-        select:active {
-            background-image: linear-gradient(var(--accentFg), var(--accentFg)),
-                linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
-                linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
-                linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
-            color: var(--accentBg);
-            border-color: var(--accentFg);
-            background-color: var(--accentFg);
-        }
+select:active {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+  color: var(--accentBg);
+  border-color: var(--accentFg);
+  background-color: var(--accentFg);
+}
 
-        :root {
-            --radius: 2px;
-            --baseFg: dimgray;
-            --baseBg: white;
-            --accentFg: #006fc2;
-            --accentBg: #bae1ff;
-        }
+:root {
+  --radius: 2px;
+  --baseFg: dimgray;
+  --baseBg: white;
+  --accentFg: #006fc2;
+  --accentBg: #bae1ff;
+}
     </style>
     <script>
         $(document).ready(function() {
@@ -401,10 +398,10 @@
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Restored Item List </b></h2>
+                            <h2>Returned Item List </b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Restore An Asset</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Borrow An Asset</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete Records</span></a>
                         </div>
                     </div>
@@ -422,46 +419,49 @@
                             <th>Kode Barang</th>
                             <th>Foto Barang</th>
                             <th>Keterangan</th>
+                            <th>Tanggal Peminjaman</th>
                             <th>Tanggal Pengembalian</th>
+                            <th>Status Peminjaman</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $i = 1
+                        @endphp
+                        @foreach ($borrow as $key=> $borrows)
+                        <tr>
+
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td>{{ $borrow ->firstItem() + $key }}</td>
+                            <td>{{ $borrows->asset_code }}</td>
+                            <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
+                            <td>{{ $borrows->description }}</td>
+                            <td>{{ $borrows->borrowing_date}}</td>
+                            <td>{{ $borrows->borrowing_end}}</td>
+                            <td>{{ $borrows->status}}</td>
+                            <td>
+                                <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="{{ route('return.destroy', ['borrow' => $borrows->id]) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                </form>
+
+                            </td>
                             @php
-                            $i = 1
+                            $i++
                             @endphp
-                            @foreach ($restore as $restore)
-                            <tr>
+                            @endforeach
 
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ $restore->asset_code }}</td>
-                                <td class="product-img"><img class="rounded" src="{{ asset($restore->return_picture) }}" alt="Img placeholder" height="50px"></td>
-                                <td>{{ $restore->description }}</td>
-                                <td>{{ $restore->return_date }}</td>
-                                <td>
-                                    <a href="/return/update/{{ $restore->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                    <form action="/borrowing/{$restore->id}/return/destroy" method="post">
-                                        @csrf
-                                        @method('delete')
-
-                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                    </form>
-
-                                </td>
-                                @php
-                                $i++
-                                @endphp
-                                @endforeach
-
-                        </tbody>
+                    </tbody>
                 </table>
                 <div class="clearfix">
 
@@ -472,7 +472,7 @@
     </div>
 
 
-    <!-- add restore-->
+    <!-- add borrow -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -488,15 +488,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
-                                    <select name="asset_code">
-                                        @foreach ($borrowings as $borrowings)
-                                        <option value="{{$borrowings->asset_code}}">{{$borrowings->asset_code}}</option>
+                                    <select name="asset_code" >
+                                        @foreach ($assets as $assets)
+                                        <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="return_picture" required>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan</label>
@@ -504,9 +504,13 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                            <div class="form-group">
+                                    <label>Tanggal Peminjaman</label>
+                                    <input type="date" class="form-control" name="borrowing_date" required>
+                                </div> 
                                 <div class="form-group">
                                     <label>Tanggal Pengembalian</label>
-                                    <input type="date" class="form-control" name="return_date">
+                                    <input type="date" class="form-control" name="borrowing_end" >
                                 </div>
                             </div>
 

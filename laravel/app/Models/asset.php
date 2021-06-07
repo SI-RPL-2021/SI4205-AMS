@@ -4,7 +4,6 @@ namespace App\Models;
 
 
 use App\Models\Category;
-use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -30,11 +29,6 @@ class Asset extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
-    }
-    
-    public function reports()
-    {
-        return $this->hasMany(Report::class);
     }
     
 }

@@ -27,8 +27,8 @@ class AssetTest extends DuskTestCase
                         ->attach('picture', storage_path('app/public/test_upload.jpg'))
                         ->type('description', 'keterangan ceritanya')
                         ->press('Save');
-                });
-                
+                })
+                ->assertSee('Asset Berhasil Ditambahkan');
              
         });
     }

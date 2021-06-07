@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -64,12 +65,12 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => true,
-    'usermenu_desc' => true,
-    'usermenu_profile_url' => true,
+    'usermenu_image' => false,
+    'usermenu_desc' => false,
+    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -145,15 +146,15 @@ return [
     |
     */
 
-    'sidebar_mini' => true,
-    'sidebar_collapse' => true,
-    'sidebar_collapse_auto_size' => true,
+    'sidebar_mini' => false,
+    'sidebar_collapse' => false,
+    'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 200,
+    'sidebar_nav_animation_speed' => 300,
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +168,7 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -226,9 +227,8 @@ return [
 
     'menu' => [
         [
-            'text' => 'Profile',
-            'url'  => '/blog',
-            'icon'  => 'far fa-fw fa-laugh',
+            'text' => 'search',
+            'search' => false,
             'topnav' => true,
             'position' => 'right: 1090px',
             
@@ -242,7 +242,7 @@ return [
             'text'        => 'Home',
             'url'         => '/',
             'icon'        => 'far fa-fw fa-laugh',
-            'label'       => 69,
+            'label'       => 911,
             'label_color' => 'danger',
         ],
         ['header' => 'Utility'],
@@ -260,23 +260,25 @@ return [
                     'url'  => '/manajer_inventaris/category/index',
                     'icon' => 'fas fa-fw fa-archive',
                 ]
-            ]
-
-
+            ],
+            'icon_color' => 'primary',
         ],
 
         [
             'text' => 'Approve Asset',
-            'url'  => '/manajer_inventaris/approve_asset',
+            'url'  => '/manajer_inventaris/approval/index',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Borrowing Asset',
+            'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
+            'icon_color' => 'primary',
             'submenu' => [
                 [
                     'text' => 'Rent Asset',
-                    'url'  => '/manajer_inventaris/borrowing/rent/index',
+                    'url'  => 'manajer_inventaris/borrowing/rent/index',
                     'icon' => 'fas fa-fw fa-handshake-o',
                 ],
                 [
@@ -289,16 +291,20 @@ return [
             'text' => 'Maintenance Asset',
             'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
-        ],
-        [
-            'text' => 'Asset Report',
-            'url'  => '/manajer_inventaris/report/index',
-            'icon' => 'fas fa-fw fa-chart-line',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Asset History',
             'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
+            'icon_color' => 'primary',
+        ],
+
+        [
+            'text' => 'User Management',
+            'url'  => '/manajer_inventaris/user/index',
+            'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'primary',
         ],
         // [
         //     'text' => 'change_password',

@@ -20,13 +20,13 @@ class BorrowingController extends Controller
         $borrow = DB::table('borrowings')->paginate(5);
         $assets = DB::table('assets')->get();
 
-        return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'assets']));
+        return view('manajer_inventaris/Borrowing/return/index', compact(['borrow', 'assets']));
     }
     public function updateindex($id, Request $request)
     {
         $borrow = borrowing::find($id);
 
-        return view('manajer_inventaris/Borrowing/rent/update', compact('borrow'));
+        return view('manajer_inventaris/Borrowing/update', compact('borrow'));
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +72,7 @@ class BorrowingController extends Controller
 
 
 
-        return redirect('/manajer_inventaris/borrowing/rent/index');
+        return redirect('/manajer_inventaris/borrowing/return/index');
     }
 
     /**
@@ -118,7 +118,7 @@ class BorrowingController extends Controller
 
         $borrow->save();
 
-        return redirect('manajer_inventaris/borrowing/rent/index');
+        return redirect('manajer_inventaris/Borrowing/index');
     }
 
     /**

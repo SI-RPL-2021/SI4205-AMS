@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Maintenance Detail')
 
 @section('content')
 
