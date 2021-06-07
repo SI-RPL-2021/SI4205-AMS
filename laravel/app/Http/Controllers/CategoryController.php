@@ -49,15 +49,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          
             'category' => 'required',
         ]);
 
 
         category::create([
             'category' => $request->category,
-    
-
         ]);
 
         return redirect('/manajer_inventaris/category/index');

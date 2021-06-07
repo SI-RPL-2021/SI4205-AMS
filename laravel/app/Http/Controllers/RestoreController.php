@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\restore;
-use App\Models\borrowing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RestoreController extends Controller
 {
@@ -16,18 +16,13 @@ class RestoreController extends Controller
      */
     public function index()
     {
-        // mengambil data dari table asset
-        $restore = DB::table('restores')->paginate(5);
-        $borrowings = DB::table('borrowings')->get();
+        
+        $borrow = restore::orderBy('updated_at', 'DESC')->where('user_id', Auth::user()->id)->paginate(5);
+        $assets = DB::table('assets')->get();
 
-        return view('manajer_inventaris/Borrowing/return/index', compact(['restore', 'borrowings']));
+        return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'assets']));
     }
-    public function updateindex($id, Request $request)
-    {
-        $restore = restore::find($id);
 
-        return view('manajer_inventaris/Borrowing/return/update', compact('restore'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -46,41 +41,16 @@ class RestoreController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'asset_code' => 'required',
-            'return_picture' => 'required',
-            'return_date' => 'nullable',
-            'description' => 'required',
-
-        ]);
-        // file upload
-        $file = $request->file('return_picture');
-        $fileName = rand() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('images/uploads/return', $fileName);
-        $file->move('images/uploads/return', $fileName);
-
-        restore::create([
-            'asset_code' => $request->asset_code,
-            'return_picture' => $path,
-            'return_date' => $request->return_date,
-            'description' => $request->description,
-
-
-        ]);
-        $code = $request->asset_code;
-        DB::table('borrowings')->where('asset_code',$code)->delete(); 
-
-
-        return redirect('/manajer_inventaris/borrowing/return/index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\borrowing  $borrowing
+     * @param  \App\Models\restore  $restore
      * @return \Illuminate\Http\Response
      */
-    public function show(restore $borrowing)
+    public function show(restore $restore)
     {
         //
     }
@@ -103,32 +73,19 @@ class RestoreController extends Controller
      * @param  \App\Models\restore  $restore
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(Request $request, restore $restore)
     {
-        $restore = restore::find($id);
-
-        $restore->return_date = $request->return_date;
-        $restore->description = $request->description;
-
-
-
-        $restore->save();
-
-        return redirect('manajer_inventaris/borrowing/return/index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\borrowing  $borrowing
+     * @param  \App\Models\restore  $restore
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(restore $restore)
     {
-        // menghapus data asset berdasarkan id yang dipilih
-        DB::table('restores')->where('id', $id)->delete();
-
-        // alihkan halaman ke halaman asset
-        return redirect(route('return.show'));
+        //
     }
 }

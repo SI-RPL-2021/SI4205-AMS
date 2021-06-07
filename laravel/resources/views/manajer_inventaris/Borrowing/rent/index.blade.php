@@ -409,16 +409,10 @@ select:active {
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
+                           
                             <th>No</th>
                             <th>Kode Barang</th>
                             <th>Foto Barang</th>
-                            <th>Keterangan</th>
                             <th>Tanggal Peminjaman</th>
                             <th>Status Peminjaman</th>
                             <th>Action</th>
@@ -428,37 +422,8 @@ select:active {
                         @php
                         $i = 1
                         @endphp
-                        @foreach ($borrow as $key=> $borrows)
-                        <tr>
-
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $borrow ->firstItem() + $key }}</td>
-                            <td>{{ $borrows->asset_code }}</td>
-                            <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
-                            <td>{{ $borrows->description }}</td>
-                            <td>{{ $borrows->borrowing_date}}</td>
-                            <td>{{ $borrows->status}}</td>
-                            <td>
-                                <a href="/borrowing/rent/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="{{ route('return.destroy', ['borrow' => $borrows->id]) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                            @endforeach
-
+                       
+                    
                     </tbody>
                 </table>
                 <div class="clearfix">
@@ -480,16 +445,18 @@ select:active {
                 </div>
                 <div class="modal-body">
 
-                    <form action="/return/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/rent/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
                                     <select name="asset_code" >
-                                        @foreach ($assets as $assets)
-                                        <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
-                                        @endforeach
+                                      @foreach ($assets as $asset)
+                                      <option value="{{$asset->unique_code}}">{{$asset->unique_code}}</option>
+                                      @endforeach
+                                       
+                                  
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -506,7 +473,7 @@ select:active {
                                     <label>Tanggal Peminjaman</label>
                                     <input type="date" class="form-control" name="borrowing_date" required>
                                 </div> 
-                              
+                               
                             </div>
 
                         </div>

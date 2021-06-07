@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Maintenance Asset')
 
 @section('content')
 
@@ -364,18 +364,13 @@
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
+                       
                             <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Kerusakan barang</th>
-                            <th>Umur barang</th>
-                            <th>Biaya kerusakan</th>
-                            <th>Status kerusakan</th>
+                            <th>Nama Asset</th>
+                            <th>Jenis Laporan Asset</th>
+                            <th>Umur Asset</th>
+                            <th>Biaya </th>
+                            <th>Status Asset</th>
 
                             <th>Action</th>
                         </tr>
@@ -387,12 +382,7 @@
                         @foreach ($maintenances as $maintenance)
                         <tr>
 
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
+                           
                             <td>{{ $i }}</td>
                             <td>{{ $maintenance->name }}</td>
                             <td>{{ $maintenance->asset_damage }}</td>
@@ -444,9 +434,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label style="color: black;">Nama Barang</label>
+                                    <label style="color: black;">Nama Asset</label>
                                     <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
-                                        <option selected="selected" data-select2-id="3">Mobil</option>
+                                        <option selected="selected" data-select2-id="3">Pilih Asset</option>
                                         <option data-select2-id="34">Laptop</option>
                                         <option data-select2-id="35">Printer</option>
                                         <option data-select2-id="36">Layar proyektor</option>
@@ -455,7 +445,7 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Kerusakan Barang</label>
+                                    <label style="color: black;">Jenis Laporan Asset</label>
                                     <input type="text" class="form-control" name="asset_damage" required>
                                 </div>
                                 <div class="form-group">
@@ -466,11 +456,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label style="color: black;">Biaya Kerusakan</label>
+                                    <label style="color: black;">Biaya </label>
                                     <input type="text" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Status kerusakan</label>
+                                    <label style="color: black;">Status Asset</label>
                                     <input type="text" class="form-control" name="damage_status" required>
                                 </div>
 

@@ -328,6 +328,13 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+@elseif (session('danger'))
+<div class="alert alert-danger" role="alert">
+    {{ session('danger') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 
 <!-- Delete Modal HTML -->
@@ -356,7 +363,7 @@
 <body>
     <!-- //table -->
 
-    <div class="container-xl ">
+    <div class="container-xxl">
         <div class="table-responsive">
             <div class="table-wrapper bg-dark">
                 <div class="table-title bg-dark">
@@ -368,7 +375,6 @@
 
                         <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
 
@@ -383,19 +389,12 @@
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll">
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Kategori</th>
                                 <th>Harga Pembelian</th>
                                 <th>Tanggal Pembelian</th>
                                 <th>Foto Barang</th>
-                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -405,14 +404,6 @@
                             @endphp
                             @foreach ($assets as $asset)
                             <tr>
-
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $asset->name }}</td>
                                 <td class="asset-category">
@@ -427,10 +418,10 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>Rp.{{ $asset->asset_purchase_price }}</td>
+                                <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="50px"></td>
-                                <td>{{ $asset->description }}</td>
+                                
                                 <td>
                                     <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
                                     <form action="/delete/{{$asset->id}}" method="post">
@@ -509,6 +500,10 @@
                                 <div class="form-group">
                                     <label>Keterangan</label>
                                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Jumlah Asset</label>
+                                <input  type="text"  class="form-control" placeholder="jumlah" name="qty" required>
                                 </div>
                             </div>
 

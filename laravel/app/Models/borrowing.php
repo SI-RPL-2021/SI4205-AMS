@@ -9,15 +9,15 @@ class borrowing extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    // protected $fillable = [
 
-        'asset_code',
-        'borrowing_picture',
-        'borrowing_end',
-        'borrowing_date' ,
-        'description',
-        'status',				
+    //     'asset_code',
+    //     'borrowing_picture',
+    //     'borrowing_end',
+    //     'borrowing_date' ,
+    //     'description',
+    //     'status',				
 
-    ];
-    protected $table = 'borrowings';
+    // ];
+    // protected $table = 'borrowings';
 }
