@@ -107,7 +107,10 @@ class RestoreController extends Controller
     {
         $restore = restore::find($id);
 
+<<<<<<< HEAD
         $restore->return_picture = $request->return_picture;
+=======
+>>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
         $restore->return_date = $request->return_date;
         $restore->description = $request->description;
 
@@ -130,6 +133,10 @@ class RestoreController extends Controller
         DB::table('restores')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman asset
+<<<<<<< HEAD
         return redirect(route('restore.show'));
+=======
+        return redirect(route('return.show'));
+>>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
     }
 }

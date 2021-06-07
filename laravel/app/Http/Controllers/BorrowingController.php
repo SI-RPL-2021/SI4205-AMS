@@ -20,13 +20,17 @@ class BorrowingController extends Controller
         $borrow = DB::table('borrowings')->paginate(5);
         $assets = DB::table('assets')->get();
 
-        return view('manajer_inventaris/Borrowing/return/index', compact(['borrow', 'assets']));
+        return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'assets']));
     }
     public function updateindex($id, Request $request)
     {
         $borrow = borrowing::find($id);
 
+<<<<<<< HEAD
         return view('manajer_inventaris/Borrowing/return/update', compact('borrow'));
+=======
+        return view('manajer_inventaris/Borrowing/rent/update', compact('borrow'));
+>>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
     }
     /**
      * Show the form for creating a new resource.
@@ -68,11 +72,11 @@ class BorrowingController extends Controller
             'status' => 'Dipinjamkan',
 
         ]);
+     
 
 
 
-
-        return redirect('/manajer_inventaris/Borrowing/index');
+        return redirect('/manajer_inventaris/borrowing/rent/index');
     }
 
     /**
@@ -118,7 +122,7 @@ class BorrowingController extends Controller
 
         $borrow->save();
 
-        return redirect('manajer_inventaris/Borrowing/index');
+        return redirect('manajer_inventaris/borrowing/rent/index');
     }
 
     /**
