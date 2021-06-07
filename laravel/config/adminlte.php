@@ -87,7 +87,11 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
+<<<<<<< HEAD
     'layout_fixed_navbar' => true,
+=======
+    'layout_fixed_navbar' => null,
+>>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
     'layout_fixed_footer' => null,
 
     /*
@@ -239,13 +243,18 @@ return [
             'text'        => 'Home',
             'url'         => '/',
             'icon'        => 'far fa-fw fa-laugh',
+<<<<<<< HEAD
             'label'       => 911,
+=======
+            'label'       => 69,
+>>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
             'label_color' => 'danger',
         ],
         ['header' => 'Utility'],
         [
             'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
+<<<<<<< HEAD
             'submenu' => [
                 [
                     'text' => 'Add Asset',
@@ -259,6 +268,9 @@ return [
                 ]
             ],
             'icon_color' => 'primary',
+=======
+            
+>>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
         ],
 
         [

@@ -61,7 +61,7 @@ class AssetController extends Controller
         $path = $file->storeAs('images/uploads', $fileName);
         $file->move('images/uploads', $fileName);
 
-        $insert = asset::create([
+         asset::create([
             'name' => $request->name,
             'unique_code' => $request->name,
             'picture' => $path,
@@ -72,7 +72,7 @@ class AssetController extends Controller
             'status' => 'Tersedia',
 
         ]);
-        return redirect('/manajer_inventaris/Input_Asset/index');
+        return redirect('/manajer_inventaris/Input_Asset/index')->with('success','Asset Berhasil Ditambahkan');
     }
 
     /**

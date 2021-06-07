@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'Update Asset')
 
 @section('content')
 
@@ -404,53 +404,33 @@
                                 <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
                             </div>
 
-            <form action="/Input_Asset/update/{{ $assets->id }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PATCH')
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nama Barang</label>
-                                        <input type="text" class="form-control" name="name" value="{{$assets->name}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kategori Barang</label>
-                                        <input type="text" class="form-control" name="asset_category" value="{{$assets->asset_category}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Harga Pembelian</label>
-                                        <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price}}" required>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Waktu Pembelian</label>
-                                        <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Foto Barang</label>
-                                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" value="{{$assets->picture}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan</label>
-                                        <textarea class="form-control"  id="floatingTextarea2" name="description" style="height: 100px" value="{{$assets->description}}"></textarea>
-                                    </div>
-                                </div>
-
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Waktu Pembelian</label>
+                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
                             </div>
-                            <div class="modal-footer text-center">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="form-group">
+                                <label>Unique Code</label>
+                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
                             </div>
-                        </form>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
 
 
                 </div>
 
         </div>
         <div class="card-footer">
+
             <div class="modal-footer justify-content-center">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-danger">Delete</button>
                 <button type="submit" class="btn btn-primary">Edit</button>
             </div>
@@ -460,26 +440,23 @@
                 <a href="#addEmployeeModal" class="btn btn-primary rounded" data-toggle="modal"><i class="material-icons "></i> <span>Edit Asset</span></a>
             </div>
         </div>
+=======
+>>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
 
-        <!-- edit asset -->
-        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
+                <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form action="/delete/{{$assets->id}}" method="post">
+                    @csrf
+                    @method('delete')
 
-                     
-                    </div>
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
 
-
-                </div>
-
+                </form>
             </div>
-
         </div>
+
+
+
 
 </body>
 

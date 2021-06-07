@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Peminjaman Asset')
+@section('title', 'Input Category')
 
 @section('content')
 
@@ -318,17 +318,6 @@
             });
         });
     </script>
-<<<<<<< HEAD
-    @if (session('success'))
-    <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-=======
->>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
 </head>
 
 
@@ -364,81 +353,72 @@
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Borrowed Item List </b></h2>
+                            <h2>List Category</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Borrow An Asset</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete Records</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Category</span></a>
+                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
                 </div>
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>No</th>
-                            <th>Kode Barang</th>
-                            <th>Foto Barang</th>
-                            <th>Keterangan</th>
-                            <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
-                            <th>Status Peminjaman</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $i = 1
-                        @endphp
-                        @foreach ($borrow as $key=> $borrows)
-                        <tr>
-
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td>{{ $borrow ->firstItem() + $key }}</td>
-                            <td>{{ $borrows->asset_code }}</td>
-                            <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
-                            <td>{{ $borrows->description }}</td>
-                            <td>{{ $borrows->borrowing_date}}</td>
-                            <td>{{ $borrows->borrowing_end}}</td>
-                            <td>{{ $borrows->status}}</td>
-                            <td>
-                                <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="{{ route('borrowing.destroy', ['borrow' => $borrows->id]) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-
-                            </td>
+                <div class="row">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                    </span>
+                                </th>
+                                <th>No</th>
+                                <th>Kategori</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @php
-                            $i++
+                            $i = 1
                             @endphp
-                            @endforeach
+                            @foreach ($categories as $key=> $cat)
+                            <tr>
 
-                    </tbody>
-                </table>
-                <div class="clearfix">
+                                <td>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                        <label for="checkbox1"></label>
+                                    </span>
+                                </td>
+                                <td>{{ $categories ->firstItem() + $key }}</td>
+                                <td>{{ $cat->category }}</td>
+                                <td>
+                                    <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                    <form action="/delete/{{$cat->id}}" method="post">
+                                        @csrf
+                                        @method('delete')
 
+                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
 
+                                    </form>
+
+                                </td>
+                                @php
+                                $i++
+                                @endphp
+                                @endforeach
+
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        {{$categories->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- add borrow -->
+    <!-- add asset -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -448,35 +428,36 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Borrowing/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Kode Barang</label>
-                                    <select name="asset_code" >
-                                        @foreach ($assets as $assets)
-                                        <option value="{{$assets->unique_code}}">{{$assets->unique_code}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>Nama Barang</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategori Barang</label>
+                                    <input type="text" class="form-control" name="asset_category" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Harga Pembelian</label>
+                                    <input type="text" class="form-control" name="asset_purchase_price" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Waktu Pembelian</label>
+                                    <input type="date" class="form-control" name="asset_purchase_date" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="borrowing_picture" required>
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea class="form-control" placeholder="Tambahkan Keterangan Disini" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                            <div class="form-group">
-                                    <label>Tanggal Peminjaman</label>
-                                    <input type="date" class="form-control" name="borrowing_date" required>
-                                </div> 
-                                <div class="form-group">
-                                    <label>Tanggal Pengembalian</label>
-                                    <input type="date" class="form-control" name="borrowing_end" >
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
                                 </div>
                             </div>
 
