@@ -26,11 +26,7 @@ class BorrowingController extends Controller
     {
         $borrow = borrowing::find($id);
 
-<<<<<<< HEAD
-        return view('manajer_inventaris/Borrowing/return/update', compact('borrow'));
-=======
         return view('manajer_inventaris/Borrowing/rent/update', compact('borrow'));
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
     }
     /**
      * Show the form for creating a new resource.

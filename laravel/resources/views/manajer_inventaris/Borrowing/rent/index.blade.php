@@ -292,10 +292,6 @@
         .modal form label {
             font-weight: normal;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
         select {
   font: 400 12px/1.3 sans-serif;
   -webkit-appearance: none;
@@ -424,10 +420,6 @@ select:active {
                             <th>Foto Barang</th>
                             <th>Keterangan</th>
                             <th>Tanggal Peminjaman</th>
-<<<<<<< HEAD
-                            <th>Tanggal Pengembalian</th>
-=======
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                             <th>Status Peminjaman</th>
                             <th>Action</th>
                         </tr>
@@ -450,16 +442,9 @@ select:active {
                             <td class="product-img"><img class="rounded" src="{{ asset($borrows->borrowing_picture) }}" alt="Img placeholder" height="100px"></td>
                             <td>{{ $borrows->description }}</td>
                             <td>{{ $borrows->borrowing_date}}</td>
-<<<<<<< HEAD
-                            <td>{{ $borrows->borrowing_end}}</td>
-                            <td>{{ $borrows->status}}</td>
-                            <td>
-                                <a href="/borrowing/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-=======
                             <td>{{ $borrows->status}}</td>
                             <td>
                                 <a href="/borrowing/rent/update/{{ $borrows->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                                 <form action="{{ route('return.destroy', ['borrow' => $borrows->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
@@ -495,11 +480,7 @@ select:active {
                 </div>
                 <div class="modal-body">
 
-<<<<<<< HEAD
-                    <form action="/Borrowing/return/store" method="post" style="color: black;" enctype="multipart/form-data">
-=======
                     <form action="/return/store" method="post" style="color: black;" enctype="multipart/form-data">
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
@@ -525,14 +506,7 @@ select:active {
                                     <label>Tanggal Peminjaman</label>
                                     <input type="date" class="form-control" name="borrowing_date" required>
                                 </div> 
-<<<<<<< HEAD
-                                <div class="form-group">
-                                    <label>Tanggal Pengembalian</label>
-                                    <input type="date" class="form-control" name="borrowing_end" >
-                                </div>
-=======
                               
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                             </div>
 
                         </div>

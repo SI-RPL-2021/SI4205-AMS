@@ -369,18 +369,6 @@
                             <h2>List Asset</b></h2>
 
                         </div>
-<<<<<<< HEAD
-                        <div class="col-sm-14">
-                            <form class="form-inline " type="get" action="{{url('/search')}}">
-                                <input type="search" class="form-control " name="query" placeholder="Search" style="position: relative; right:0px; left:250px">
-                                <button class="btn btn-primary" type="submit" style="position: relative; right:0px; left:240px; height: 36px">Search</button>
-                            </form>
-<br>
-
-                        </div>
-=======
-
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                         <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
@@ -430,10 +418,6 @@
 
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $asset->name }}</td>
-<<<<<<< HEAD
-                                <td>{{ $asset->asset_category }}</td>
-                                <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
-=======
                                 <td class="asset-category">
                                     <ul>
                                         @foreach ($asset->categories as $category)
@@ -447,7 +431,6 @@
                                     </ul>
                                 </td>
                                 <td>Rp.{{ $asset->asset_purchase_price }}</td>
->>>>>>> 37b4f1c9ffeb6bf4ab1fe4dc660b228e33d0d7b6
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="50px"></td>
                                 <td>{{ $asset->description }}</td>
