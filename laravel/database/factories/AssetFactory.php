@@ -31,6 +31,7 @@ class AssetFactory extends Factory
             'asset_purchase_date' => $this->faker->date($format = 'Y-m-d', $min = 'now'),
             'asset_purchase_price' => $this->faker->numerify('########'),
             'description' =>$this->faker->paragraph,
+            'status' => 1,
             'qty' => $this->faker->numerify('#'),
 
         ];
