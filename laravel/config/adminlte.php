@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -64,8 +65,8 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_enabled' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -86,7 +87,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -238,44 +239,69 @@ return [
             'text'        => 'Home',
             'url'         => '/',
             'icon'        => 'far fa-fw fa-laugh',
-            'label'       => 69,
+            'label'       => 911,
             'label_color' => 'danger',
         ],
         ['header' => 'Utility'],
         [
             'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
-            'submenu' => [[
-                'text' => 'Add Asset',
-                'url'  => '/manajer_inventaris/Input_Asset/index',
-                'icon' => 'fas fa-fw fa-pen',
+            'submenu' => [
+                [
+                    'text' => 'Add Asset',
+                    'url'  => '/manajer_inventaris/Input_Asset/index',
+                    'icon' => 'fas fa-fw fa-pen',
+                ],
+                [
+                    'text' => 'Add Asset Category',
+                    'url'  => '/manajer_inventaris/category/index',
+                    'icon' => 'fas fa-fw fa-archive',
+                ]
             ],
-            [
-                'text' => 'Add Asset Category',
-                'url'  => '/manajer_inventaris/category/index',
-                'icon' => 'fas fa-fw fa-archive',
-            ]]
-
-
+            'icon_color' => 'primary',
         ],
+
         [
             'text' => 'Approve Asset',
             'url'  => '/manajer_inventaris/approve_asset',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Borrowing Asset',
-            'url'  => '/manajer_inventaris/Borrowing/index',
+            'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
+            'icon_color' => 'primary',
+            'submenu' => [
+                [
+                    'text' => 'Rent Asset',
+                    'url'  => 'manajer_inventaris/Borrowing/rent/index',
+                    'icon' => 'fas fa-fw fa-handshake-o',
+                ],
+                [
+                    'text' => 'Return Asset',
+                    'url'  => '/manajer_inventaris/category/index',
+                    'icon' => 'fas fa-fw fa-undo',
+                ]
+            ]
         ], [
             'text' => 'Maintenance Asset',
             'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Asset History',
             'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
+            'icon_color' => 'primary',
+        ],
+
+        [
+            'text' => 'User Management',
+            'url'  => '/manajer_inventaris/user/index',
+            'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'primary',
         ],
         // [
         //     'text' => 'change_password',
