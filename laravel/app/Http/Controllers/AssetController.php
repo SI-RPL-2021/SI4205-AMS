@@ -161,8 +161,6 @@ class AssetController extends Controller
         // alihkan halaman ke halaman asset
         return redirect('manajer_inventaris/Input_Asset/index');
     }
-<<<<<<< HEAD
-=======
     public function search()
     {
         $search_text = $_GET['search'];
@@ -175,5 +173,4 @@ class AssetController extends Controller
         $total = $a + $b;
         return $total;
     }
->>>>>>> 56c131c30ca83005cca908255103292cc45bad94
 }
