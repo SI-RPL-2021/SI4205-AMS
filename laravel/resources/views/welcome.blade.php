@@ -422,7 +422,13 @@
                 dasar admin beban
 
             @else
-                <h1>Kamu hanyalah {{Auth::user()->name}} </h1>
+            <div class="row justify-content-center">
+                <h1>Nama Usermu adalah {{Auth::user()->name}} <br>
+                    Kamu tuh {{Auth::user()->role}}  </h1>
+            </div>
+               
+                
+              
 
             @endif
 

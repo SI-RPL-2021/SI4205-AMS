@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Peminjaman Asset')
+@section('title', 'Pengembalian Asset')
 
 @section('content')
 
@@ -398,7 +398,7 @@ select:active {
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Borrowed Item List </b></h2>
+                            <h2>Returned Item List </b></h2>
                         </div>
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Borrow An Asset</span></a>

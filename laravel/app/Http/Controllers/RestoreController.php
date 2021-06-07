@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\restore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RestoreController extends Controller
 {
@@ -14,7 +16,11 @@ class RestoreController extends Controller
      */
     public function index()
     {
-        //
+        
+        $borrow = restore::orderBy('updated_at', 'DESC')->where('user_id', Auth::user()->id)->paginate(5);
+        $assets = DB::table('assets')->get();
+
+        return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'assets']));
     }
 
     /**

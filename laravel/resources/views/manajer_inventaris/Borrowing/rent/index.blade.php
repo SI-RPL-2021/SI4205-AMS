@@ -414,7 +414,6 @@ select:active {
                             <th>Kode Barang</th>
                             <th>Foto Barang</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
                             <th>Status Peminjaman</th>
                             <th>Action</th>
                         </tr>
@@ -424,31 +423,7 @@ select:active {
                         $i = 1
                         @endphp
                        
-                        <tr>
-
-                      
-                            <td>1</td>
-                            <td>AA1244</td>
-                            <td><img src="\images\banner\banner-2.jpg" alt="" style="width: 150px"></td>
-                            <td>11-07-2021</td>
-                            <td>11-08-2021</td>
-                            <td>Dikembalikan</td>
-                            <td>
-                                <a href="" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                <form action="" method="post">
-                                    @csrf
-                                    @method('delete')
-
-                                    <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
-
-                                </form>
-
-                            </td>
-                            @php
-                            $i++
-                            @endphp
-                           
-
+                    
                     </tbody>
                 </table>
                 <div class="clearfix">
@@ -470,15 +445,17 @@ select:active {
                 </div>
                 <div class="modal-body">
 
-                    <form action="/return/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/rent/store" method="post" style="color: black;" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
                                     <select name="asset_code" >
-                                      
-                                        <option value="a">A}</option>
+                                      @foreach ($assets as $asset)
+                                      <option value="{{$asset->unique_code}}">{{$asset->unique_code}}</option>
+                                      @endforeach
+                                       
                                   
                                     </select>
                                 </div>
@@ -496,10 +473,7 @@ select:active {
                                     <label>Tanggal Peminjaman</label>
                                     <input type="date" class="form-control" name="borrowing_date" required>
                                 </div> 
-                                <div class="form-group">
-                                    <label>Tanggal Pengembalian</label>
-                                    <input type="date" class="form-control" name="borrowing_end" >
-                                </div>
+                               
                             </div>
 
                         </div>

@@ -263,7 +263,7 @@ return [
 
         [
             'text' => 'Approve Asset',
-            'url'  => '/manajer_inventaris/approve_asset',
+            'url'  => '/manajer_inventaris/approval/index',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
             'icon_color' => 'primary',
         ],
@@ -275,12 +275,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Rent Asset',
-                    'url'  => 'manajer_inventaris/Borrowing/rent/index',
+                    'url'  => 'manajer_inventaris/borrowing/rent/index',
                     'icon' => 'fas fa-fw fa-handshake-o',
                 ],
                 [
                     'text' => 'Return Asset',
-                    'url'  => '/manajer_inventaris/category/index',
+                    'url'  => '/manajer_inventaris/borrowing/return/index',
                     'icon' => 'fas fa-fw fa-undo',
                 ]
             ]

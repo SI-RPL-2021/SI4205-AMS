@@ -328,6 +328,13 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+@elseif (session('danger'))
+<div class="alert alert-danger" role="alert">
+    {{ session('danger') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 
 <!-- Delete Modal HTML -->
@@ -382,12 +389,6 @@
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll">
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Kategori</th>
@@ -403,14 +404,6 @@
                             @endphp
                             @foreach ($assets as $asset)
                             <tr>
-
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $asset->name }}</td>
                                 <td class="asset-category">

@@ -6,6 +6,7 @@ use App\Models\asset;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AssetController extends Controller
 {
@@ -14,15 +15,38 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         // mengambil data dari table asset
-        $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
-        $categories = Category::all();
+        if (Auth::user()->name != 'admin') {
+            $assets = Asset::orderBy('updated_at', 'DESC')->where('author', Auth::user()->name)->paginate(5);
+            $categories = Category::all();
+        } else {
+
+            $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
+            $categories = Category::all();
+        }
+
 
 
 
         return view('manajer_inventaris/Input_Asset/index', compact('assets', 'categories'));
+    }
+    public function index2()
+    {
+        // mengambil data dari table asset
+
+
+        $assets = Asset::orderBy('updated_at', 'DESC')->where('status', '0')->paginate(5);
+        $categories = Category::all();
+
+
+
+
+
+
+        return view('manajer_inventaris/approval/index', compact('assets', 'categories'));
     }
     public function updateindex($id, Request $request)
     {
@@ -55,6 +79,7 @@ class AssetController extends Controller
             'asset_purchase_date' => 'required',
             'picture' => 'required',
             'description' => 'nullable',
+            'qty' => 'required',
         ]);
 
         // file upload
@@ -63,29 +88,36 @@ class AssetController extends Controller
         $path = $file->storeAs('images/uploads', $fileName);
         $file->move('images/uploads', $fileName);
 
-        // asset::create([
-        //     'name' => $request->name,
-        //     'unique_code' => $request->name,
-        //     'picture' => $path,
-        //     'asset_category' => $request->asset_category,
-        //     'asset_purchase_date' => $request->asset_purchase_date,
-        //     'asset_purchase_price' => $request->asset_purchase_price,
-        //     'description' => $request->description,
-        //     'status' => 'Tersedia',
 
-        // ]);
+        if (Auth::user()->role != 'karyawan') {
+            $asset = new Asset;
+            $asset->name = $request['name'];
+            $asset->unique_code = $request['name'];
+            $asset->picture = $path;
+            $asset->asset_purchase_date = $request['asset_purchase_date'];
+            $asset->asset_purchase_price = $request['asset_purchase_price'];
+            $asset->description = $request['description'];
+            $asset->qty = $request['qty'];
+            $asset->author = Auth::user()->name;
+            $asset->status = '1';
 
-        $asset = new Asset;
-        $asset->name = $request['name'];
-        $asset->unique_code = $request['name'];
-        $asset->picture = $path;
-        $asset->asset_purchase_date = $request['asset_purchase_date'];
-        $asset->asset_purchase_price = $request['asset_purchase_price'];
-        $asset->description = $request['description'];
-        $asset->qty = 100;
+            $asset->save();
+        } else {
+            $asset = new Asset;
+            $asset->name = $request['name'];
+            $asset->unique_code = $request['name'];
+            $asset->picture = $path;
+            $asset->asset_purchase_date = $request['asset_purchase_date'];
+            $asset->asset_purchase_price = $request['asset_purchase_price'];
+            $asset->description = $request['description'];
+            $asset->qty = $request['qty'];
+            $asset->author = Auth::user()->name;
+            $asset->status = '0';
+
+            $asset->save();
+        }
 
 
-        $asset->save();
 
         // $category = Category::find($request['asset_category']);
         $asset->categories()->attach($request['asset_category']);
@@ -167,9 +199,9 @@ class AssetController extends Controller
     {
         // menghapus data asset berdasarkan id yang dipilih
         DB::table('assets')->where('id', $id)->delete();
-
         // alihkan halaman ke halaman asset
-        return redirect('manajer_inventaris/Input_Asset/index');
+        return redirect('manajer_inventaris/Input_Asset/index')->with('danger', 'Asset Berhasil Dihapus');
+        ;
     }
     public function search()
     {
