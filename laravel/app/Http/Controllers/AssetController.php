@@ -125,14 +125,7 @@ class AssetController extends Controller
     public function update($id, Request $request)
     {
         $asset = Asset::find($id);
-        $request->validate([
-            'name' => 'required',
-            'asset_category' => 'required',
-            'asset_purchase_price' => 'required',
-            'asset_purchase_date' => 'required',
-            'picture' => 'nullable',
-            'description' => 'nullable',
-        ]);
+
 
 
 
@@ -147,7 +140,7 @@ class AssetController extends Controller
             $asset->picture = $asset->picture;
         }
 
-        $asset = new Asset;
+
         $asset->name = $request['name'];
         $asset->unique_code = $request['name'];
         $asset->picture = $path;
@@ -160,7 +153,6 @@ class AssetController extends Controller
         $asset->save();
 
         $asset->categories()->attach($request['asset_category']);
-
 
         return redirect(route('asset.show'))->with('success', 'Asset Berhasil DiUpdate');
     }

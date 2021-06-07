@@ -345,20 +345,15 @@
                                 <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" >
                             </div>
                             <div class="form-group">
-                                <label for="asset-category mb-1">Category</label>
-                                <select class="select2-bg form-control select2 @error('asset-category') is-invalid @enderror" id="asset-category" name="asset-category[]" placeholder="Category"  autocomplete="asset-category" autofocus multiple="multiple">
+                                <label for="asset_category mb-1">Category</label>
+                                <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
 
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @foreach ($category as $name) @if ($category->category == $name)
-                                        selected
-                                        @endif
-                                        @endforeach>
-                                        {{ $category->category }}
-                                    </option>
+                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
                                     @endforeach
                                 </select>
 
-                                @error('asset-category')
+                                @error('asset_category')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

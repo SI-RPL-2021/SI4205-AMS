@@ -368,7 +368,6 @@
 
                         <div class="col-sm-12">
                             <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
 

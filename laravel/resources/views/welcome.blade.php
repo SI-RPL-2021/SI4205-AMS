@@ -419,10 +419,10 @@
     <body class="antialiased">
         <div class="row justify-center">
             @if ( Auth::user()->name == 'admin' )
-                anjing admin beban
+                dasar admin beban
 
             @else
-                <h1>Kamu hanyalah {{Auth::user()->name}} sialan</h1>
+                <h1>Kamu hanyalah {{Auth::user()->name}} </h1>
 
             @endif
 

@@ -23,12 +23,19 @@ class UserController extends Controller
 
         return view('manajer_inventaris/user/index', compact('users'));
     }
+    public function updateindex($id, Request $request)
+    {
+        $users = User::find($id);
+     
+        return view('manajer_inventaris/user/update', compact('users'));
+    }
+
 
     public function search()
     {
         $search_text = $_GET['user'];
         $users = user::where('name', 'LIKE', '%' . $search_text . '%')->paginate(5);
-      
+
         return view('manajer_inventaris/user/index', compact('users'));
     }
     /**
@@ -95,9 +102,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        $user = User::find($id);
+       
+
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+    
+        $user->role = $request['role'];
+
+        $user->save();
+
+
+
+        return redirect(route('user.show'))->with('success', 'User Berhasil DiUpdate');
     }
 
     /**

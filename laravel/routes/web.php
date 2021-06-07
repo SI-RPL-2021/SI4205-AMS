@@ -70,9 +70,9 @@ Route::delete('maintenance/delete/{Maintenances:id}',  [App\Http\Controllers\Mai
 
 Route::get('manajer_inventaris/user/index', [App\Http\Controllers\UserController::class, 'index'])->name('user.show');
 Route::post('user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.save');
-Route::get('user/update/{user:id}',  [App\Http\Controllers\UserController::class, 'updateindex'])->name('user.details');
-Route::patch('manajer_inventaris/user/update/{user:id}',  [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
-Route::delete('user/delete/{user:id}',  [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete');
+Route::get('user/update/{users:id}',  [App\Http\Controllers\UserController::class, 'updateindex'])->name('user.details');
+Route::patch('manajer_inventaris/user/update/{users:id}',  [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+Route::delete('user/delete/{users:id}',  [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete');
 Route::get('searchUser', [App\Http\Controllers\UserController::class, 'search'])->name('user.search');
 
 
