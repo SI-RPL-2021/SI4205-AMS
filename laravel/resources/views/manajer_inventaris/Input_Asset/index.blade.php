@@ -430,7 +430,7 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>Rp.{{ $asset->asset_purchase_price }}</td>
+                                <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
                                 <td>{{ $asset->asset_purchase_date }}</td>
                                 <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}" alt="Img placeholder" height="50px"></td>
                                 <td>{{ $asset->description }}</td>
