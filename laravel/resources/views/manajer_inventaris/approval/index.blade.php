@@ -552,7 +552,7 @@
         <body>
 
 
-            <div class="row justify-content-center">
+            <div class="justify-content-center">
                 <h3>Maaf {{ Auth::user()->name }} Role mu hanya {{ Auth::user()->role }} </h3>
                 <h5 style="color: #000">Untuk mengakses halaman ini mohon untuk menghubungi admin</h5>
 

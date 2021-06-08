@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\borrowing;
 use App\Models\asset;
+use App\Models\borrowing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BorrowingController extends Controller
 {
@@ -17,16 +19,17 @@ class BorrowingController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        $borrow = DB::table('borrowings')->paginate(5);
-        $assets = DB::table('assets')->get();
+     
+        $borrow = borrowing::orderBy('updated_at', 'DESC')->paginate(5);
+        $asset = asset::all();
 
-        return view('manajer_inventaris/Borrowing/return/index', compact(['borrow', 'assets']));
+        return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'asset']));
     }
-    public function updateindex($id, Request $request)
+    public function updateindex($id)
     {
         $borrow = borrowing::find($id);
-
-        return view('manajer_inventaris/Borrowing/update', compact('borrow'));
+        $asset = asset::all();
+        return view('manajer_inventaris/Borrowing/rent/update', compact('borrow','asset'));
     }
     /**
      * Show the form for creating a new resource.
@@ -47,32 +50,21 @@ class BorrowingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'asset_code' => 'required',
-            'borrowing_end' => 'nullable',
+            // 'asset_id' => 'required',
             'borrowing_date' => 'required',
-            'borrowing_picture' => 'required',
-            'description' => 'nullable',
+            'period' => 'required',
+            'description' => 'required',
         ]);
-        // file upload
-        $file = $request->file('borrowing_picture');
-        $fileName = rand() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('images/uploads/borrow', $fileName);
-        $file->move('images/uploads/borrow', $fileName);
 
-        borrowing::create([
-            'asset_code' => $request->asset_code,
-            'borrowing_picture' => $path,
-            'borrowing_end' => $request->borrowing_end,
-            'borrowing_date' => $request->borrowing_date,
-            'description' => $request->description,
-            'status' => 'Dipinjamkan',
+        $borrow = new borrowing;
+        $borrow->asset_id = $request['asset_id'];
+        $borrow->borrowing_date = $request['borrowing_date'];
+        $borrow->description = $request['description'];
+        $borrow->period = $request['period'];
+        $borrow->status = 0;
+        $borrow->save();
 
-        ]);
-     
-
-
-
-        return redirect('/manajer_inventaris/borrowing/return/index');
+        return redirect(route('rent.show'))->with('success', 'Peminjaman Berhasil Ditambahkan');
     }
 
     /**
@@ -110,15 +102,13 @@ class BorrowingController extends Controller
 
         $borrow->asset_code = $request->asset_code;
         $borrow->borrowing_date = $request->borrowing_date;
-        $borrow->borrowing_end = $request->borrowing_end;
-        $borrow->status = $request->status;
         $borrow->description = $request->description;
 
 
 
         $borrow->save();
 
-        return redirect('manajer_inventaris/Borrowing/index');
+        return redirect(route('rent.show'));
     }
 
     /**
@@ -130,9 +120,9 @@ class BorrowingController extends Controller
     public function destroy($id)
     {
         // menghapus data asset berdasarkan id yang dipilih
-        DB::table('borrowings')->where('id', $id)->delete();
+        borrowing::find($id)->delete();
 
         // alihkan halaman ke halaman asset
-        return redirect(route('borrowing.show'));
+        return redirect(route('rent.show'))->with('danger', 'Peminjaman Berhasil Dihapus');
     }
 }

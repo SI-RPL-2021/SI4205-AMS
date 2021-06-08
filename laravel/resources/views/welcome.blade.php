@@ -418,17 +418,16 @@
 
     <body class="antialiased">
         <div class="row justify-center">
-            @if ( Auth::user()->name == 'admin' )
-                dasar admin beban
-
+            @if (Auth::user()->name == 'admin')
+                Anda adalah Admin
             @else
-            <div class="row justify-content-center">
-                <h1>Nama Usermu adalah {{Auth::user()->name}} <br>
-                    Kamu tuh {{Auth::user()->role}}  </h1>
-            </div>
-               
-                
-              
+                <div class="row justify-content-center">
+                    <h1>Nama Usermu adalah {{ Auth::user()->name }} <br>
+                        Kamu tuh {{ Auth::user()->role }} </h1>
+                </div>
+
+
+
 
             @endif
 

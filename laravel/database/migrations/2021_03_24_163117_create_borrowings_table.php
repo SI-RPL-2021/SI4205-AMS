@@ -16,18 +16,16 @@ class CreateBorrowingsTable extends Migration
         Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('asset_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('emp_id');
-            $table->unsignedBigInteger('borrowing_id');
-            $table->string('return_picture');
-            $table->date('return_date');
+            // $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('emp_id');
+            $table->date('borrowing_date');
             $table->text('description')->nullable();
+            $table->integer('period');
             $table->string('status');
             $table->timestamps();
-            $table->foreign('asset_id')->references('id')->on('assets');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('emp_id')->references('id')->on('employees');
-            $table->foreign('borrowing_id')->references('id')->on('borrowings');
+            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('emp_id')->references('id')->on('employees');
         });
     }
 

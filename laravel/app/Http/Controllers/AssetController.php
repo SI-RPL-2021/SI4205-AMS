@@ -19,14 +19,11 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        if (Auth::user()->name != 'admin') {
-            $assets = Asset::orderBy('updated_at', 'DESC')->where('author', Auth::user()->name)->paginate(5);
-            $categories = Category::all();
-        } else {
+           
 
             $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
             $categories = Category::all();
-        }
+        
 
 
 
@@ -92,7 +89,7 @@ class AssetController extends Controller
         if (Auth::user()->role != 'karyawan') {
             $asset = new Asset;
             $asset->name = $request['name'];
-            $asset->unique_code = $request['name'];
+            $asset->unique_code = 'A'. mt_rand(1000,9000);
             $asset->picture = $path;
             $asset->asset_purchase_date = $request['asset_purchase_date'];
             $asset->asset_purchase_price = $request['asset_purchase_price'];

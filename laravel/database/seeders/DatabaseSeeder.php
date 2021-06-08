@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         \App\Models\Category::factory(10)->create();
         \App\Models\Asset::factory(10)->create();
-
+        \App\Models\User::factory(1)->create();
         // Get all the roles attaching up to 3 random roles to each user
         $categories =  \App\Models\Category::all();
 

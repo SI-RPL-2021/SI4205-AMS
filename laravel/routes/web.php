@@ -60,11 +60,11 @@ Route::delete('/borrowing/{borrow}/return/destroy',  [App\Http\Controllers\Borro
 
 //Fitur CRUD peminjaman
 
-Route::get('manajer_inventaris/borrowing/rent/index', [App\Http\Controllers\RestoreController::class, 'index'])->name('return.show');
-Route::post('rent/store', [App\Http\Controllers\RestoreController::class, 'store'])->name('return.save');
-Route::get('borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\RestoreController::class, 'updateindex'])->name('return.details');
-Route::patch('manajer_inventaris/borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\RestoreController::class, 'update'])->name('return.update');
-Route::delete('/borrowing/{borrow}/rent/destroy',  [App\Http\Controllers\RestoreController::class, 'destroy'])->name('return.destroy');
+Route::get('manajer_inventaris/borrowing/rent/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('rent.show');
+Route::post('/rent/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('rent.save');
+Route::get('Borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('rent.details');
+Route::patch('manajer_inventaris/borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('rent.update');
+Route::delete('/borrowing/{borrow}/rent/destroy',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('rent.destroy');
 
 //Fitur CRUD Maintenance
 
