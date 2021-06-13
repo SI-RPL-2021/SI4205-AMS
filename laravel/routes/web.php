@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('auth/login');
 // });
-Route::get('/', [App\Http\Controllers\AssetController::class, 'count'])->name('asset.count');
+
 
 Route::middleware('auth')->group(function () {
     //Fitur CRUD Asset
     // Route::get('/', function () {
     //     return view('/welcome');
     // });
+    Route::get('/', [App\Http\Controllers\AssetController::class, 'count'])->name('asset.count');
     Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
     Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
     Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');

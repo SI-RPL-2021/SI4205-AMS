@@ -459,7 +459,7 @@
 
         <div class="card bg-dark mt-3"  style="color: black; width: 18rem"`>
             <div class="card-header">
-              Asset yang dimiliki saat ini
+              Asset yang terdaftar saat ini
             </div>
             <div class="card-body bg-light">
                 <h4>{{$count}} Asset</h4>
