@@ -434,10 +434,12 @@
             @endif
 
         </div>
-     
-        <div class="card " style="color: black; width: 18rem">
-            <div class="">
-                <div class="card-body">
+        
+        <div class="card  bg-dark " style="color: black; width: 18rem">
+            <div class="card-header bg-dark">
+                Kalkulasi Depresiasi Asset
+            </div> 
+                <div class="card-body bg-light">
                 <form  action="/" method="GET">
                     <label for="num1">Biaya Awal Pembelian</label> 
                     <input id="num1" class="form-control" type="number" name="num1">
@@ -445,14 +447,31 @@
                     <input class="form-control" type="number" name="num2">
                     <button class="btn btn-primary mt-3" type="submit">Submit</button>
                 </form>
-            </div> 
+           
         </div>
           
-              <div class="card-footer">
+              <div class="card-footer bg-dark">
                 <h4>Rp {{ number_format($result, 0, ',', '.') }}</h4>
               </div>
 
 
+        </div>
+
+        <div class="card bg-dark mt-3"  style="color: black; width: 18rem"`>
+            <div class="card-header">
+              Asset yang dimiliki saat ini
+            </div>
+            <div class="card-body bg-light">
+                <h4>{{$count}} Asset</h4>
+               
+            </div>
+            <div class="card-footer">
+                <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                   
+                    <a class="btn btn-info" href="{{ route('export') }}">Export Asset Data</a>
+                </form>
+            </div>
         </div>
     </body>
 

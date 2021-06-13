@@ -20,16 +20,18 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-
-
         $assets = Asset::orderBy('updated_at', 'DESC')->where('status', 1)->paginate(5);
         $categories = Category::all();
 
-
-
-
-
         return view('manajer_inventaris/Input_Asset/index', compact('assets', 'categories'));
+    }
+
+    public function count()
+    {
+        // mengambil data dari table asset
+        $count = asset::all()->count();
+
+        return view('/welcome', compact('count'));
     }
     public function index2()
     {
@@ -114,9 +116,9 @@ class AssetController extends Controller
 
             $asset->save();
         }
-        $history = new History;
-        $history->asset_id = $request['qty'];
-        $history-> save();
+        // $history = new History;
+        // $history->asset_id = $request['qty'];
+        // $history-> save();
 
 
 
