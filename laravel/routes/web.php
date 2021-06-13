@@ -15,15 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Manajer Inventaris
-Route::get('/', function () {
-    return view('auth/login');
-});
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
+Route::get('/', [App\Http\Controllers\AssetController::class, 'count'])->name('asset.count');
 
 Route::middleware('auth')->group(function () {
     //Fitur CRUD Asset
-    Route::get('/', function () {
-        return view('/welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('/welcome');
+    // });
     Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
     Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
     Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');
@@ -93,4 +94,7 @@ Route::get('searchAsset', [App\Http\Controllers\AssetController::class, 'search'
 
 Auth::routes();
 
+Route::get('importExportView', [MyController::class, 'importExportView']);
+Route::get('export',[App\Http\Controllers\MyController::class, 'export'])->name('export');
+Route::post('import', [App\Http\Controllers\MyController::class, 'import'])->name('import');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
