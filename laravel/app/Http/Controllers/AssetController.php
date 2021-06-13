@@ -29,7 +29,7 @@ class AssetController extends Controller
     public function count()
     {
         // mengambil data dari table asset
-        $count = asset::all()->count();
+        $count = asset::all()->where('status',1)->count();
 
         return view('/welcome', compact('count'));
     }
