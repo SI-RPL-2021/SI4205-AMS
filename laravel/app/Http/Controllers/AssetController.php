@@ -19,14 +19,11 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-        if (Auth::user()->name != 'admin') {
-            $assets = Asset::orderBy('updated_at', 'DESC')->where('author', Auth::user()->name)->paginate(5);
-            $categories = Category::all();
-        } else {
+           
 
             $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
             $categories = Category::all();
-        }
+        
 
 
 

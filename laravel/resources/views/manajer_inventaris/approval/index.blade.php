@@ -385,12 +385,7 @@
                             <table class="table table-dark table-hover">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <span class="custom-checkbox">
-                                                <input type="checkbox" id="selectAll">
-                                                <label for="selectAll"></label>
-                                            </span>
-                                        </th>
+                                     
                                         <th>No</th>
                                         <th>Nama Barang</th>
                                         <th>Kategori</th>
@@ -552,7 +547,7 @@
         <body>
 
 
-            <div class="row justify-content-center">
+            <div class="justify-content-center">
                 <h3>Maaf {{ Auth::user()->name }} Role mu hanya {{ Auth::user()->role }} </h3>
                 <h5 style="color: #000">Untuk mengakses halaman ini mohon untuk menghubungi admin</h5>
 

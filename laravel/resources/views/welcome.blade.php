@@ -419,7 +419,7 @@
     <body class="antialiased">
         <div class="row justify-center">
             @if ( Auth::user()->name == 'admin' )
-                dasar admin beban
+                Halo, anda login sebagai Admin
 
             @else
             <div class="row justify-content-center">
