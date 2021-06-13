@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Input Asset')
+@section('title', 'History Asset')
     <link rel=”icon” href=ams.png”>
 @section('content')
 

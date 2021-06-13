@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\asset;
+use App\Models\History;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +20,11 @@ class AssetController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-           
 
-            $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
-            $categories = Category::all();
-        
+
+        $assets = Asset::orderBy('updated_at', 'DESC')->where('status', 1)->paginate(5);
+        $categories = Category::all();
+
 
 
 
@@ -35,7 +36,7 @@ class AssetController extends Controller
         // mengambil data dari table asset
 
 
-        $assets = Asset::orderBy('updated_at', 'DESC')->where('status', '0')->paginate(5);
+        $assets = Asset::orderBy('updated_at', 'DESC')->where('status', 0)->paginate(5);
         $categories = Category::all();
 
 
@@ -89,7 +90,7 @@ class AssetController extends Controller
         if (Auth::user()->role != 'karyawan') {
             $asset = new Asset;
             $asset->name = $request['name'];
-            $asset->unique_code = 'A'. mt_rand(1000,9000);
+            $asset->unique_code = 'A' . mt_rand(1000, 9000);
             $asset->picture = $path;
             $asset->asset_purchase_date = $request['asset_purchase_date'];
             $asset->asset_purchase_price = $request['asset_purchase_price'];
@@ -102,7 +103,7 @@ class AssetController extends Controller
         } else {
             $asset = new Asset;
             $asset->name = $request['name'];
-            $asset->unique_code = $request['name'];
+            $asset->unique_code = 'A' . mt_rand(1000, 9000);
             $asset->picture = $path;
             $asset->asset_purchase_date = $request['asset_purchase_date'];
             $asset->asset_purchase_price = $request['asset_purchase_price'];
@@ -113,6 +114,9 @@ class AssetController extends Controller
 
             $asset->save();
         }
+        $history = new History;
+        $history->asset_id = $request['qty'];
+        $history-> save();
 
 
 
@@ -166,17 +170,29 @@ class AssetController extends Controller
             $file->move('images/uploads', $fileName);
         } else {
 
-            $asset->picture = $asset->picture;
+            $path = $asset->picture;
+        }
+
+        if (Auth::user()->role == 'admin') {
+            $asset->name = $request['name'];
+            $asset->unique_code = $request['unique_code'];
+            $asset->picture = $path;
+            $asset->asset_purchase_date = $request['asset_purchase_date'];
+            $asset->asset_purchase_price = $request['asset_purchase_price'];
+            $asset->description = $request['description'];
+            $asset->qty = $request['qty'];
+            $asset->status = $request['status'];
+        } else {
+            $asset->name = $request['name'];
+            $asset->unique_code = $request['name'];
+            $asset->picture = $path;
+            $asset->asset_purchase_date = $request['asset_purchase_date'];
+            $asset->asset_purchase_price = $request['asset_purchase_price'];
+            $asset->description = $request['description'];
+            $asset->qty = $request['qty'];
         }
 
 
-        $asset->name = $request['name'];
-        $asset->unique_code = $request['name'];
-        $asset->picture = $path;
-        $asset->asset_purchase_date = $request['asset_purchase_date'];
-        $asset->asset_purchase_price = $request['asset_purchase_price'];
-        $asset->description = $request['description'];
-        $asset->qty = 100;
 
 
         $asset->save();
@@ -197,8 +213,7 @@ class AssetController extends Controller
         // menghapus data asset berdasarkan id yang dipilih
         DB::table('assets')->where('id', $id)->delete();
         // alihkan halaman ke halaman asset
-        return redirect('manajer_inventaris/Input_Asset/index')->with('danger', 'Asset Berhasil Dihapus');
-        ;
+        return redirect('manajer_inventaris/Input_Asset/index')->with('danger', 'Asset Berhasil Dihapus');;
     }
     public function search()
     {

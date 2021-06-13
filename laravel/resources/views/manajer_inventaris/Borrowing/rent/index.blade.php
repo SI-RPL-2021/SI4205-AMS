@@ -432,7 +432,7 @@
                                 <th>No</th>
                                 <th>Kode Barang</th>
                                 <th>Tanggal Peminjaman</th>
-                                <th>Lama Peminjaman</th>
+                                <th>Lama Peminjaman /Minggu</th>
                                 <th>Status Peminjaman</th>
                                 <th>Action</th>
                             </tr>
@@ -444,7 +444,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $borrow->asset->unique_code }}</td>
                                         <td>{{ $borrow->borrowing_date }}</td>
-                                        <td>{{ $borrow->period }}</td>
+                                        <td>{{ $borrow->period }} Minggu</td>
                                         @if ($borrow->status != 1)
                                             <td style="color: #F44336">Masih Dipinjam</td>
                                         @else
@@ -452,26 +452,33 @@
 
                                         @endif
 
-                                        @if (Auth::user()->role != 'karyawan')
+                                        @if (Auth::user()->role != 'admin')
 
-                                            <td>
-                                                <a href="{{ route('rent.details', $borrow->id) }}" class="edit"><i
-                                                        class="material-icons" data-toggle="tooltip"
-                                                        title="Details">&#xE241;</i></a>
-                                                <form action="{{ route('rent.destroy', $borrow->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
+                                           <td>
+                                            <a href="{{ route('rent.details', $borrow->id) }}" class="edit"><i
+                                                    class="material-icons" data-toggle="tooltip"
+                                                    title="Details">&#xE241;</i></a>
+                                           
 
-                                                    <button type="submit" class=""
-                                                        style="background-color: transparent; border:none"> <i
-                                                            class="fa fa-trash" style="color: red;"></i> </button>
-
-                                                </form>
-
-                                            </td>
+                                        </td>
                                         @else
-                                        @endif
+                                        <td>
+                                            <a href="{{ route('rent.details', $borrow->id) }}" class="edit"><i
+                                                    class="material-icons" data-toggle="tooltip"
+                                                    title="Details">&#xE241;</i></a>
+                                            <form action="{{ route('rent.destroy', $borrow->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
 
+                                                <button type="submit" class=""
+                                                    style="background-color: transparent; border:none"> <i
+                                                        class="fa fa-trash" style="color: red;"></i> </button>
+
+                                            </form>
+
+                                        </td>
+                                        @endif
+                                       
                                     </tr>
                                 @else
 
@@ -531,7 +538,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Lama Peminjaman</label>
+                                        <label>Lama Peminjaman (Minggu)</label>
                                         <input type="number" class="form-control" name="period" required>
                                     </div>
                                 </div>

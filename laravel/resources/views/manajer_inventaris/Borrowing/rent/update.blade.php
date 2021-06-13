@@ -344,7 +344,7 @@
                                     <label>Kode Barang</label>
                                     <select name="asset_id" class="form-control">
 
-                                        <option selected value="{{ $borrow->asset->unique_code }}">
+                                        <option selected value="{{ $borrow->asset->id }}">
                                             {{ $borrow->asset->unique_code }}</option>
                                         @foreach ($asset as $asset)
                                             <option value="{{ $asset->id }}">{{ $asset->unique_code }}</option>
@@ -357,6 +357,11 @@
                                     <label>Tanggal Peminjaman </label>
                                     <input type="date" class="form-control" name="borrowing_date"
                                         value="{{ $borrow->borrowing_date }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ta">Lama Peminjaman</label>
+                                    <input name="period" class="form-control" id="ta"
+                                        placeholder="{{ $borrow->period }}" value="{{ $borrow->period }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="ta">Keterangan Peminjaman</label>
@@ -399,6 +404,7 @@
 
                     <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
+                    @if (Auth::user()->role == 'admin')
                     <form action="{{ route('rent.destroy', $borrow->id) }}" method="post">
                         @csrf
                         @method('delete')
@@ -406,6 +412,9 @@
                         <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
 
                     </form>
+                    @else
+                        
+                    @endif
                 </div>
             </div>
         </div>

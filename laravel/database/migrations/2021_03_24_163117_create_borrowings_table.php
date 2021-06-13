@@ -23,6 +23,7 @@ class CreateBorrowingsTable extends Migration
             $table->integer('period');
             $table->string('status');
             $table->timestamps();
+            $table->string('author')->nullable();
             $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
             // $table->foreign('user_id')->references('id')->on('users');
             // $table->foreign('emp_id')->references('id')->on('employees');

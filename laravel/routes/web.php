@@ -52,11 +52,11 @@ Route::get('searchCat', [App\Http\Controllers\CategoryController::class, 'search
 
 //Fitur CRUD pengembalian
 
-Route::get('manajer_inventaris/borrowing/return/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('return.show');
-Route::post('return/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('return.save');
-Route::get('borrowing/return/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('return.details');
-Route::patch('manajer_inventaris/borrowing/return/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('return.update');
-Route::delete('/borrowing/{borrow}/return/destroy',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('return.destroy');
+Route::get('manajer_inventaris/borrowing/return/index', [App\Http\Controllers\RestoreController::class, 'index'])->name('return.show');
+Route::post('/return/store', [App\Http\Controllers\RestoreController::class, 'store'])->name('return.save');
+Route::get('Borrowing/return/update/{restore:id}',  [App\Http\Controllers\RestoreController::class, 'updateindex'])->name('return.details');
+Route::patch('manajer_inventaris/borrowing/return/update/{restore:id}',  [App\Http\Controllers\RestoreController::class, 'update'])->name('return.update');
+Route::delete('/borrowing/{borrow}/return/destroy',  [App\Http\Controllers\RestoreController::class, 'destroy'])->name('return.destroy');
 
 //Fitur CRUD peminjaman
 
@@ -83,6 +83,13 @@ Route::patch('manajer_inventaris/user/update/{users:id}',  [App\Http\Controllers
 Route::delete('user/delete/{users:id}',  [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete');
 Route::get('searchUser', [App\Http\Controllers\UserController::class, 'search'])->name('user.search');
 
+//Fitur History
+Route::get('manajer_inventaris/History/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
+Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
+Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');
+Route::patch('manajer_inventaris/Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
+Route::delete('delete/{assets:id}',  [App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.delete');
+Route::get('searchAsset', [App\Http\Controllers\AssetController::class, 'search'])->name('asset.search');
 
 Auth::routes();
 

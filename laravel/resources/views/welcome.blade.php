@@ -406,7 +406,12 @@
             }
 
         </style>
-
+  <?php
+  $num1 = !empty($_GET["num1"])?$_GET["num1"] : '12';
+  $num2 = !empty($_GET["num2"])?$_GET["num2"] : '1';
+  $peryear = $num1 / $num2;
+  $result = $num1 - $peryear;
+?>
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -426,38 +431,28 @@
                         Kamu tuh {{ Auth::user()->role }} </h1>
                 </div>
 
-
-
-
             @endif
 
         </div>
+     
+        <div class="card " style="color: black; width: 18rem">
+            <div class="">
+                <div class="card-body">
+                <form  action="/" method="GET">
+                    <label for="num1">Biaya Awal Pembelian</label> 
+                    <input id="num1" class="form-control" type="number" name="num1">
+                    <label for="num2">Umur Ekonomis Asset</label> 
+                    <input class="form-control" type="number" name="num2">
+                    <button class="btn btn-primary mt-3" type="submit">Submit</button>
+                </form>
+            </div> 
+        </div>
+          
+              <div class="card-footer">
+                <h4>Rp {{ number_format($result, 0, ',', '.') }}</h4>
+              </div>
 
-        <div class="row justify-center">
-            <div id="carouselExampleControls" class="carousel slide" style="width: 1200px;" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 rounded" src="https://images7.alphacoders.com/111/thumb-1920-1114095.png"
-                            alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 rounded" src="https://images7.alphacoders.com/111/thumb-1920-1114095.png"
-                            alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 rounded" src="https://images7.alphacoders.com/111/thumb-1920-1114095.png"
-                            alt="Third slide">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+
         </div>
     </body>
 

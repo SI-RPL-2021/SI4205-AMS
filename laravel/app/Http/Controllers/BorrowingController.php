@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\asset;
 use App\Models\borrowing;
+use App\Models\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class BorrowingController extends Controller
     {
         // mengambil data dari table asset
      
-        $borrow = borrowing::orderBy('updated_at', 'DESC')->paginate(5);
+        $borrow = borrowing::orderBy('updated_at', 'DESC')->where('author',Auth::user()->role)->paginate(5);
         $asset = asset::all();
 
         return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'asset']));
@@ -61,8 +62,14 @@ class BorrowingController extends Controller
         $borrow->borrowing_date = $request['borrowing_date'];
         $borrow->description = $request['description'];
         $borrow->period = $request['period'];
+        $borrow->author = Auth::user()->role;
         $borrow->status = 0;
         $borrow->save();
+
+        // $history = new History;
+        // $history-> $request['asset_id'];
+        // $history-> $request['borrowing_date'];
+        
 
         return redirect(route('rent.show'))->with('success', 'Peminjaman Berhasil Ditambahkan');
     }
@@ -100,9 +107,10 @@ class BorrowingController extends Controller
     {
         $borrow = borrowing::find($id);
 
-        $borrow->asset_code = $request->asset_code;
-        $borrow->borrowing_date = $request->borrowing_date;
-        $borrow->description = $request->description;
+        $borrow->asset_id =  $request['asset_id'];
+        $borrow->borrowing_date =  $request['borrowing_date'];
+        $borrow->description = $request['description'];
+        $borrow->period = $request['period'];
 
 
 
