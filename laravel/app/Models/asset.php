@@ -31,5 +31,9 @@ class Asset extends Model
         return $this->belongsToMany(Category::class);
     }
    
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
     
 }

@@ -292,51 +292,26 @@
             font-weight: normal;
         }
     </style>
-    <script>
-        $(document).ready(function() {
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
 
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function() {
-                if (this.checked) {
-                    checkbox.each(function() {
-                        this.checked = true;
-                    });
-                } else {
-                    checkbox.each(function() {
-                        this.checked = false;
-                    });
-                }
-            });
-            checkbox.click(function() {
-                if (!this.checked) {
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
     <div class="card bg-dark">
         <div class="card-header">
             Detail Maintenance
-            <div class="close"><a href="/manajer_inventaris/Maintenance/input">&times; </a></div>
+            <div class="close"><a href="/manajer_inventaris/Maintenance/index">&times; </a></div>
 
         </div>
-        <div class="card-body">
-           
-            <div class="row">
-
-
-                <div class="row justify-text-center">
-                    <div class="col">
+        <form action="{{ route('maintenance.update', compact('maintenances')) }}" method="post" enctype="multipart/form-data">
+            @method('patch')
+            @csrf
+            <div class="card-body ">
+                <div class=" row ">
+                    <div class="col  ">
 
                         <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input type="text" class="form-control" name="name" value="{{$maintenances->name }}" placeholder="{{$maintenances->Name }}" required>
+                            <label>Nama Asset</label>
+                            <input type="text" class="form-control" readonly value=" {{ $maintenances->asset->unique_code }} - {{ $maintenances->asset->name }} ">
                         </div>
                         <div class="form-group">
                             <label>Kerusakan Barang</label>
@@ -348,79 +323,51 @@
                         </div>
                         <div class="form-group">
                             <label>Biaya Kerusakan</label>
-                            <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
+                            <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenance_bill}}" required>
                         </div>
                         <div class="form-group">
                             <label>Status kerusakan</label>
                             <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
                         </div>
-
                     </div>
-
-                </div>
-
-
-
-            </div>
-
-        </div>
-        <div class="card-footer">
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-danger">Delete</button>
-                <a href="#addEmployeeModal" class="btn btn-primary rounded" data-toggle="modal"><i class="material-icons "></i> <span>Edit Asset</span></a>
-            </div>
-        </div>
-
-        <!-- edit maintenance -->
-        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form action="/Maintenance/update/{{ $maintenances->id }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PATCH')
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nama Barang</label>
-                                        <input type="text" class="form-control" name="name" value="{{$maintenances->name }}" placeholder="{{$maintenances->Name }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kerusakan Barang</label>
-                                        <input type="text" class="form-control" name="asset_damage" value="{{ $maintenances->asset_damage }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>umur Barang</label>
-                                        <input type="text" class="form-control" name="asset_age" value="{{$maintenances->asset_age }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Biaya Kerusakan</label>
-                                        <input type="text" class="form-control" name="maintenance_bill" value="{{$maintenances->maintenace_bill}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Status kerusakan</label>
-                                        <input type="text" class="form-control" name="damage_status" value="{{$maintenances->damage_status}}" required>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer text-center">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                        </form>
-                    </div>
-
-
                 </div>
 
             </div>
 
+            <div class="card-footer">
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+        <form action="{{ route('maintenance.delete', $maintenances->id) }}" method="post">
+            @csrf
+            @method('delete')
+
+            <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
+
+        </form>
+    </div>
+    </div>
+
+    <!-- edit maintenance -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+
+
+                </div>
+
+
+            </div>
+
         </div>
+
+    </div>
 
 </body>
 

@@ -20,8 +20,8 @@ class BorrowingController extends Controller
     public function index()
     {
         // mengambil data dari table asset
-     
-        $borrow = borrowing::orderBy('updated_at', 'DESC')->where('author',Auth::user()->role)->paginate(5);
+
+        $borrow = borrowing::orderBy('updated_at', 'DESC')->where('author', Auth::user()->role)->paginate(5);
         $asset = asset::all();
 
         return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'asset']));
@@ -30,7 +30,7 @@ class BorrowingController extends Controller
     {
         $borrow = borrowing::find($id);
         $asset = asset::all();
-        return view('manajer_inventaris/Borrowing/rent/update', compact('borrow','asset'));
+        return view('manajer_inventaris/Borrowing/rent/update', compact('borrow', 'asset'));
     }
     /**
      * Show the form for creating a new resource.
@@ -66,10 +66,27 @@ class BorrowingController extends Controller
         $borrow->status = 0;
         $borrow->save();
 
-        // $history = new History;
-        // $history-> $request['asset_id'];
-        // $history-> $request['borrowing_date'];
-        
+        $cek = History::Where('asset_id', $request['asset_id'])->first();
+        if (empty($cek->borrowing_date)) {
+            $cek->borrowing_date = $request['borrowing_date'];
+            $cek->author = Auth::user()->role;
+            $cek->save();
+        } else {
+            $history = new History();
+            $history->asset_id = $request['asset_id'];
+            $history->borrowing_date = $request['borrowing_date'];
+            $history->author = Auth::user()->role;
+            // $asset->borrowing_date = $request['borrowing_date'];
+            // $asset->return_date = $request['return_date'];
+            // $asset->jenis_laporan = $request['jenis_laporan'];
+            // $asset->biaya = $request['biaya'];
+            // $asset->author = $request['author'];
+            $history->save();
+        }
+
+
+
+
 
         return redirect(route('rent.show'))->with('success', 'Peminjaman Berhasil Ditambahkan');
     }

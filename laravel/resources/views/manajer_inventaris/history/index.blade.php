@@ -296,32 +296,7 @@
             }
 
         </style>
-        <script>
-            $(document).ready(function() {
-                // Activate tooltip
-                $('[data-toggle="tooltip"]').tooltip();
-
-                // Select/Deselect checkboxes
-                var checkbox = $('table tbody input[type="checkbox"]');
-                $("#selectAll").click(function() {
-                    if (this.checked) {
-                        checkbox.each(function() {
-                            this.checked = true;
-                        });
-                    } else {
-                        checkbox.each(function() {
-                            this.checked = false;
-                        });
-                    }
-                });
-                checkbox.click(function() {
-                    if (!this.checked) {
-                        $("#selectAll").prop("checked", false);
-                    }
-                });
-            });
-
-        </script>
+       
     </head>
     @if (session('success'))
         <div class="alert alert-success" role="alert">
@@ -339,27 +314,7 @@
         </div>
     @endif
 
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete these Records?</p>
-                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 
 
     <body>
@@ -371,20 +326,17 @@
                     <div class="table-title bg-dark">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>List Asset</b></h2>
+                                <h2>History Asset</b></h2>
 
                             </div>
 
-                            <div class="col-sm-12">
-                                <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i
-                                        class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
-                            </div>
+                        
                         </div>
 
                     </div>
                     <div class="row">
-                        <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchAsset') }}">
-                            <input type="search" class="form-control " name="search" placeholder="Search">
+                        <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchAsset2') }}">
+                            <input type="search" class="form-control " name="search2" placeholder="Search">
                             <button class="btn btn-primary" type="submit">Search</button>
                         </form>
                     </div>
@@ -393,10 +345,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Barang</th>
+                                    <th>Nama Asset</th>
                                     <th>Kategori</th>
-                                    <th>Harga Pembelian</th>
-                                    <th>Tanggal Pembelian</th>
                                     <th>Foto Barang</th>
                                     @if (Auth::user()->role != 'karyawan')
                                         <th>Action</th>
@@ -427,29 +377,17 @@
                                                 @endforeach
                                             </ul>
                                         </td>
-                                        <td>Rp {{ number_format($asset->asset_purchase_price, 0, ',', '.') }}</td>
-                                        <td>{{ $asset->asset_purchase_date }}</td>
                                         <td class="product-img"><img class="rounded" src="{{ asset($asset->picture) }}"
-                                                alt="Img placeholder" height="50px"></td>
-                                        @if (Auth::user()->role != 'karyawan')
+                                                alt="Img placeholder" height="100px"></td>
+                                      
 
                                             <td>
-                                                <a href="/Input_Asset/update/{{ $asset->id }}" class="edit"><i
+                                                <a href="/history/update/{{$asset->id}}" class="edit"><i
                                                         class="material-icons" data-toggle="tooltip"
                                                         title="Details">&#xE241;</i></a>
-                                                <form action="/delete/{{ $asset->id }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-
-                                                    <button type="submit" class=""
-                                                        style="background-color: transparent; border:none"> <i
-                                                            class="fa fa-trash" style="color: red;"></i> </button>
-
-                                                </form>
-
+                                           
                                             </td>
-                                        @else
-                                        @endif
+                                     
 
                                         @php
                                             $i++;

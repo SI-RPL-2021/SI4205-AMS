@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\asset;
 use App\Models\History;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistoryController extends Controller
 {
@@ -14,9 +17,18 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        //
+        $assets = Asset::orderBy('updated_at', 'DESC')->paginate(5);
+        $categories = Category::all();
+        $history = History::orderBy('id', 'DESC');
+        return view('manajer_inventaris/history/index', (compact('assets', 'categories', 'history')));
     }
-
+    public function updateindex($id, Request $request)
+    {
+        $assets = Asset::find($id);
+        $categories = Category::all();
+        $history = History::all()->where('asset_id',$id);
+        return view('manajer_inventaris/history/update', compact('assets', 'categories','history'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +38,13 @@ class HistoryController extends Controller
     {
         //
     }
-
+    public function search()
+    {
+        $search_text = $_GET['search2'];
+        $assets = asset::where('name', 'LIKE', '%' . $search_text . '%')->paginate(5);
+        $categories = DB::table('categories')->get();
+        return view('manajer_inventaris/History/index', compact('assets', 'categories'));
+    }
     /**
      * Store a newly created resource in storage.
      *

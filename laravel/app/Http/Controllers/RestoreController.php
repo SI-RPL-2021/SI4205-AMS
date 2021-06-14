@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\borrowing;
+use App\Models\History;
 use App\Models\restore;
+use App\Models\borrowing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -66,13 +67,35 @@ class RestoreController extends Controller
         $restore->return_picture = $path;
         $restore->description = $request['description'];
         $restore->author = Auth::user()->role;
-        $restore->status = 0;
+        if (Auth::user()->role != 'karyawan') {
+            $restore->status = 1;
+        } else {
+            $restore->status = 0;
+        }
+        
+       
 
         $borrow = borrowing::find($request['borrowing_id']);
         $borrow->status = 1;
         $borrow->save();
         $restore->save();
         // dd($request);
+        $borrow = borrowing::find($request['borrowing_id']);
+        $cek = History::Where('asset_id', $borrow->asset_id)->Where('borrowing_date', $borrow->borrowing_date)->first();
+        if (empty($cek->return_date)) {
+            $cek->return_date = $request['return_date'];
+            $cek->save();
+        } else {
+            $history = new History();
+            $history->asset_id = $request['asset_id'];
+            $history->return_date = $request['return_date'];
+            // $asset->borrowing_date = $request['borrowing_date'];
+            // $asset->return_date = $request['return_date'];
+            // $asset->jenis_laporan = $request['jenis_laporan'];
+            // $asset->biaya = $request['biaya'];
+            // $asset->author = $request['author'];
+            $history->save();
+        }
         return redirect(route('return.show'))->with('success', 'Pengembalian Berhasil Ditambahkan');
     }
 
@@ -105,9 +128,29 @@ class RestoreController extends Controller
      * @param  \App\Models\restore  $restore
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, restore $restore)
+    public function update(Request $request, $id)
     {
-        //
+        $restore = restore::find($id);
+
+        if ($request->hasFile('return_picture')) {
+            // file upload
+            $file = $request->file('return_picture');
+            $fileName = rand() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('images/uploads/return', $fileName);
+            $file->move('images/uploads/return', $fileName);
+        } else {
+
+            $path = $restore->return_picture;
+        }
+        $restore->borrowing_id =  $request['borrowing_id'];
+        $restore->return_date =  $request['return_date'];
+        $restore->return_picture = $path;
+        $restore->status = $request['status'];
+
+
+        $restore->save();
+
+        return redirect(route('return.show'));
     }
 
     /**

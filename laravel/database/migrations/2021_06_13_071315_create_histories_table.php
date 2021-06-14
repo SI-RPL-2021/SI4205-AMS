@@ -15,7 +15,7 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('asset_id')->nullable();
+            $table->unsignedBigInteger('asset_id');
             $table->date('borrowing_date')->nullable();
             $table->date('return_date')->nullable();
             $table->string('jenis_laporan')->nullable();

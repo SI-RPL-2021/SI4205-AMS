@@ -323,7 +323,7 @@
     <div class="card bg-dark">
         <div class="card-header">
             Detail Asset
-            <div class="close"><a href="/manajer_inventaris/Input_Asset/index">&times; </a></div>
+            <div class="close"><a href="/manajer_inventaris/History/index">&times; </a></div>
 
         </div>
         <div class="card-body">
@@ -337,6 +337,54 @@
 
 
                     <div class="row justify-text-center" style="width: 100%;">
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="asset_category mb-1">Category</label>
+                                <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}" autocomplete="asset_category" autofocus multiple="multiple">
+                                    @foreach ($assets->categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                    @endforeach
+
+                                </select>
+
+                                @error('asset_category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group">
+                                <h6>Author: {{$assets->author}}</h6>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Unique Code</label>
+                                <input type="text" class="form-control" readonly name="unique_code" value="{{$assets->unique_code}}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            @foreach ($history as $h)
+
+                            <li class="mt-4">Asset ini pernah dipinjam pada {{$h->borrowing_date}}, dikembalikan pada {{$h->borrowing_date}} oleh <b>{{$h->author}}</b> <br>
+                                dan pernah dilakukan maintenance dengan jenis laporan {{$h->jenis_laporan}} dan biaya sebesar Rp {{ number_format($h->biaya, 0, ',', '.') }}
+                            </li>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- <div class="row justify-text-center" style="width: 100%;">
 
                         <div class="col">
 
@@ -359,50 +407,26 @@
                                 </span>
                                 @enderror
                             </div>
+                         
+                         
                             <div class="form-group">
-                                <label>Harga Pembelian</label>
-                                <input type="number" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" >
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah Asset</label>
-                                <input type="number" class="form-control" name="qty" value="{{$assets->qty}}" >
-                            </div>
-                            <div class="form-group">
-                                <h6>Author: {{Auth::user()->name}}</h6>
+                                <h6>Author: {{$assets->author}}</h6>
                             
                             </div>
 
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                                <label>Waktu Pembelian</label>
-                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" >
-                            </div>
+                           
                             <div class="form-group">
                                 <label>Unique Code</label>
                                 <input type="text" class="form-control" readonly name="unique_code" value="{{$assets->unique_code}}" >
                             </div>
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" >{{$assets->description}}</textarea>
-                            </div>
-                            @if (Auth::user()->role == 'admin')
-                            <div class="form-group">
-                                <label>Status</label>
-                              <select class="form-control" name="status" required>
-                                  <option value="0">0</option>
-                                  <option value="1">1</option>
-                              </select>
-                            </div>
-                            @else
-                                
-                            @endif
+                           
+                          
                            
                         </div>
 
-                    </div>
-
-
+                    </div> -->
 
                 </div>
 
@@ -411,7 +435,7 @@
 
             <div class="modal-footer justify-content-center">
 
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <!-- <button type="submit" class="btn btn-primary">Edit</button>
             </form>
                 <form action="/delete/{{$assets->id}}" method="post">
                     @csrf
@@ -419,7 +443,7 @@
 
                     <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">Delete</button>
 
-                </form>
+                </form> -->
             </div>
         </div>
 
