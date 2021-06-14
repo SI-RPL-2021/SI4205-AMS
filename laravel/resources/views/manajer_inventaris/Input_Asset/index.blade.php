@@ -508,7 +508,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Harga Pembelian</label>
-                                        <input type="text" class="form-control" name="asset_purchase_price" required>
+                                        <input type="number" class="form-control" name="asset_purchase_price" required>
                                     </div>
 
                                 </div>
@@ -529,7 +529,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Jumlah Asset</label>
-                                        <input type="text" class="form-control" placeholder="jumlah" name="qty" required>
+                                        <input type="number" class="form-control" placeholder="jumlah" name="qty" required>
                                     </div>
                                 </div>
 

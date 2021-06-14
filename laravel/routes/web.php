@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Manajer Inventaris
-// Route::get('/', function () {
-//     return view('auth/login');
-// });
+Route::get('/', function () {
+    return view('auth/login');
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -91,10 +91,11 @@ Route::get('history/update/{history:id}',  [App\Http\Controllers\HistoryControll
 Route::get('searchAsset2', [App\Http\Controllers\HistoryController::class, 'search'])->name('history.search');
 
 
-Auth::routes();
+
 
 Route::get('importExportView', [MyController::class, 'importExportView']);
 Route::get('export',[App\Http\Controllers\MyController::class, 'export'])->name('export');
 Route::post('import', [App\Http\Controllers\MyController::class, 'import'])->name('import');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
+Auth::routes();
