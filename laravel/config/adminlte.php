@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -64,8 +65,8 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_enabled' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -86,7 +87,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -101,11 +102,11 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
+    'classes_auth_card' => 'bg-gradient-dark',
+    'classes_auth_header' => 'bg-dark',
+    'classes_auth_body' => 'bg-gradient-dark',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'fa-fw text-light',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
@@ -187,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -237,46 +238,70 @@ return [
         [
             'text'        => 'Home',
             'url'         => '/',
-            'icon'        => 'far fa-fw fa-laugh',
-            'label'       => 69,
+            'icon'        => 'fas fa-house-user',
+            'label'       => 911,
             'label_color' => 'danger',
         ],
-        ['header' => 'Utility'],
+        ['header' => 'Operational'],
         [
             'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
-            'submenu' => [[
-                'text' => 'Add Asset',
-                'url'  => '/manajer_inventaris/Input_Asset/index',
-                'icon' => 'fas fa-fw fa-pen',
+            'submenu' => [
+                [
+                    'text' => 'Add Asset',
+                    'url'  => '/manajer_inventaris/Input_Asset/index',
+                    'icon' => 'fas fa-fw fa-pen',
+                ],
+                [
+                    'text' => 'Add Asset Category',
+                    'url'  => '/manajer_inventaris/category/index',
+                    'icon' => 'fas fa-fw fa-archive',
+                ]
             ],
-            [
-                'text' => 'Add Asset Category',
-                'url'  => '/manajer_inventaris/category/index',
-                'icon' => 'fas fa-fw fa-archive',
-            ]]
-
-
+            'icon_color' => 'primary',
         ],
-        
+
         [
             'text' => 'Approve Asset',
-            'url'  => '/manajer_inventaris/approve_asset',
+            'url'  => '/manajer_inventaris/approval/index',
             'icon' => 'fas fa-fw fa-hand-holding-usd',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Borrowing Asset',
             'url'  => '/manajer_inventaris/Borrowing/return/index',
             'icon' => 'fas fa-fw fa-shopping-bag',
+            'icon_color' => 'primary',
+            'submenu' => [
+                [
+                    'text' => 'Rent Asset',
+                    'url'  => 'manajer_inventaris/borrowing/rent/index',
+                    'icon' => 'fas fa-fw fa-handshake-o',
+                ],
+                [
+                    'text' => 'Return Asset',
+                    'url'  => '/manajer_inventaris/borrowing/return/index',
+                    'icon' => 'fas fa-fw fa-undo',
+                ]
+            ]
         ], [
             'text' => 'Maintenance Asset',
             'url'  => '/manajer_inventaris/Maintenance/index',
             'icon' => 'fas fa-fw fa-medkit',
+            'icon_color' => 'primary',
         ],
         [
             'text' => 'Asset History',
             'url'  => '/manajer_inventaris/History/index',
             'icon' => 'fas fa-fw fa-history',
+            'icon_color' => 'primary',
+        ],
+
+        [
+            'text' => 'User Management',
+            'url'  => '/manajer_inventaris/user/index',
+            'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'primary',
         ],
         // [
         //     'text' => 'change_password',

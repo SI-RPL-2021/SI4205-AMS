@@ -460,7 +460,7 @@
                                     <input type="text" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Status </label>
+                                    <label style="color: black;">Status Asset</label>
                                     <input type="text" class="form-control" name="damage_status" required>
                                 </div>
 
