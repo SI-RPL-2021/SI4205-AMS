@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,15 +10,19 @@ class borrowing extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
+    protected $fillable = [
 
-    //     'asset_code',
-    //     'borrowing_picture',
-    //     'borrowing_end',
-    //     'borrowing_date' ,
-    //     'description',
-    //     'status',				
+        // 'asset_id',
+        'borrowing_date' ,
+        'description',
+        'period',
+        'status',				
 
-    // ];
-    // protected $table = 'borrowings';
+    ];
+    protected $table = 'borrowings';
+
+    public function asset()
+    {
+        return $this->belongsTo(Asset::class);
+    }
 }

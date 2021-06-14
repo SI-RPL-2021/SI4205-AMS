@@ -11,13 +11,17 @@ class restore extends Model
 
     protected $fillable = [
 
-        'asset_code',
-        'borrowing_picture',
-        'borrowing_end',
-        'borrowing_date' ,
+        // 'borrowing_id',
+        'return_picture',
+        'return_date' ,
         'description',
         'status',				
 
     ];
-    protected $table = 'borrowings';
+    protected $table = 'restores';
+
+    public function borrowing()
+    {
+        return $this->belongsTo(borrowing::class);
+    }
 }

@@ -328,9 +328,9 @@
         </div>
         <div class="card-body">
             <div class="row  justify-content-center">
-                <img class="rounded" src="{{ asset($borrow->borrowing_picture) }}" alt="{{$borrow->borrowing_picture}}" height="250px">
+                <img class="rounded" src="{{ asset($restore->return_picture) }}" alt="" height="250px">
             </div>
-            <form action="{{ route('borrowing.update', compact('borrow')) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('return.update', compact('restore')) }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
                 <div class="row">
@@ -342,25 +342,37 @@
 
                             <div class="form-group">
                                 <label>Kode Barang</label>
-                                <input type="text" class="form-control" name="asset_code" value="{{$borrow->asset_code }}" placeholder="{{$borrow->asset_code }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Peminjaman </label>
-                                <input type="date" class="form-control" name="borrowing_date" value="{{ $borrow->borrowing_date }}" required>
+                                <select name="borrowing_id">
+                                    @foreach ($borrow as $borrow)
+                                    @if ($borrow->status == 0)
+                                    <option value="{{ $borrow->id }}">{{ $borrow->asset->unique_code }}</option>
+                                    @else
+
+                                    @endif
+
+                                    @endforeach
+
+
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Pengembalian</label>
-                                <input type="date" class="form-control" name="borrowing_end" value="{{$borrow->borrowing_end }}" >
+                                <input type="date" class="form-control" name="return_date" value="{{$restore->return_date}}">
                             </div>
                             <div class="form-group">
-                                <label for="ta">Status Asset</label>
-                                <textarea name="description" id="ta" cols="15" rows="5" placeholder="{{$borrow->description}}" value="{{$borrow->description}}"></textarea>
+                                <label>Foto Barang</label>
+                                <input class="form-control form-control-sm" value="{{$restore->return_picture}}" id="formFileSm" type="file" name="picture">
                             </div>
                             <div class="form-group">
-                                <label>Status Asset</label>
-                                <input type="text" class="form-control" name="status" value="{{$borrow->status}}" required>
-                            </div>
+                                <label>Status pengembalian</label>
+                                <select name="status" class="form-control">
 
+                                    <option value="0">Belum terkonfirmasi</option>
+
+                                    <option value="1">Sudah Terkonfirmasi</option>
+
+                                </select>
+                            </div>
                         </div>
 
 
@@ -377,7 +389,7 @@
 
                 <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
-                <form action="{{route('borrowing.destroy',['borrow' => $borrow->id])}}" method="post">
+                <form action="" method="post">
                     @csrf
                     @method('delete')
 

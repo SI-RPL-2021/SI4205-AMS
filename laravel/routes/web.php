@@ -15,22 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Manajer Inventaris
-Route::get('/', function () {
-    return view('auth/login');
-});
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
+
 
 Route::middleware('auth')->group(function () {
     //Fitur CRUD Asset
-    Route::get('/', function () {
-        return view('/welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('/welcome');
+    // });
+    Route::get('/', [App\Http\Controllers\AssetController::class, 'count'])->name('asset.count');
     Route::get('manajer_inventaris/Input_Asset/index', [App\Http\Controllers\AssetController::class, 'index'])->name('asset.show');
     Route::post('Input_Asset/store', [App\Http\Controllers\AssetController::class, 'store'])->name('asset.save');
     Route::get('Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'updateindex'])->name('asset.details');
     Route::patch('manajer_inventaris/Input_Asset/update/{assets:id}',  [App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
     Route::delete('delete/{assets:id}',  [App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.delete');
     Route::get('searchAsset', [App\Http\Controllers\AssetController::class, 'search'])->name('asset.search');
-});
+
 
 //Fitur CRUD Approval Asset
 
@@ -52,27 +54,27 @@ Route::get('searchCat', [App\Http\Controllers\CategoryController::class, 'search
 
 //Fitur CRUD pengembalian
 
-Route::get('manajer_inventaris/borrowing/return/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('return.show');
-Route::post('return/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('return.save');
-Route::get('borrowing/return/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('return.details');
-Route::patch('manajer_inventaris/borrowing/return/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('return.update');
-Route::delete('/borrowing/{borrow}/return/destroy',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('return.destroy');
+Route::get('manajer_inventaris/borrowing/return/index', [App\Http\Controllers\RestoreController::class, 'index'])->name('return.show');
+Route::post('/return/store', [App\Http\Controllers\RestoreController::class, 'store'])->name('return.save');
+Route::get('Borrowing/return/update/{restore:id}',  [App\Http\Controllers\RestoreController::class, 'updateindex'])->name('return.details');
+Route::patch('manajer_inventaris/borrowing/return/update/{restore:id}',  [App\Http\Controllers\RestoreController::class, 'update'])->name('return.update');
+Route::delete('/borrowing/{borrow}/return/destroy',  [App\Http\Controllers\RestoreController::class, 'destroy'])->name('return.destroy');
 
 //Fitur CRUD peminjaman
 
-Route::get('manajer_inventaris/borrowing/rent/index', [App\Http\Controllers\RestoreController::class, 'index'])->name('return.show');
-Route::post('rent/store', [App\Http\Controllers\RestoreController::class, 'store'])->name('return.save');
-Route::get('borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\RestoreController::class, 'updateindex'])->name('return.details');
-Route::patch('manajer_inventaris/borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\RestoreController::class, 'update'])->name('return.update');
-Route::delete('/borrowing/{borrow}/rent/destroy',  [App\Http\Controllers\RestoreController::class, 'destroy'])->name('return.destroy');
+Route::get('manajer_inventaris/borrowing/rent/index', [App\Http\Controllers\BorrowingController::class, 'index'])->name('rent.show');
+Route::post('/rent/store', [App\Http\Controllers\BorrowingController::class, 'store'])->name('rent.save');
+Route::get('Borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'updateindex'])->name('rent.details');
+Route::patch('manajer_inventaris/borrowing/rent/update/{borrow:id}',  [App\Http\Controllers\BorrowingController::class, 'update'])->name('rent.update');
+Route::delete('/borrowing/{borrow}/rent/destroy',  [App\Http\Controllers\BorrowingController::class, 'destroy'])->name('rent.destroy');
 
 //Fitur CRUD Maintenance
 
 Route::get('manajer_inventaris/Maintenance/index', [App\Http\Controllers\MaintenanceController::class, 'index'])->name('maintenance.show');
 Route::post('Maintenance/store', [App\Http\Controllers\MaintenanceController::class, 'store'])->name('maintenance.save');
 Route::get('Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'updateindex'])->name('maintenance.details');
-Route::patch('manajer_inventaris/Maintenance/update/{maintenance:id}',  [App\Http\Controllers\MaintenanceController::class, 'update'])->name('maintenance.update');
-Route::delete('maintenance/delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('Maintenance.delete')->name('maintenance.delete');
+Route::patch('manajer_inventaris/Maintenance/update/{maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'update'])->name('maintenance.update');
+Route::delete('maintenance/delete/{Maintenances:id}',  [App\Http\Controllers\MaintenanceController::class, 'destroy'])->name('maintenance.delete');
 
 //Fitur CRUD User
 
@@ -83,7 +85,16 @@ Route::patch('manajer_inventaris/user/update/{users:id}',  [App\Http\Controllers
 Route::delete('user/delete/{users:id}',  [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete');
 Route::get('searchUser', [App\Http\Controllers\UserController::class, 'search'])->name('user.search');
 
+//Fitur History
+Route::get('manajer_inventaris/History/index', [App\Http\Controllers\HistoryController::class, 'index'])->name('history.show');
+Route::get('history/update/{history:id}',  [App\Http\Controllers\HistoryController::class, 'updateindex'])->name('history.details');
+Route::get('searchAsset2', [App\Http\Controllers\HistoryController::class, 'search'])->name('history.search');
+
 
 Auth::routes();
 
+Route::get('importExportView', [MyController::class, 'importExportView']);
+Route::get('export',[App\Http\Controllers\MyController::class, 'export'])->name('export');
+Route::post('import', [App\Http\Controllers\MyController::class, 'import'])->name('import');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});

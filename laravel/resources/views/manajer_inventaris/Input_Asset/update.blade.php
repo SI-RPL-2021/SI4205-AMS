@@ -347,7 +347,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="asset_category mb-1">Category</label>
-                                <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}" required autocomplete="asset_category" autofocus multiple="multiple">
+                                <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}"  autocomplete="asset_category" autofocus multiple="multiple">
 
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -366,7 +366,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Jumlah Asset</label>
-                                <input type="number" class="form-control" name="status" value="{{$assets->qty}}" >
+                                <input type="number" class="form-control" name="qty" value="{{$assets->qty}}" >
                             </div>
                             <div class="form-group">
                                 <h6>Author: {{Auth::user()->name}}</h6>
@@ -381,16 +381,24 @@
                             </div>
                             <div class="form-group">
                                 <label>Unique Code</label>
-                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" >
+                                <input type="text" class="form-control" readonly name="unique_code" value="{{$assets->unique_code}}" >
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
                                 <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" >{{$assets->description}}</textarea>
                             </div>
+                            @if (Auth::user()->role == 'admin')
                             <div class="form-group">
-                                <label>Foto Barang</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" >
+                                <label>Status</label>
+                              <select class="form-control" name="status" required>
+                                  <option value="0">0</option>
+                                  <option value="1">1</option>
+                              </select>
                             </div>
+                            @else
+                                
+                            @endif
+                           
                         </div>
 
                     </div>

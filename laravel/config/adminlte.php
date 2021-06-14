@@ -102,11 +102,11 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
+    'classes_auth_card' => 'bg-gradient-dark',
+    'classes_auth_header' => 'bg-dark',
+    'classes_auth_body' => 'bg-gradient-dark',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'fa-fw text-light',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -241,11 +241,11 @@ return [
         [
             'text'        => 'Home',
             'url'         => '/',
-            'icon'        => 'far fa-fw fa-laugh',
+            'icon'        => 'fas fa-house-user',
             'label'       => 911,
             'label_color' => 'danger',
         ],
-        ['header' => 'Utility'],
+        ['header' => 'Operational'],
         [
             'text' => 'Asset',
             'icon' => 'fas fa-fw fa-book',
