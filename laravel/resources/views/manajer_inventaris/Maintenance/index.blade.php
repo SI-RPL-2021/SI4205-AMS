@@ -349,14 +349,14 @@
 
     <div class="container-xl ">
         <div class="table-responsive">
-            <div class="table-wrapper bg-dark">
+            <div class="table-wrapper">
                 <div class="table-title bg-dark">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>List Asset</b></h2>
+                            <h2>List Maintenance</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Asset</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE147;</i> <span>Add New Maintenance</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger rounded-pill" data-toggle="modal"><i class="material-icons ">&#xE15C;</i> <span>Delete</span></a>
                         </div>
                     </div>
@@ -364,26 +364,50 @@
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
+                       
                             <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Harga Pembelian</th>
-                            <th>Tanggal Pembelian</th>
-                            <th>Foto Barang</th>
-                            <th>Keterangan</th>
+                            <th>Nama Asset</th>
+                            <th>Jenis Laporan Asset</th>
+                            <th>Umur Asset</th>
+                            <th>Biaya </th>
+                            <th>Status Asset</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
-                  
+                    <tbody>
+                        @php
+                        $i = 1
+                        @endphp
+                        @foreach ($maintenances as $maintenance)
+                        <tr>
+
+                           
+                            <td>{{ $i }}</td>
+                            <td>{{ $maintenance->name }}</td>
+                            <td>{{ $maintenance->asset_damage }}</td>
+                            <td>{{ $maintenance->asset_age}}</td>
+                            <td>{{ $maintenance->maintenance_bill }}</td>
+                            <td>{{ $maintenance->damage_status }}</td>
+                            <td>
+                                <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                <form action="/maintenance/delete/{{$maintenance->id}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button type="submit" class="" style="background-color: transparent; border:none" data-toggle="tooltip" title="Delete"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                </form>
+                            </td>
+                            @php
+                            $i++
+                            @endphp
+                            @endforeach
+
+                    </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>1</b> out of <b>Many</b> entries</div>
+                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
                         <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -395,7 +419,7 @@
     </div>
 
 
-    <!-- add asset -->
+    <!-- add maintenance -->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -405,37 +429,41 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/Input_Asset/store" method="post" style="color: black;" enctype="multipart/form-data">
+                    <form action="/Maintenance/store" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row ">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <label style="color: black;">Nama Asset</label>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" name="name" required>
+                                        <option selected="selected" data-select2-id="3">Pilih Asset</option>
+                                        <option data-select2-id="34">Laptop</option>
+                                        <option data-select2-id="35">Printer</option>
+                                        <option data-select2-id="36">Layar proyektor</option>
+                                        
+                                    </select>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label>Kategori Barang</label>
-                                    <input type="text" class="form-control" name="asset_category" required>
+                                    <label style="color: black;">Jenis Laporan Asset</label>
+                                    <input type="text" class="form-control" name="asset_damage" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Harga Pembelian</label>
-                                    <input type="text" class="form-control" name="asset_purchase_price" required>
+                                    <label style="color: black;">Umur barang</label>
+                                    <input type="number" class="form-control" name="asset_age" required>
                                 </div>
 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label >Waktu Pembelian</label>
-                                    <input type="date" class="form-control" name="asset_purchase_date" required>
+                                    <label style="color: black;">Biaya </label>
+                                    <input type="text" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Foto Barang</label>
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="picture" required>
+                                    <label style="color: black;">Status Asset</label>
+                                    <input type="text" class="form-control" name="damage_status" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="description" style="height: 100px"></textarea>
-                                </div>
+
                             </div>
 
                         </div>

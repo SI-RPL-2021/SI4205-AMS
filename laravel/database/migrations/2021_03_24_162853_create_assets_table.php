@@ -17,13 +17,14 @@ class CreateAssetsTable extends Migration
             $table->id();
             // $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->integer('status');
             $table->string('unique_code');
-            $table->string('asset_category');
             $table->string('picture');
             $table->date('asset_purchase_date');
             $table->integer('asset_purchase_price');
             $table->text('description')->nullable();
-            $table->string('status');
+            $table->integer('qty');
+            $table->string('author')->nullable();
             $table->timestamps();
             // $table->foreign('user_id')->references('id')->on('users');
         });

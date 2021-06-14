@@ -389,35 +389,62 @@
 
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" required>
+                                <input type="text" class="form-control" name="name" value="{{$assets->name }}" placeholder="{{$assets->Name }}" >
                             </div>
                             <div class="form-group">
-                                <label>Kategori Barang</label>
-                                <input type="text" class="form-control" name="asset_category" value="{{ $assets->asset_category }}" required>
+                                <label for="asset_category mb-1">Category</label>
+                                <select class="select2-bg form-control select2 @error('asset_category') is-invalid @enderror" id="asset_category" name="asset_category[]" placeholder="Category" value="{{ old('asset_category') }}"  autocomplete="asset_category" autofocus multiple="multiple">
+
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('asset_category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Harga Pembelian</label>
-                                <input type="text" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" required>
+                                <input type="number" class="form-control" name="asset_purchase_price" value="{{$assets->asset_purchase_price }}" >
                             </div>
                             <div class="form-group">
-                                <label>Status Asset</label>
-                                <input type="text" class="form-control" name="status" value="{{$assets->status}}" required>
+                                <label>Jumlah Asset</label>
+                                <input type="number" class="form-control" name="qty" value="{{$assets->qty}}" >
+                            </div>
+                            <div class="form-group">
+                                <h6>Author: {{Auth::user()->name}}</h6>
+                            
                             </div>
 
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Waktu Pembelian</label>
-                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" required>
+                                <input type="date" class="form-control" name="asset_purchase_date" value="{{$assets->asset_purchase_date}}" >
                             </div>
                             <div class="form-group">
                                 <label>Unique Code</label>
-                                <input type="text" class="form-control" name="unique_code" value="{{$assets->unique_code}}" required>
+                                <input type="text" class="form-control" readonly name="unique_code" value="{{$assets->unique_code}}" >
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" required>{{$assets->description}}</textarea>
+                                <textarea class="form-control" name="description" value="{{$assets->description}}" style="height: 120px" >{{$assets->description}}</textarea>
                             </div>
+                            @if (Auth::user()->role == 'admin')
+                            <div class="form-group">
+                                <label>Status</label>
+                              <select class="form-control" name="status" required>
+                                  <option value="0">0</option>
+                                  <option value="1">1</option>
+                              </select>
+                            </div>
+                            @else
+                                
+                            @endif
+                           
                         </div>
 
                     </div>
@@ -444,7 +471,7 @@
 >>>>>>> 4b62d26ef30ddbdf696c3dc886a091b725017ac7
 
                 <button type="submit" class="btn btn-primary">Edit</button>
-                </form>
+            </form>
                 <form action="/delete/{{$assets->id}}" method="post">
                     @csrf
                     @method('delete')

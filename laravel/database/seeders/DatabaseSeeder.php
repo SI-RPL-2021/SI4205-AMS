@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Type\Integer;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,22 +18,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        for ($i = 0; $i < 10; $i++) {
+        \App\Models\Category::factory(10)->create();
+        \App\Models\Asset::factory(10)->create();
+        \App\Models\User::factory(1)->create();
+        // Get all the roles attaching up to 3 random roles to each user
+        $categories =  \App\Models\Category::all();
 
-            DB::table('assets')->insert([
-                'name' => Str::random(10),
-                'unique_code' => Str::random(10),
-                'picture' => 'images/uploads/1642217433_cow.jpg',
-                'asset_category' => Str::random(10),
-                'asset_purchase_date' => '2015-12-31 00:00:00',
-                'asset_purchase_price' => '12',
-                'description' => Str::random(10),
-                'status' =>  Str::random(10),
-
-
-
-
-            ]);
-        }
+        // Populate the pivot table
+        \App\Models\Asset::all()->each(function ($assets) use ($categories) {
+            $assets->categories()->attach(
+                $categories->random(rand(1, 10))->pluck('id')->toArray()
+            );
+        });
     }
 }
