@@ -368,7 +368,7 @@
                             <th>No</th>
                             <th>Kode Asset</th>
                             <th>Jenis Laporan Asset</th>
-                            <th>Umur Asset</th>
+                            <th>Umur Asset(Tahun)</th>
                             <th>Biaya </th>
                             <th>Status Asset</th>
 
@@ -387,7 +387,7 @@
                             <td>{{ $maintenance->asset->unique_code }}</td>
                             <td>{{ $maintenance->asset_damage }}</td>
                             <td>{{ $maintenance->asset_age}}</td>
-                            <td>{{ $maintenance->maintenance_bill }}</td>
+                            <td>Rp {{ number_format($maintenance->maintenance_bill , 0, ',', '.') }}</td>
                             <td>{{ $maintenance->damage_status }}</td>
                             <td>
                                 <a href="/Maintenance/update/{{ $maintenance->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
@@ -451,7 +451,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label style="color: black;">Biaya </label>
-                                    <input type="text" class="form-control" name="maintenance_bill" required>
+                                    <input type="number" class="form-control" name="maintenance_bill" required>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Status Asset</label>

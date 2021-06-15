@@ -18,17 +18,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        \App\Models\Category::factory(10)->create();
-        \App\Models\Asset::factory(10)->create();
+        // \App\Models\Category::factory(10)->create();
+        // \App\Models\Asset::factory(10)->create();
         \App\Models\User::factory(1)->create();
         // Get all the roles attaching up to 3 random roles to each user
-        $categories =  \App\Models\Category::all();
+        // $categories =  \App\Models\Category::all();
 
         // Populate the pivot table
-        \App\Models\Asset::all()->each(function ($assets) use ($categories) {
-            $assets->categories()->attach(
-                $categories->random(rand(1, 10))->pluck('id')->toArray()
-            );
-        });
+        // \App\Models\Asset::all()->each(function ($assets) use ($categories) {
+        //     $assets->categories()->attach(
+        //         $categories->random(rand(1, 10))->pluck('id')->toArray()
+        //     );
+        // });
     }
 }

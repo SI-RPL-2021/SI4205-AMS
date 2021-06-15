@@ -22,7 +22,7 @@ class BorrowingController extends Controller
         // mengambil data dari table asset
 
         $borrow = borrowing::orderBy('updated_at', 'DESC')->where('author', Auth::user()->role)->paginate(5);
-        $asset = asset::all();
+        $asset = asset::where('status',1)->get();
 
         return view('manajer_inventaris/Borrowing/rent/index', compact(['borrow', 'asset']));
     }

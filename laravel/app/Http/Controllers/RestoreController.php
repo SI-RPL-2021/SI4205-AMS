@@ -18,8 +18,13 @@ class RestoreController extends Controller
      */
     public function index()
     {
+if (Auth::user()->role != 'karyawan') {
+    $restore = restore::orderBy('updated_at', 'DESC')->paginate(5);
+} else {
+    $restore = restore::orderBy('updated_at', 'DESC')->where('author', Auth::user()->role)->paginate(5);
+}
 
-        $restore = restore::orderBy('updated_at', 'DESC')->where('author', Auth::user()->role)->paginate(5);
+       
         $borrow = borrowing::all()->where('author', Auth::user()->role);
 
         return view('manajer_inventaris/Borrowing/return/index', compact(['borrow', 'restore']));
