@@ -70,7 +70,7 @@ class UserController extends Controller
             'role' => $request->role,
 
         ]);
-        return redirect(route('user.show'));
+        return redirect(route('user.show'))->with('success', 'User Berhasil Ditambah');
     }
 
     /**
@@ -131,6 +131,6 @@ class UserController extends Controller
         DB::table('users')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman user
-        return redirect(route('user.show'));
+        return redirect(route('user.show'))->with('danger', 'User Berhasil Dihapus');
     }
 }

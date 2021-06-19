@@ -370,7 +370,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Jumlah Asset</label>
-                                <input type="number" class="form-control" name="status" value="{{$assets->status}}" required>
+                                <input type="number" class="form-control" name="qty" value="{{$assets->qty}}" required>
                             </div>
 
                         </div>

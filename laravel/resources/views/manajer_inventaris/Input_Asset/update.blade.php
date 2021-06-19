@@ -390,8 +390,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                               <select class="form-control" name="status" required>
-                                  <option value="0">0</option>
-                                  <option value="1">1</option>
+                                  <option value="0">Pending</option>
+                                  <option value="1">Diterima</option>
                               </select>
                             </div>
                             @else

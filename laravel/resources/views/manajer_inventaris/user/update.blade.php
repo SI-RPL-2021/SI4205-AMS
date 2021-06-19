@@ -359,7 +359,7 @@
                             <label>Role</label>
                             <select class="form-select" value="{{ $users->role }}" placeholder="{{ $users->role }}"
                                 name="role" aria-label="Default select example">
-                                <option selected>Select Role</option>
+                                <option selected>{{ $users->role }}</option>
                                 <option value="admin">Admin</option>
                                 <option value="manager">Manager</option>
                                 <option value="karyawan">Karyawan</option>
