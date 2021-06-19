@@ -355,148 +355,160 @@
     </div>
 
 
-    <body>
-        <!-- //table -->
+ @if (Auth::user()->role != 'karyawan')
+ <body>
+    <!-- //table -->
 
-        <div class="container-xl ">
-            <div class="table-responsive">
-                <div class="table-wrapper bg-dark">
-                    <div class="table-title bg-dark">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>List User</b></h2>
+    <div class="container-xl ">
+        <div class="table-responsive">
+            <div class="table-wrapper bg-dark">
+                <div class="table-title bg-dark">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>List User</b></h2>
 
-                            </div>
-
-                            <div class="col-sm-12">
-                                <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i
-                                        class="material-icons ">&#xE147;</i> <span>Add New User</span></a>
-                         
-                            </div>
                         </div>
 
+                        <div class="col-sm-12">
+                            <a href="#addEmployeeModal" class="btn btn-success rounded-pill" data-toggle="modal"><i
+                                    class="material-icons ">&#xE147;</i> <span>Add New User</span></a>
+                     
+                        </div>
                     </div>
-                    <div class="row">
-                        <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchUser') }}">
-                            <input type="search" class="form-control " name="user" placeholder="Search">
-                            <button class="btn btn-primary" type="submit">Search</button>
-                        </form>
-                    </div>
-                    <div class="row">
-                        <table class="table table-dark table-hover">
-                            <thead>
-                                <tr>
 
-                                    <th>No</th>
-                                    <th>Username </th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                </div>
+                <div class="row">
+                    <form class="form-inline ml-auto p-2 " type="get" action="{{ url('/searchUser') }}">
+                        <input type="search" class="form-control " name="user" placeholder="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+
+                                <th>No</th>
+                                <th>Username </th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $i = 1
+                            @endphp
+                            @foreach ($users as $key=> $user)
+                            <tr>
+
+                             
+                                <td>{{ $users ->firstItem() + $key }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
+                                <td>
+                                    <a href="/user/update/{{ $user->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
+                                    <form action="/user/delete/{{$user->id}}" method="post">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
+
+                                    </form>
+
+                                </td>
                                 @php
-                                $i = 1
+                                $i++
                                 @endphp
-                                @foreach ($users as $key=> $user)
-                                <tr>
-    
-                                 
-                                    <td>{{ $users ->firstItem() + $key }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td>
-                                        <a href="/user/update/{{ $user->id }}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Details">&#xE241;</i></a>
-                                        <form action="/user/delete/{{$user->id}}" method="post">
-                                            @csrf
-                                            @method('delete')
-    
-                                            <button type="submit" class="" style="background-color: transparent; border:none"> <i class="fa fa-trash" style="color: red;"></i> </button>
-    
-                                        </form>
-    
-                                    </td>
-                                    @php
-                                    $i++
-                                    @endphp
-                                    @endforeach
+                                @endforeach
+                           
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        {{$users->links('pagination::bootstrap-4') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- add asset -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{route('user.save')}}" method="post" style="color: black;" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="form-select" name="role" aria-label="Default select example">
+                                        <option selected>Select Role</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="karyawan">Karyawan</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="text" class="form-control" name="password" required>
+                                </div>
                                
-                            </tbody>
-                        </table>
-                        <div class="pagination">
-                            {{$users->links('pagination::bootstrap-4') }}
+
+                            </div>
+
+
                         </div>
-                    </div>
+
+
+                        <div class="modal-footer text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
 
-
-        <!-- add asset -->
-        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form action="{{route('user.save')}}" method="post" style="color: black;" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="row ">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" name="name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" name="email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select class="form-select" name="role" aria-label="Default select example">
-                                            <option selected>Select Role</option>
-                                            <option value="manager">Manager</option>
-                                            <option value="karyawan">Karyawan</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" name="password" required>
-                                    </div>
-                                   
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="modal-footer text-center">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
-
-
-                </div>
 
             </div>
 
         </div>
-        </div>
-        </div>
 
-    </body>
+    </div>
+    </div>
+    </div>
+
+</body>
+ @else
+ <body>
+
+
+    <div class="justify-content-center">
+        <h3>Maaf {{ Auth::user()->name }} Role mu hanya {{ Auth::user()->role }} </h3>
+        <h5 style="color: #000">Halaman ini diluar hak mu</h5>
+
+    </div>
+</body>
+ @endif
 @endsection
 
 @section('css')
