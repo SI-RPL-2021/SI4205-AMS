@@ -355,10 +355,10 @@
                                 @php
                                     $i = 1;
                                 @endphp
-                                @foreach ($assets as $asset)
+                                @foreach ($assets as $key => $asset)
                                     <tr>
                                       
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $assets ->firstItem() + $key }}</td>
                                         <td>{{ $asset->name }}</td>
                                         <td class="asset-category">
                                             <ul>

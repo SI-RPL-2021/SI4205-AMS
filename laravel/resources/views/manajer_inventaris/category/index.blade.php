@@ -372,12 +372,7 @@
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll">
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
+                               
                                 <th>No</th>
                                 <th>Kategori</th>
                                 <th>Action</th>
@@ -390,12 +385,7 @@
                             @foreach ($categories as $key=> $cat)
                             <tr>
 
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
+                              
                                 <td>{{ $categories ->firstItem() + $key }}</td>
                                 <td>{{ $cat->category }}</td>
                                 <td>

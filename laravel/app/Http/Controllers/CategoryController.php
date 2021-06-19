@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
          // mengambil data dari table category
-         $categories = DB::table('categories')->paginate(5);
+         $categories = Category::orderBy('updated_at','DESC')->paginate(5);
      
 
          return view('manajer_inventaris/category/index', compact('categories'));
